@@ -65,3 +65,86 @@
 .stat-item.animate-5 {
     animation-delay: 0.6s;
 }
+
+/* BACKDROP FADE */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* MOBILE MODAL */
+@keyframes modalMobile {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-modalMobile {
+    animation: modalMobile 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* DESKTOP MODAL */
+@keyframes modalDesktop {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.animate-modalDesktop {
+    animation: modalDesktop 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* INPUTS + CONTENT */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slideUp {
+    animation: slideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ICON FLOAT */
+@keyframes bounceSlow {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-bounceSlow {
+    animation: bounceSlow 3s ease-in-out infinite;
+}

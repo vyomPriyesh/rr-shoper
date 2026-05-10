@@ -4,8 +4,9 @@ import { HiMenu, HiX } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import CommonButton from "../ui/CommonButton";
+import LanguageSwitcher from "../ui/LanguageSwitcher";
 
-const Header = () => {
+const Header = ({ setOpen }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const NAV_LINKS = [
@@ -29,12 +30,14 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#FFFFFF]/95 backdrop-blur-md">
       <div className="container mx-auto md:px-5 px-2">
-        <nav className="flex items-center justify-between md:h-20 h-14">
-          <Logo />
+        <nav className="flex flex-row justify-between md:h-20 h-14">
+          <div className="col-span-1">
+            <Logo />
+          </div>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex place-content-center items-center gap-14">
-            <div className="hidden lg:flex place-content-center items-center gap-8">
+          <div className="hidden lg:flex place-content-center items-center">
+            <div className="hidden lg:flex place-content-center items-center gap-8 text-nowrap">
               {NAV_LINKS.map(({ label, to }) => (
                 <Link
                   key={to}
@@ -44,9 +47,9 @@ const Header = () => {
                   {label}
                 </Link>
               ))}
-              <CommonButton text="Get Free Consultation" {...btnProps} />
+              <CommonButton onClick={() => setOpen(true)} text="Get Free Consultation" {...btnProps} />
             </div>
-            {/* <CommonButton text="Get Free Consultation" {...btnProps} /> */}
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile Toggle */}
@@ -65,6 +68,7 @@ const Header = () => {
             </Link>
           ))}
           <CommonButton text="Get Free Consultation" {...btnProps} />
+          <LanguageSwitcher />
         </div>
       </div>
     </header>
