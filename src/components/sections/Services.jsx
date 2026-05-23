@@ -42,12 +42,12 @@ const Services = () => {
     ];
 
     return (
-        <section className="py-14 md:py-20">
+        <section className="py-14 md:pt-24">
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Heading */}
-                <div className="max-w-3xl mx-auto mb-12 md:mb-16 text-center">
+                <div className="max-w-3xl mx-auto mb-12 md:mb-14 text-center">
 
                     <h2 className="
                         text-sm
@@ -96,7 +96,7 @@ const Services = () => {
                     xl:grid-cols-3
                     gap-5
                     md:gap-7
-                    lg:gap-8
+                    lg:gap-5
                 ">
 
                     {SERVICES.map((service, index) => (
@@ -106,24 +106,16 @@ const Services = () => {
                                 group
                                 relative
                                 overflow-hidden
-
                                 rounded-[24px]
                                 md:rounded-[28px]
-
                                 bg-white/80
                                 backdrop-blur-md
-
                                 border border-white/60
-
                                 p-6
-                                sm:p-7
-                                lg:p-8
-
+                                lg:p-7 
                                 transition-all
                                 duration-500
-
                                 shadow-[0_8px_30px_rgba(176,106,141,0.08)]
-
                                 hover:-translate-y-2
                                 hover:shadow-[0_20px_50px_rgba(176,106,141,0.16)]
                             "
@@ -186,7 +178,7 @@ const Services = () => {
                                 font-bold
                                 text-[#1E1E1E]
 
-                                mb-3
+                                my-3
                             ">
                                 {service.title}
                             </h3>

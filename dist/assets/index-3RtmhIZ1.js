@@ -161,7 +161,7 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
                                                 -8px -8px 20px rgba(255,255,255,0.95),
                                                 inset -6px -6px 15px rgba(255,255,255,0.9),
                                                 inset 6px 6px 15px rgba(163,96,129,0.08)
-                                            `},children:[(0,j.jsx)(`div`,{className:`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center bg-gradient-to-r from-[#A36081]/10 to-[#A17BA4]/10`,children:(0,j.jsx)(`i`,{className:e,style:{fontSize:`1.3rem`,color:`#A36081`}})}),(0,j.jsx)(`span`,{className:`text-xs sm:text-sm font-bold text-[#1A1A1A]`,children:t})]},t))})]}),(0,j.jsxs)(`div`,{className:`md:hidden grid grid-cols-2 gap-3 mt-10`,children:[(0,j.jsxs)(`div`,{className:`bg-[#A36081] text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10`,children:[(0,j.jsx)(Nu,{}),`Account Approved`]}),(0,j.jsxs)(`div`,{className:`bg-[#A17BA4] text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10`,children:[(0,j.jsx)(Pu,{}),`+147% Sales Growth`]})]})]})]}),(0,j.jsx)(`div`,{className:`flex justify-center md:mt-16 mt-7 `,children:(0,j.jsx)(`div`,{className:`w-full bg-white/80  backdrop-blur-xl  border border-[#E7D8E0]/50 rounded-[28px] shadow-2xl px-4 sm:px-6  py-6`,children:(0,j.jsx)(`div`,{className:`grid grid-cols-2  md:grid-cols-3 xl:grid-cols-6 gap-y-8  gap-x-6`,children:t.slice(0,6).map((e,t)=>(0,j.jsxs)(`div`,{className:`stat-item animate-${t} text-center`,children:[(0,j.jsxs)(`div`,{className:`text-3xl sm:text-4xl lg:text-5xl font-black text-[#1A1A1A] leading-none mb-2`,children:[(0,j.jsx)(r,{end:e.number}),(0,j.jsx)(`span`,{className:`text-[#A36081] text-xl sm:text-2xl`,children:e.suffix})]}),(0,j.jsx)(`p`,{className:`text-sm sm:text-base text-gray-500 font-medium`,children:e.label})]},t))})})})]})})},Lu=()=>(0,j.jsx)(`section`,{className:`py-14 md:py-20`,children:(0,j.jsxs)(`div`,{className:`container mx-auto px-4 sm:px-6 lg:px-8`,children:[(0,j.jsxs)(`div`,{className:`max-w-3xl mx-auto mb-12 md:mb-16 text-center`,children:[(0,j.jsx)(`h2`,{className:`\r
+                                            `},children:[(0,j.jsx)(`div`,{className:`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center bg-gradient-to-r from-[#A36081]/10 to-[#A17BA4]/10`,children:(0,j.jsx)(`i`,{className:e,style:{fontSize:`1.3rem`,color:`#A36081`}})}),(0,j.jsx)(`span`,{className:`text-xs sm:text-sm font-bold text-[#1A1A1A]`,children:t})]},t))})]}),(0,j.jsxs)(`div`,{className:`md:hidden grid grid-cols-2 gap-3 mt-10`,children:[(0,j.jsxs)(`div`,{className:`bg-[#A36081] text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10`,children:[(0,j.jsx)(Nu,{}),`Account Approved`]}),(0,j.jsxs)(`div`,{className:`bg-[#A17BA4] text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10`,children:[(0,j.jsx)(Pu,{}),`+147% Sales Growth`]})]})]})]}),(0,j.jsx)(`div`,{className:`flex justify-center md:mt-16 mt-7 `,children:(0,j.jsx)(`div`,{className:`w-full bg-white/80  backdrop-blur-xl  border border-[#E7D8E0]/50 rounded-[28px] shadow-2xl px-4 sm:px-6  py-6`,children:(0,j.jsx)(`div`,{className:`grid grid-cols-2  md:grid-cols-3 xl:grid-cols-6 gap-y-8  gap-x-6`,children:t.slice(0,6).map((e,t)=>(0,j.jsxs)(`div`,{className:`stat-item animate-${t} text-center`,children:[(0,j.jsxs)(`div`,{className:`text-3xl sm:text-4xl lg:text-5xl font-black text-[#1A1A1A] leading-none mb-2`,children:[(0,j.jsx)(r,{end:e.number}),(0,j.jsx)(`span`,{className:`text-[#A36081] text-xl sm:text-2xl`,children:e.suffix})]}),(0,j.jsx)(`p`,{className:`text-sm sm:text-base text-gray-500 font-medium`,children:e.label})]},t))})})})]})})},Lu=()=>(0,j.jsx)(`section`,{className:`py-14 md:pt-24`,children:(0,j.jsxs)(`div`,{className:`container mx-auto px-4 sm:px-6 lg:px-8`,children:[(0,j.jsxs)(`div`,{className:`max-w-3xl mx-auto mb-12 md:mb-14 text-center`,children:[(0,j.jsx)(`h2`,{className:`\r
                         text-sm\r
                         sm:text-base\r
                         md:text-lg\r
@@ -192,29 +192,21 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
                     xl:grid-cols-3\r
                     gap-5\r
                     md:gap-7\r
-                    lg:gap-8\r
+                    lg:gap-5\r
                 `,children:[{icon:`fas fa-user-plus`,title:`Account Opening`,description:`Complete seller account setup on Amazon, Flipkart, Meesho, Ajio, and more. We handle documentation, verification, and ensure fast approval.`},{icon:`fas fa-list-check`,title:`Product Listing & Optimization`,description:`Professional product listings with SEO-optimized titles, descriptions, keywords, and high-quality images that convert browsers into buyers.`},{icon:`fas fa-bullhorn`,title:`Marketing & Advertising`,description:`Strategic PPC campaigns, sponsored ads management, and promotional strategies to boost visibility and drive targeted traffic to your listings.`},{icon:`fas fa-certificate`,title:`Brand Approval`,description:`Navigate the brand approval process seamlessly. We help you get brand registry and authorization to sell restricted categories.`},{icon:`fas fa-trademark`,title:`Brand Creation & Registration`,description:`Build your brand from scratch — logo design, brand identity, trademark registration, and brand store creation on marketplaces.`},{icon:`fas fa-boxes-stacked`,title:`Catalog Management`,description:`Ongoing catalog maintenance, inventory updates, pricing optimization, and A+ content creation to keep your listings competitive.`}].map((e,t)=>(0,j.jsxs)(`div`,{className:`\r
                                 group\r
                                 relative\r
                                 overflow-hidden\r
-\r
                                 rounded-[24px]\r
                                 md:rounded-[28px]\r
-\r
                                 bg-white/80\r
                                 backdrop-blur-md\r
-\r
                                 border border-white/60\r
-\r
                                 p-6\r
-                                sm:p-7\r
-                                lg:p-8\r
-\r
+                                lg:p-7 \r
                                 transition-all\r
                                 duration-500\r
-\r
                                 shadow-[0_8px_30px_rgba(176,106,141,0.08)]\r
-\r
                                 hover:-translate-y-2\r
                                 hover:shadow-[0_20px_50px_rgba(176,106,141,0.16)]\r
                             `,children:[(0,j.jsx)(`div`,{className:`\r
@@ -263,7 +255,7 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
                                 font-bold\r
                                 text-[#1E1E1E]\r
 \r
-                                mb-3\r
+                                my-3\r
                             `,children:e.title}),(0,j.jsx)(`p`,{className:`\r
                                 relative z-10\r
 \r
@@ -288,7 +280,270 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
                                 duration-500\r
 \r
                                 group-hover:w-24\r
-                            `})]},t))})]})}),Ru=()=>(0,j.jsxs)(`div`,{className:`bg-gradient-to-br from-[#FFF8FC] via-[#F7EDF3] to-[#F2E1EA]`,children:[(0,j.jsx)(Iu,{}),(0,j.jsx)(Lu,{})]}),zu=({isOpen:e=!1,onClose:t})=>{let[n,r]=(0,_.useState)(``),[i,a]=(0,_.useState)(``),[o,s]=(0,_.useState)(!1),[c,l]=(0,_.useState)(30);return(0,_.useEffect)(()=>{if(!o||c===0)return;let e=setInterval(()=>{l(e=>e-1)},1e3);return()=>clearInterval(e)},[o,c]),e?(0,j.jsxs)(j.Fragment,{children:[(0,j.jsx)(`div`,{className:`fixed inset-0 z-[51] bg-black/60 backdrop-blur-sm animate-fadeIn`}),(0,j.jsx)(`div`,{className:`fixed inset-0 z-[51] flex flex-col px-4 md:px-8 animate-fadeIn`,children:(0,j.jsx)(`div`,{className:`flex-1 flex items-end md:items-center justify-center pt-12 md:pt-0 pb-12 md:pb-0`,children:(0,j.jsxs)(`div`,{className:`\r
+                            `})]},t))})]})}),Ru=()=>{let e=[{name:`Amazon`,logo:`https://cdn-icons-png.flaticon.com/512/5968/5968870.png`},{name:`Flipkart`,logo:`https://cdn-icons-png.flaticon.com/512/5977/5977576.png`},{name:`Meesho`,logo:`https://cdn-icons-png.flaticon.com/512/5968/5968520.png`},{name:`Ajio`,logo:`https://cdn-icons-png.flaticon.com/512/732/732084.png`},{name:`Myntra`,logo:`https://cdn-icons-png.flaticon.com/512/5968/5968255.png`},{name:`Nykaa`,logo:`https://cdn-icons-png.flaticon.com/512/5968/5968672.png`},{name:`JioMart`,logo:`https://cdn-icons-png.flaticon.com/512/732/732200.png`}],t={Amazon:[{title:`Starter`,price:`₹4,999`,features:[`Account Setup`,`5 Product Listings`,`Basic SEO`,`Email Support`]},{title:`Growth`,price:`₹9,999`,popular:!0,features:[`20 Product Listings`,`SEO Optimization`,`PPC Campaign Setup`,`Priority Support`]},{title:`Enterprise`,price:`₹19,999`,features:[`Unlimited Listings`,`Advanced Ads`,`Brand Registry`,`Dedicated Manager`]}],Flipkart:[{title:`Starter`,price:`₹3,999`,features:[`Seller Setup`,`Catalog Upload`,`5 Listings`,`Support`]},{title:`Growth`,price:`₹8,999`,popular:!0,features:[`SEO Optimization`,`Ad Campaign`,`15 Listings`,`Priority Support`]},{title:`Enterprise`,price:`₹16,999`,features:[`Unlimited Products`,`Premium Marketing`,`Brand Approval`,`Dedicated Manager`]}],Meesho:[{title:`Starter`,price:`₹2,999`,features:[`Seller Setup`,`5 Listings`,`Catalog Upload`,`Basic Support`]},{title:`Growth`,price:`₹6,999`,popular:!0,features:[`SEO & Keywords`,`Promotion Setup`,`20 Listings`,`Priority Support`]},{title:`Enterprise`,price:`₹12,999`,features:[`Unlimited Listings`,`Growth Strategy`,`Dedicated Support`,`Advanced Marketing`]}]},[n,r]=(0,_.useState)(`Amazon`);return(0,j.jsx)(`section`,{className:`py-14 md:py-20 overflow-hidden`,children:(0,j.jsxs)(`div`,{className:`container mx-auto px-4 sm:px-6 lg:px-8`,children:[(0,j.jsxs)(`div`,{className:`max-w-3xl mx-auto text-center mb-12 md:mb-16`,children:[(0,j.jsx)(`h2`,{className:`\r
+                        text-sm\r
+                        sm:text-base\r
+                        font-semibold\r
+                        uppercase\r
+                        tracking-[4px]\r
+                        text-[#B06A8D]\r
+                        mb-4\r
+                    `,children:`Plans & Pricing`}),(0,j.jsx)(`h1`,{className:`\r
+                        text-3xl\r
+                        lg:text-4xl\r
+                        font-bold\r
+                        text-[#1E1E1E]\r
+                        leading-tight\r
+                        mb-5\r
+                    `,children:`Choose Your Marketplace Plan`}),(0,j.jsx)(`p`,{className:`\r
+                        text-sm\r
+                        md:text-base\r
+                        text-[#5F6673]\r
+                        leading-relaxed\r
+                        max-w-2xl\r
+                        mx-auto\r
+                    `,children:`Pricing changes based on marketplace platforms. Select your platform to explore custom plans.`})]}),(0,j.jsx)(`div`,{className:`\r
+                    flex\r
+                    flex-wrap\r
+                    justify-center\r
+                    gap-3\r
+                    sm:gap-4\r
+                    mb-12\r
+                    lg:mb-16\r
+                `,children:e.map((e,t)=>(0,j.jsxs)(`button`,{onClick:()=>r(e.name),className:`
+                                group
+                                relative
+                                overflow-hidden
+
+                                flex
+                                items-center
+                                gap-2
+                                sm:gap-3
+
+                                px-4
+                                sm:px-5
+
+                                py-3
+                                sm:py-3.5
+
+                                rounded-2xl
+
+                                transition-all
+                                duration-500
+
+                                backdrop-blur-md
+
+                                border
+
+                                hover:-translate-y-1
+                                hover:scale-105
+
+                                ${n===e.name?`
+                                        bg-[#B06A8D]
+                                        text-white
+                                        border-[#B06A8D]
+
+                                        shadow-[0_12px_35px_rgba(176,106,141,0.30)]
+
+                                        scale-105
+                                    `:`
+                                        bg-white/80
+                                        text-[#1E1E1E]
+                                        border-white/60
+
+
+                                        hover:border-[#E8C7D7]
+                                    `}
+                            `,children:[(0,j.jsx)(`div`,{className:`
+                                absolute
+                                inset-0
+                                opacity-0
+                                transition-all
+                                duration-500
+
+                                bg-gradient-to-br
+                                from-white/20
+                                via-transparent
+                                to-[#C89AB5]/20
+
+                                ${n===e.name?`opacity-100`:`group-hover:opacity-100`}
+                            `}),(0,j.jsx)(`div`,{className:`
+                                relative
+                                z-10
+
+                                flex
+                                items-center
+                                justify-center
+
+                                w-9 h-9
+                                sm:w-10 sm:h-10
+
+                                rounded-xl
+
+                                transition-all
+                                duration-500
+
+                                ${n===e.name?`
+                                        bg-white
+                                        shadow-inner
+                                    `:`
+                                        bg-[#FFF7FA]
+                                        group-hover:bg-white
+                                    `}
+                            `,children:(0,j.jsx)(`img`,{src:e.logo,alt:e.name,className:`\r
+                                        w-5 h-5\r
+                                        sm:w-6 sm:h-6\r
+                                        object-contain\r
+                                    `})}),(0,j.jsx)(`span`,{className:`\r
+                                relative\r
+                                z-10\r
+\r
+                                text-xs\r
+                                sm:text-sm\r
+                                md:text-[15px]\r
+\r
+                                font-semibold\r
+                                tracking-wide\r
+                            `,children:e.name}),n===e.name&&(0,j.jsx)(`div`,{className:`\r
+                                    absolute\r
+                                    top-2\r
+                                    right-2\r
+\r
+                                    w-2\r
+                                    h-2\r
+\r
+                                    rounded-full\r
+                                    bg-white\r
+\r
+                                    animate-pulse\r
+                                `})]},t))}),(0,j.jsx)(`div`,{className:`\r
+                    grid\r
+                    grid-cols-1\r
+                    md:grid-cols-2\r
+                    xl:grid-cols-3\r
+                    gap-6\r
+                    lg:gap-8\r
+                `,children:t[n]?.map((e,t)=>(0,j.jsxs)(`div`,{className:`
+        relative
+        overflow-hidden
+
+        rounded-[28px]
+
+        p-6
+        sm:p-7
+        lg:p-8
+
+        transition-all
+        duration-500
+
+        flex
+        flex-col
+        h-full
+
+        ${e.popular?`
+                bg-[#B06A8D]
+                text-white
+
+                md:scale-[1.03]
+
+                shadow-[0_20px_50px_rgba(176,106,141,0.25)]
+            `:`
+                bg-white/80
+                backdrop-blur-md
+
+                border border-white/60
+
+                text-[#1E1E1E]
+
+                shadow-[0_10px_30px_rgba(176,106,141,0.08)]
+
+                hover:-translate-y-2
+                hover:shadow-[0_20px_50px_rgba(176,106,141,0.15)]
+            `}
+    `,children:[e.popular&&(0,j.jsx)(`div`,{className:`\r
+            absolute\r
+            top-5\r
+            right-5\r
+\r
+            bg-white\r
+            text-[#B06A8D]\r
+\r
+            text-xs\r
+            font-bold\r
+\r
+            px-3\r
+            py-1\r
+\r
+            rounded-full\r
+        `,children:`Most Popular`}),(0,j.jsx)(`h3`,{className:`\r
+        text-2xl\r
+        font-bold\r
+        mb-4\r
+    `,children:e.title}),(0,j.jsxs)(`div`,{className:`\r
+        flex\r
+        items-end\r
+        gap-1\r
+        mb-7\r
+    `,children:[(0,j.jsx)(`span`,{className:`\r
+            text-4xl\r
+            font-bold\r
+        `,children:e.price}),(0,j.jsx)(`span`,{className:`\r
+            text-sm\r
+            opacity-70\r
+            mb-1\r
+        `,children:`/month`})]}),(0,j.jsx)(`div`,{className:`\r
+        space-y-4\r
+        mb-8\r
+    `,children:e.features.map((t,n)=>(0,j.jsxs)(`div`,{className:`\r
+                    flex\r
+                    items-start\r
+                    gap-3\r
+                `,children:[(0,j.jsx)(`div`,{className:`
+                    min-w-[20px]
+                    h-5
+
+                    rounded-full
+
+                    flex
+                    items-center
+                    justify-center
+
+                    text-[11px]
+
+                    mt-0.5
+
+                    ${e.popular?`bg-white text-[#B06A8D]`:`bg-[#F8EEF3] text-[#B06A8D]`}
+                `,children:`✓`}),(0,j.jsx)(`span`,{className:`\r
+                    text-sm\r
+                    sm:text-[15px]\r
+                    leading-relaxed\r
+                `,children:t})]},n))}),(0,j.jsx)(`div`,{className:`mt-auto`,children:(0,j.jsx)(`button`,{className:`
+            w-full
+
+            py-3.5
+
+            rounded-2xl
+
+            text-sm
+            sm:text-base
+
+            font-semibold
+
+            transition-all
+            duration-300
+
+            ${e.popular?`
+                    bg-white
+                    text-[#B06A8D]
+
+                    hover:bg-[#F8EEF3]
+                `:`
+                    bg-[#B06A8D]
+                    text-white
+
+                    hover:bg-[#9A5A7C]
+                `}
+        `,children:`Get Started`})})]},t))})]})})},zu=()=>(0,j.jsxs)(`div`,{className:`bg-gradient-to-br from-[#FFF8FC] via-[#F7EDF3] to-[#F2E1EA]`,children:[(0,j.jsx)(Iu,{}),(0,j.jsx)(Lu,{}),(0,j.jsx)(Ru,{})]}),Bu=({isOpen:e=!1,onClose:t})=>{let[n,r]=(0,_.useState)(``),[i,a]=(0,_.useState)(``),[o,s]=(0,_.useState)(!1),[c,l]=(0,_.useState)(30);return(0,_.useEffect)(()=>{if(!o||c===0)return;let e=setInterval(()=>{l(e=>e-1)},1e3);return()=>clearInterval(e)},[o,c]),e?(0,j.jsxs)(j.Fragment,{children:[(0,j.jsx)(`div`,{className:`fixed inset-0 z-[51] bg-black/60 backdrop-blur-sm animate-fadeIn`}),(0,j.jsx)(`div`,{className:`fixed inset-0 z-[51] flex flex-col px-4 md:px-8 animate-fadeIn`,children:(0,j.jsx)(`div`,{className:`flex-1 flex items-end md:items-center justify-center pt-12 md:pt-0 pb-12 md:pb-0`,children:(0,j.jsxs)(`div`,{className:`\r
               w-full max-w-4xl overflow-hidden rounded-3xl bg-white\r
               shadow-2xl md:shadow-3xl\r
               animate-modalMobile md:animate-modalDesktop\r
@@ -344,4 +599,4 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
                         disabled:opacity-50\r
                         disabled:cursor-not-allowed\r
                         disabled:shadow-none\r
-                      `,children:`Send OTP`})]})]})]})]})})})]}):null};function Bu(){let[e,t]=(0,_.useState)(!1);return(0,j.jsx)(j.Fragment,{children:(0,j.jsxs)(Cn,{children:[(0,j.jsx)(zu,{isOpen:e}),(0,j.jsx)(Ou,{setOpen:t}),(0,j.jsx)(Ru,{})]})})}(0,v.createRoot)(document.getElementById(`root`)).render((0,j.jsx)(_.StrictMode,{children:(0,j.jsx)(Bu,{})}));
+                      `,children:`Send OTP`})]})]})]})]})})})]}):null};function Vu(){let[e,t]=(0,_.useState)(!1);return(0,j.jsx)(j.Fragment,{children:(0,j.jsxs)(Cn,{children:[(0,j.jsx)(Bu,{isOpen:e}),(0,j.jsx)(Ou,{setOpen:t}),(0,j.jsx)(zu,{})]})})}(0,v.createRoot)(document.getElementById(`root`)).render((0,j.jsx)(_.StrictMode,{children:(0,j.jsx)(Vu,{})}));
