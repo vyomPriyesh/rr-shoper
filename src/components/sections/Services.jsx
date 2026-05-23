@@ -64,8 +64,7 @@ const Services = () => {
 
                     <h1 className="
                         text-3xl
-                        sm:text-4xl
-                        lg:text-5xl
+                        md:text-4xl
                         font-bold
                         text-[#1E1E1E]
                         leading-tight

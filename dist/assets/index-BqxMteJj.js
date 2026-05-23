@@ -172,8 +172,7 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
                         uppercase\r
                     `,children:`Our Services`}),(0,j.jsx)(`h1`,{className:`\r
                         text-3xl\r
-                        sm:text-4xl\r
-                        lg:text-5xl\r
+                        md:text-4xl\r
                         font-bold\r
                         text-[#1E1E1E]\r
                         leading-tight\r
