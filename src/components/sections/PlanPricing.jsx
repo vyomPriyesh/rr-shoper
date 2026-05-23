@@ -142,7 +142,7 @@ const PlanPricing = () => {
     const [selectedPlatform, setSelectedPlatform] = useState("Amazon")
 
     return (
-        <section className="pb-10 md:py-20 overflow-hidden">
+        <section className="pb-10 md:py-10">
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 

@@ -65,7 +65,7 @@ const Hero = () => {
                 <div className="grid grid-cols-1 xl:grid-cols-2 md:gap-14 lg:gap-0 xl:gap-20 items-center">
                     {/* LEFT CONTENT */}
                     <div className="w-full grid grid-cols-1 gap-3 md:gap-10 mb-10">
-                        <Badge className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-xl border border-white/50 rounded-full lg:mb-5 xl:mb-10 mb-5 md:py-1 md:px-3 xl:py-2 xl:px-5 shadow-xl">
+                        <Badge className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-xl border border-white/50 w-fit rounded-full lg:mb-5 xl:mb-10 mb-5 md:py-1 md:px-3 xl:py-2 xl:px-5 shadow-xl">
                             <FaCrown className="text-[#fabc0f] text-sm sm:text-lg" />
                             <span className="text-[#A36081] font-semibold text-xs sm:text-sm md:text-sm xl:text-base">
                                 Trusted by 500+ Brands Across India

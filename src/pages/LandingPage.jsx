@@ -2,6 +2,7 @@ import React from 'react'
 import Hero from '../components/sections/Hero'
 import Services from '../components/sections/Services'
 import PlanPricing from '../components/sections/PlanPricing'
+import WorkProcess from '../components/sections/WorkProcess'
 
 const LandingPage = () => {
   return (
@@ -9,6 +10,7 @@ const LandingPage = () => {
       <Hero />
       <Services />
       <PlanPricing />
+      <WorkProcess />
     </div>
   )
 }
