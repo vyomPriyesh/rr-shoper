@@ -59,7 +59,7 @@ const Hero = () => {
     }
 
     return (
-        <section className="relative overflow-hidden min-h-screen flex items-center pt-20 md:pb-0 pb-10 bg-gradient-to-br from-[#FFF8FC] via-[#F7EDF3] to-[#F2E1EA]">
+        <section className="relative min-h-screen flex items-center pt-20 md:pb-0 pb-10">
             <div className="container mx-auto px-2 md:px-4 sm:px-6 lg:px-8 md:py-4">
                 {/* MAIN GRID */}
                 <div className="grid grid-cols-1 xl:grid-cols-2 md:gap-14 lg:gap-0 xl:gap-20 items-center">
