@@ -49,6 +49,9 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
         },
         onSuccess: ({ message, data }) => {
             showToast(message, "success");
+            setMobile("");
+            setOtp("");
+            setOtpSent(false);
             setRefresh((prev) => prev + 1);
             localStorage.setItem("user", JSON.stringify({
                 ...data.result.user,
