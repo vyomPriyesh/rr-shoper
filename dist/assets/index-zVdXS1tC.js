@@ -715,86 +715,30 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
                         disabled:opacity-50\r
                         disabled:cursor-not-allowed\r
                         disabled:shadow-none\r
-                      `,children:`Send OTP`})]})]})]})]})})})]}):null},id=()=>(0,j.jsx)(`section`,{className:`py-6 px-4 sm:px-6 lg:px-8 bg-white`,children:(0,j.jsxs)(`div`,{className:`container p-6 lg:p-10 mx-auto rounded-[32px] border border-borderColor bg-background`,children:[(0,j.jsxs)(`div`,{className:`flex flex-col lg:flex-row gap-14`,children:[(0,j.jsxs)(`div`,{className:`w-full lg:max-w-[380px] flex flex-col gap-5`,children:[(0,j.jsx)(Gn,{}),(0,j.jsx)(`p`,{className:`text-paragraph leading-8 text-base`,children:`Your trusted partner for complete e-commerce marketplace solutions. Helping brands launch, list, market, and scale on major platforms since 2019.`}),(0,j.jsx)(`div`,{className:`mt-4 flex items-center flex-wrap gap-4`,children:[(0,j.jsx)(Pu,{}),(0,j.jsx)(Nu,{}),(0,j.jsx)(Mu,{}),(0,j.jsx)(Au,{})].map((e,t)=>(0,j.jsx)(`button`,{className:`\r
-                                w-12 h-12 rounded-2xl text-white\r
-                                flex items-center justify-center\r
-                                bg-primary\r
-                                transition-all duration-300\r
-                                hover:text-primary\r
-                                hover:bg-white\r
-                                hover:-translate-y-1\r
-                                hover:shadow-xl\r
-                                border border-transparent\r
-                                hover:border-primary\r
-                            `,children:e},t))})]}),(0,j.jsxs)(`div`,{className:`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full`,children:[(0,j.jsxs)(`div`,{children:[(0,j.jsx)(`h3`,{className:`text-xl font-semibold text-heading mb-6`,children:`Quick Links`}),(0,j.jsx)(`ul`,{className:`space-y-4`,children:[`Home`,`Services`,`Platforms`,`Packages`,`About`,`Contact`].map((e,t)=>(0,j.jsx)(`li`,{children:(0,j.jsx)(`a`,{href:`/`,className:`\r
-                                        relative inline-block\r
-                                        text-paragraph\r
+                      `,children:`Send OTP`})]})]})]})]})})})]}):null},id=()=>{let e=[{title:`Quick Links`,links:[{label:`Home`,path:`/`},{label:`Services`,path:`/services`},{label:`Platforms`,path:`/platforms`},{label:`Packages`,path:`/packages`},{label:`About`,path:`/about`},{label:`Contact`,path:`/contact`}]},{title:`Our Services`,links:[{label:`Account Opening`,path:`/services/account-opening`},{label:`Product Listing`,path:`/services/product-listing`},{label:`Marketing & Ads`,path:`/services/marketing`},{label:`Brand Registration`,path:`/services/brand-registration`},{label:`Catalog Management`,path:`/services/catalog-management`}]},{title:`Platforms`,links:[{label:`Amazon India`,path:`/platforms/amazon`},{label:`Flipkart`,path:`/platforms/flipkart`},{label:`Meesho`,path:`/platforms/meesho`},{label:`Ajio`,path:`/platforms/ajio`},{label:`Snapdeal`,path:`/platforms/snapdeal`},{label:`Myntra`,path:`/platforms/myntra`}]}],t=[{icon:(0,j.jsx)(Pu,{}),path:`/`},{icon:(0,j.jsx)(Nu,{}),path:`/`},{icon:(0,j.jsx)(Mu,{}),path:`/`},{icon:(0,j.jsx)(Au,{}),path:`/`}],n=`
+        relative inline-block
+        text-paragraph
+        transition-all duration-300
+        hover:text-primary
+        
+        after:absolute
+        after:left-0
+        after:-bottom-1
+        after:h-[2px]
+        after:w-0
+        after:bg-primary
+        after:transition-all
+        after:duration-300
+        hover:after:w-full
+    `;return(0,j.jsx)(`footer`,{className:`py-6 px-4 sm:px-6 lg:px-8 bg-white`,children:(0,j.jsxs)(`div`,{className:`container mx-auto p-6 lg:p-10 rounded-[32px] border border-borderColor bg-background`,children:[(0,j.jsxs)(`div`,{className:`flex flex-col lg:flex-row gap-14`,children:[(0,j.jsxs)(`div`,{className:`w-full lg:max-w-[380px] flex flex-col gap-5`,children:[(0,j.jsx)(Gn,{}),(0,j.jsx)(`p`,{className:`text-paragraph leading-8 text-base`,children:`Your trusted partner for complete e-commerce marketplace solutions. Helping brands launch, list, market, and scale on major platforms since 2019.`}),(0,j.jsx)(`div`,{className:`mt-4 flex items-center flex-wrap gap-4`,children:t.map((e,t)=>(0,j.jsx)(Tn,{to:e.path,className:`\r
+                                        w-12 h-12 rounded-2xl text-white\r
+                                        flex items-center justify-center\r
+                                        bg-primary\r
                                         transition-all duration-300\r
                                         hover:text-primary\r
-                                        \r
-                                        after:absolute\r
-                                        after:left-0\r
-                                        after:-bottom-1\r
-                                        after:h-[2px]\r
-                                        after:w-0\r
-                                        after:bg-primary\r
-                                        after:transition-all\r
-                                        after:duration-300\r
-                                        hover:after:w-full\r
-                                    `,children:e})},t))})]}),(0,j.jsxs)(`div`,{children:[(0,j.jsx)(`h3`,{className:`text-xl font-semibold text-heading mb-6`,children:`Our Services`}),(0,j.jsx)(`ul`,{className:`space-y-4`,children:[`Account Opening`,`Product Listing`,`Marketing & Ads`,`Brand Registration`,`Catalog Management`].map((e,t)=>(0,j.jsx)(`li`,{children:(0,j.jsx)(`a`,{href:`/`,className:`\r
-                                        relative inline-block\r
-                                        text-paragraph\r
-                                        transition-all duration-300\r
-                                        hover:text-primary\r
-                                        \r
-                                        after:absolute\r
-                                        after:left-0\r
-                                        after:-bottom-1\r
-                                        after:h-[2px]\r
-                                        after:w-0\r
-                                        after:bg-primary\r
-                                        after:transition-all\r
-                                        after:duration-300\r
-                                        hover:after:w-full\r
-                                    `,children:e})},t))})]}),(0,j.jsxs)(`div`,{children:[(0,j.jsx)(`h3`,{className:`text-xl font-semibold text-heading mb-6`,children:`Platforms`}),(0,j.jsx)(`ul`,{className:`space-y-4`,children:[`Amazon India`,`Flipkart`,`Meesho`,`Ajio`,`Snapdeal`,`Myntra`].map((e,t)=>(0,j.jsx)(`li`,{children:(0,j.jsx)(`a`,{href:`/`,className:`\r
-                                        relative inline-block\r
-                                        text-paragraph\r
-                                        transition-all duration-300\r
-                                        hover:text-primary\r
-                                        \r
-                                        after:absolute\r
-                                        after:left-0\r
-                                        after:-bottom-1\r
-                                        after:h-[2px]\r
-                                        after:w-0\r
-                                        after:bg-primary\r
-                                        after:transition-all\r
-                                        after:duration-300\r
-                                        hover:after:w-full\r
-                                    `,children:e})},t))})]})]})]}),(0,j.jsxs)(`div`,{className:`mt-12 pt-6 border-t border-borderColor flex flex-col sm:flex-row items-center justify-between gap-4`,children:[(0,j.jsx)(`p`,{className:`text-sm text-paragraph text-center sm:text-left`,children:`© 2026 RR SHOPER. All rights reserved.`}),(0,j.jsxs)(`div`,{className:`flex items-center gap-5 flex-wrap justify-center`,children:[(0,j.jsx)(`a`,{href:`/`,className:`\r
-                        relative inline-block text-sm text-paragraph\r
-                        hover:text-primary transition-all duration-300\r
-                        \r
-                        after:absolute\r
-                        after:left-0\r
-                        after:-bottom-1\r
-                        after:h-[2px]\r
-                        after:w-0\r
-                        after:bg-primary\r
-                        after:transition-all\r
-                        after:duration-300\r
-                        hover:after:w-full\r
-                    `,children:`Privacy Policy`}),(0,j.jsx)(`a`,{href:`/`,className:`\r
-                        relative inline-block text-sm text-paragraph\r
-                        hover:text-primary transition-all duration-300\r
-                        \r
-                        after:absolute\r
-                        after:left-0\r
-                        after:-bottom-1\r
-                        after:h-[2px]\r
-                        after:w-0\r
-                        after:bg-primary\r
-                        after:transition-all\r
-                        after:duration-300\r
-                        hover:after:w-full\r
-                    `,children:`Terms & Conditions`})]})]})]})});function ad(){let[e,t]=(0,x.useState)(!1);return(0,j.jsx)(j.Fragment,{children:(0,j.jsxs)(Sn,{children:[(0,j.jsx)(rd,{isOpen:e}),(0,j.jsx)(Du,{setOpen:t}),(0,j.jsx)(nd,{}),(0,j.jsx)(id,{})]})})}(0,g.createRoot)(document.getElementById(`root`)).render((0,j.jsx)(ad,{}));
+                                        hover:bg-white\r
+                                        hover:-translate-y-1\r
+                                        hover:shadow-xl\r
+                                        border border-transparent\r
+                                        hover:border-primary\r
+                                    `,children:e.icon},t))})]}),(0,j.jsx)(`div`,{className:`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full`,children:e.map((e,t)=>(0,j.jsxs)(`div`,{children:[(0,j.jsx)(`h3`,{className:`text-xl font-semibold text-heading mb-6`,children:e.title}),(0,j.jsx)(`ul`,{className:`space-y-4`,children:e.links.map((e,t)=>(0,j.jsx)(`li`,{children:(0,j.jsx)(Tn,{to:e.path,className:n,children:e.label})},t))})]},t))})]}),(0,j.jsxs)(`div`,{className:`mt-12 pt-6 border-t border-borderColor flex flex-col sm:flex-row items-center justify-between gap-4`,children:[(0,j.jsx)(`p`,{className:`text-sm text-paragraph text-center sm:text-left`,children:`© 2026 RR SHOPER. All rights reserved.`}),(0,j.jsxs)(`div`,{className:`flex items-center gap-5 flex-wrap justify-center`,children:[(0,j.jsx)(Tn,{to:`/privacy-policy`,className:n,children:`Privacy Policy`}),(0,j.jsx)(Tn,{to:`/terms-and-conditions`,className:n,children:`Terms & Conditions`})]})]})]})})};function ad(){let[e,t]=(0,x.useState)(!1);return(0,j.jsx)(j.Fragment,{children:(0,j.jsxs)(Sn,{children:[(0,j.jsx)(rd,{isOpen:e}),(0,j.jsx)(Du,{setOpen:t}),(0,j.jsx)(nd,{}),(0,j.jsx)(id,{})]})})}(0,g.createRoot)(document.getElementById(`root`)).render((0,j.jsx)(ad,{}));
