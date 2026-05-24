@@ -5,6 +5,7 @@ import Hero from "./components/sections/Hero"
 import LandingPage from "./pages/LandingPage"
 import MobileLogin from "./components/sections/MobileLogin"
 import { useState } from "react"
+import Footer from "./components/layouts/Footer"
 function App() {
   const [open, setOpen] = useState(false);
   return (
@@ -13,6 +14,7 @@ function App() {
         <MobileLogin isOpen={open} />
         <Header setOpen={setOpen} />
         <LandingPage />
+        <Footer />
       </BrowserRouter>
     </>
   )

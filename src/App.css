@@ -1,3 +1,14 @@
+/* Hide number input arrows */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 .logo-Font {
     font-family: "Cormorant Garamond", serif;
     font-optical-sizing: auto;
@@ -147,4 +158,70 @@
 
 .animate-bounceSlow {
     animation: bounceSlow 3s ease-in-out infinite;
+}
+
+@keyframes floatOne {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  25% {
+    transform: translate(-30px, 20px);
+  }
+  50% {
+    transform: translate(-10px, 50px);
+  }
+  75% {
+    transform: translate(20px, 10px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes floatTwo {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  25% {
+    transform: translate(40px, -20px);
+  }
+  50% {
+    transform: translate(20px, -50px);
+  }
+  75% {
+    transform: translate(-20px, -10px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes floatThree {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  25% {
+    transform: translate(20px, -20px) scale(1.1);
+  }
+  50% {
+    transform: translate(-10px, 30px) scale(0.95);
+  }
+  75% {
+    transform: translate(30px, 10px) scale(1.05);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-floatOne {
+  animation: floatOne 10s ease-in-out infinite;
+}
+
+.animate-floatTwo {
+  animation: floatTwo 12s ease-in-out infinite;
+}
+
+.animate-floatThree {
+  animation: floatThree 8s ease-in-out infinite;
 }

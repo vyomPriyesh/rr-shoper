@@ -155,7 +155,7 @@ const PlanPricing = () => {
                         font-semibold
                         uppercase
                         tracking-[4px]
-                        text-[#B06A8D]
+                        text-primary
                         mb-4
                     ">
                         Plans & Pricing
@@ -165,7 +165,7 @@ const PlanPricing = () => {
                         text-3xl
                         lg:text-4xl
                         font-bold
-                        text-[#1E1E1E]
+                        text-heading
                         leading-tight
                         mb-5
                     ">
@@ -175,7 +175,7 @@ const PlanPricing = () => {
                     <p className="
                         text-sm
                         md:text-base
-                        text-[#5F6673]
+                        text-paragraph
                         leading-relaxed
                         max-w-2xl
                         mx-auto
@@ -232,9 +232,9 @@ const PlanPricing = () => {
 
                                 ${selectedPlatform === platform.name
                                     ? `
-                                        bg-[#B06A8D]
+                                        bg-primary
                                         text-white
-                                        border-[#B06A8D]
+                                        border-primary
 
                                         shadow-[0_12px_35px_rgba(176,106,141,0.30)]
 
@@ -242,7 +242,7 @@ const PlanPricing = () => {
                                     `
                                     : `
                                         bg-white/80
-                                        text-[#1E1E1E]
+                                        text-heading
                                         border-white/60
 
 
@@ -263,7 +263,7 @@ const PlanPricing = () => {
                                 bg-gradient-to-br
                                 from-white/20
                                 via-transparent
-                                to-[#C89AB5]/20
+                                to-secondary/20
 
                                 ${selectedPlatform === platform.name
                                     ? "opacity-100"
@@ -383,7 +383,7 @@ const PlanPricing = () => {
 
         ${plan.popular
                                     ? `
-                bg-[#B06A8D]
+                bg-primary
                 text-white
 
                 md:scale-[1.03]
@@ -396,7 +396,7 @@ const PlanPricing = () => {
 
                 border border-white/60
 
-                text-[#1E1E1E]
+                text-heading
 
                 shadow-[0_10px_30px_rgba(176,106,141,0.08)]
 
@@ -415,7 +415,7 @@ const PlanPricing = () => {
             right-5
 
             bg-white
-            text-[#B06A8D]
+            text-primary
 
             text-xs
             font-bold
@@ -495,8 +495,8 @@ const PlanPricing = () => {
                     mt-0.5
 
                     ${plan.popular
-                                                ? "bg-white text-[#B06A8D]"
-                                                : "bg-[#F8EEF3] text-[#B06A8D]"
+                                                ? "bg-white text-primary"
+                                                : "bg-[#F8EEF3] text-primary"
                                             }
                 `}>
                                             ✓
@@ -537,15 +537,15 @@ const PlanPricing = () => {
             ${plan.popular
                                         ? `
                     bg-white
-                    text-[#B06A8D]
+                    text-primary
 
                     hover:bg-[#F8EEF3]
                 `
                                         : `
-                    bg-[#B06A8D]
+                    bg-primary
                     text-white
 
-                    hover:bg-[#9A5A7C]
+                    hover:bg-primaryDark
                 `
                                     }
         `}>

@@ -67,19 +67,19 @@ const Hero = () => {
                     <div className="w-full grid grid-cols-1 gap-3 md:gap-10 mb-10">
                         <Badge className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-xl border border-white/50 w-fit rounded-full lg:mb-5 xl:mb-10 mb-5 md:py-1 md:px-3 xl:py-2 xl:px-5 shadow-xl">
                             <FaCrown className="text-[#fabc0f] text-sm sm:text-lg" />
-                            <span className="text-[#A36081] font-semibold text-xs sm:text-sm md:text-sm xl:text-base">
+                            <span className="text-primary font-semibold text-xs sm:text-sm md:text-sm xl:text-base">
                                 Trusted by 500+ Brands Across India
                             </span>
                         </Badge>
                         <h1 className="
                             text-3xl sm:text-[3rem] md:text-[3.6rem] xl:text-[4.2rem] leading-[1.1] font-bold text-[#1A1A1A] font-['Times_New_Roman']">
                             Grow Your Online Business with{' '}
-                            <span className="bg-gradient-to-r from-[#A36081] to-[#A17BA4] bg-clip-text text-transparent">
+                            <span className="bg-gradient-to-r from-primary to-[#A17BA4] bg-clip-text text-transparent">
                                 Complete E-Commerce Support
                             </span>
                         </h1>
                         <p className="text-sm sm:text-lg lg:text-xl leading-relaxed text-gray-600 max-w-2xl">
-                            Your <span className="font-bold text-[#A36081]">premium</span> marketplace growth partner for Amazon,
+                            Your <span className="font-bold text-primary">premium</span> marketplace growth partner for Amazon,
                             Flipkart, Meesho, Myntra, and more — helping brands scale with strategy,
                             ads, and operational excellence.
                         </p>
@@ -98,10 +98,10 @@ const Hero = () => {
                                 {...btnProps}
                                 bgColor="white"
                                 color="#1A1A1A"
-                                className="w-full sm:w-auto justify-center border-2 border-[#A36081]/30 shadow-xl hover:bg-[#A36081]/5 transition-all duration-300"
+                                className="w-full sm:w-auto justify-center border-2 border-primary/30 shadow-xl hover:bg-primary/5 transition-all duration-300"
                             >
-                                <FaArrowRight size={14} className="text-[#A36081]" />
-                                <span className="text-[#A36081] font-bold">
+                                <FaArrowRight size={14} className="text-primary" />
+                                <span className="text-primary font-bold">
                                     Explore Services
                                 </span>
                             </CommonButton>
@@ -125,7 +125,7 @@ const Hero = () => {
 
                             {/* TOP BADGE */}
                             <div className="
-                                absolute top-3 right-3 sm:-top-5 sm:-right-5 bg-[#A36081] text-white px-3 sm:px-5 py-2 rounded-2xl shadow-xl hidden md:flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
+                                absolute top-3 right-3 sm:-top-5 sm:-right-5 bg-primary text-white px-3 sm:px-5 py-2 rounded-2xl shadow-xl hidden md:flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
                                 <FaCheckCircle />
                                 Account Approved
                             </div>
@@ -148,7 +148,7 @@ const Hero = () => {
                                             `
                                         }}
                                     >
-                                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center bg-gradient-to-r from-[#A36081]/10 to-[#A17BA4]/10">
+                                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center bg-gradient-to-r from-primary/10 to-[#A17BA4]/10">
                                             <i
                                                 className={icon}
                                                 style={{
@@ -166,7 +166,7 @@ const Hero = () => {
                             </div>
                         </div>
                         <div className="md:hidden grid grid-cols-2 gap-3 mt-10">
-                            <div className="bg-[#A36081] text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
+                            <div className="bg-primary text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
                                 <FaCheckCircle />
                                 Account Approved
                             </div>
@@ -187,7 +187,7 @@ const Hero = () => {
                                 <div key={i} className={`stat-item animate-${i} text-center`}>
                                     <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#1A1A1A] leading-none mb-2">
                                         <Counter end={item.number} />
-                                        <span className="text-[#A36081] text-xl sm:text-2xl">
+                                        <span className="text-primary text-xl sm:text-2xl">
                                             {item.suffix}
                                         </span>
                                     </div>

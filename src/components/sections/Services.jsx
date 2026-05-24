@@ -54,7 +54,7 @@ const Services = () => {
                         sm:text-base
                         md:text-lg
                         font-semibold
-                        text-[#B06A8D]
+                        text-primary
                         mb-3
                         tracking-[3px]
                         uppercase
@@ -66,7 +66,7 @@ const Services = () => {
                         text-3xl
                         md:text-4xl
                         font-bold
-                        text-[#1E1E1E]
+                        text-heading
                         leading-tight
                         mb-5
                     ">
@@ -77,7 +77,7 @@ const Services = () => {
                         text-sm
                         sm:text-base
                         md:text-lg
-                        text-[#5F6673]
+                        text-paragraph
                         leading-relaxed
                         max-w-2xl
                         mx-auto
@@ -131,9 +131,9 @@ const Services = () => {
                                 duration-500
 
                                 bg-gradient-to-br
-                                from-[#B06A8D]/5
+                                from-primary/5
                                 via-transparent
-                                to-[#C89AB5]/10
+                                to-secondary/10
                             "></div>
 
                             {/* Icon */}
@@ -154,12 +154,12 @@ const Services = () => {
                                     md:text-2xl
 
                                     bg-[#F8EEF3]
-                                    text-[#B06A8D]
+                                    text-primary
 
                                     transition-all
                                     duration-500
 
-                                    group-hover:bg-[#B06A8D]
+                                    group-hover:bg-primary
                                     group-hover:text-white
                                     group-hover:scale-110
                                 "
@@ -176,7 +176,7 @@ const Services = () => {
                                 md:text-2xl
 
                                 font-bold
-                                text-[#1E1E1E]
+                                text-heading
 
                                 my-3
                             ">
@@ -190,7 +190,7 @@ const Services = () => {
                                 text-sm
                                 sm:text-[15px]
 
-                                text-[#5F6673]
+                                text-paragraph
                                 leading-relaxed
                             ">
                                 {service.description}
@@ -204,8 +204,8 @@ const Services = () => {
                                 rounded-full
 
                                 bg-gradient-to-r
-                                from-[#B06A8D]
-                                to-[#C89AB5]
+                                from-primary
+                                to-secondary
 
                                 mt-6
 
