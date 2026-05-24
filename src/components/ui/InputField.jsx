@@ -18,6 +18,7 @@ const InputField = ({
     // select
     options = [],
     multiple = false,
+    ...rest
 }) => {
     const [open, setOpen] = useState(false)
     const dropdownRef = useRef(null)
@@ -81,6 +82,7 @@ const InputField = ({
                             focus:border-primary
                             focus:ring-4 focus:ring-primary/10
                         "
+                        {...rest}
                     />
                 )}
 
@@ -100,6 +102,7 @@ const InputField = ({
                         focus:border-primary
                         focus:ring-4 focus:ring-primary/10
                     "
+                    {...rest}
                 />
             )}
 

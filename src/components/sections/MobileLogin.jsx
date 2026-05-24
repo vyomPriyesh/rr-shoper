@@ -1,7 +1,17 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import InputField from "../ui/InputField";
+import { useMutation } from "@tanstack/react-query";
+import api from "../../config/api";
+import apiList from "../../config/apiList";
+import { useToast } from "../../context/ToastContext";
+import { userState } from "../../context/UserContext";
 
-const FirstAuthModal = ({ isOpen = false, onClose }) => {
+const FirstAuthModal = ({ isOpen, onClose }) => {
+
+    const { login } = apiList();
+    const { setRefresh } = userState();
+    const { showToast } = useToast();
+
     const [mobile, setMobile] = useState("");
     const [otp, setOtp] = useState("");
     const [otpSent, setOtpSent] = useState(false);
@@ -17,23 +27,35 @@ const FirstAuthModal = ({ isOpen = false, onClose }) => {
         return () => clearInterval(timer);
     }, [otpSent, seconds]);
 
-    const handleSendOtp = async () => {
-        if (mobile.length === 10) {
-            setOtpSent(true);
-            setSeconds(30);
+    const { mutate: handleSendOtp } = useMutation({
+        mutationFn: async () => {
+            const response = await api.post(login.sendOtp, { mobile });
+            return response.data;
+        },
+        onSuccess: ({ data }) => {
+            if (mobile.length === 10) {
+                showToast(data.result.otp, "success")
+                setOtp("");
+                setOtpSent(true);
+                setSeconds(30);
+            }
         }
-    };
+    })
 
-    const handleResend = () => {
-        setOtp("");
-        setSeconds(30);
-    };
-
-    const handleVerify = () => {
-        if (otp.length === 6) {
-            console.log("Verify:", mobile, otp);
+    const { mutate: handleVerify } = useMutation({
+        mutationFn: async () => {
+            const response = await api.post(login.verifyOtp, { mobile, otp });
+            return response.data;
+        },
+        onSuccess: ({ message, data }) => {
+            showToast(message, "success");
+            setRefresh((prev) => prev + 1);
+            localStorage.setItem("user", JSON.stringify({
+                ...data.result.user,
+                token: data.result.token
+            }));
         }
-    };
+    });
 
     if (!isOpen) return null;
 
@@ -126,30 +148,19 @@ const FirstAuthModal = ({ isOpen = false, onClose }) => {
                                     </div>
                                 </div>
 
-                                <div className="space-y-6">
+                                <div className="space-y-3">
                                     {/* Phone Input */}
                                     <div className="animate-slideUp">
-                                        <input
+                                        <InputField
                                             type="tel"
                                             maxLength={10}
                                             value={mobile}
+                                            placeholder="Enter 10-digit mobile"
                                             onChange={(e) =>
                                                 setMobile(
                                                     e.target.value.replace(/\D/g, "")
                                                 )
                                             }
-                                            placeholder="Enter 10-digit mobile"
-                                            className="
-                        w-full h-14 md:h-16 px-5 md:px-6 py-4
-                        rounded-2xl border-2 border-[#A36081]/30
-                        bg-[#F3E8EE]/50 text-lg md:text-xl font-bold
-                        text-[#A36081] placeholder-[#A36081]/50
-                        outline-none shadow-inner
-                        focus:border-[#A36081]
-                        focus:shadow-lg
-                        focus:ring-4 ring-[#A36081]/20
-                        transition-all
-                      "
                                         />
                                     </div>
 
@@ -176,8 +187,7 @@ const FirstAuthModal = ({ isOpen = false, onClose }) => {
                                         <>
                                             {/* OTP Input */}
                                             <div className="animate-slideUp">
-                                                <input
-                                                    type="text"
+                                                <InputField
                                                     maxLength={6}
                                                     value={otp}
                                                     onChange={(e) =>
@@ -186,44 +196,29 @@ const FirstAuthModal = ({ isOpen = false, onClose }) => {
                                                         )
                                                     }
                                                     placeholder="Enter 6-digit OTP"
-                                                    className="
-                            w-full h-14 md:h-16 px-5 md:px-6 py-4
-                            rounded-2xl border-2 border-[#A36081]/30
-                            bg-[#F3E8EE]/50 text-xl md:text-2xl
-                            font-bold tracking-[0.6em]
-                            text-[#A36081]
-                            placeholder-[#A36081]/50
-                            outline-none shadow-inner
-                            focus:border-[#A36081]
-                            focus:shadow-lg
-                            focus:ring-4 ring-[#A36081]/20
-                            transition-all
-                          "
                                                 />
                                             </div>
 
                                             {/* Timer */}
-                                            <div className="flex items-center justify-between p-4 md:p-5 rounded-2xl bg-[#F3E8EE]/70 border border-[#A36081]/20 animate-slideUp">
-                                                <span className="text-lg md:text-xl font-bold text-[#A36081]/70">
+                                            <div className="flex items-center justify-between rounded-2xl animate-slideUp">
+                                                {/* <span className="text-lg md:text-xl font-bold text-[#A36081]/70">
                                                     {seconds > 0
                                                         ? `Resend in ${seconds}s`
                                                         : "Ready to resend"}
-                                                </span>
+                                                </span> */}
 
                                                 <button
-                                                    onClick={handleResend}
+                                                    onClick={handleSendOtp}
                                                     disabled={seconds > 0}
-                                                    className="
-                            px-4 md:px-6 py-2 md:py-3
-                            rounded-xl bg-[#A36081]/30
-                            text-[#A36081] font-bold
-                            hover:bg-[#A36081]/50
-                            transition-all
+                                                    className={` ${seconds > 0 ? '' : 'text-primary'}
+                            rounded-xl ms-auto
+                            transition-all 
                             disabled:opacity-40
-                            disabled:cursor-not-allowed
-                          "
+                            disabled:cursor-not-allowed`}
                                                 >
-                                                    Resend OTP
+                                                    {seconds > 0
+                                                        ? `Resend in ${seconds}s`
+                                                        : "Resend OTP"}
                                                 </button>
                                             </div>
 
@@ -232,7 +227,7 @@ const FirstAuthModal = ({ isOpen = false, onClose }) => {
                                                 onClick={handleVerify}
                                                 disabled={otp.length !== 6}
                                                 className="
-                          w-full h-14 md:h-16 rounded-2xl
+                          w-full h-14 rounded-2xl
                           bg-gradient-to-r from-[#A36081] to-[#8D4F6C]
                           text-white text-lg md:text-xl font-bold
                           shadow-xl hover:shadow-2xl

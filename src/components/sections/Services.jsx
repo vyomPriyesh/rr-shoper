@@ -1,4 +1,5 @@
 import React from 'react'
+import SectionsUI from '../layouts/SectionsUI';
 
 const Services = () => {
 
@@ -41,68 +42,13 @@ const Services = () => {
         },
     ];
 
-    return (
-        <section className="py-14 md:pt-20">
-
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-
-                {/* Heading */}
-                <div className="max-w-3xl mx-auto mb-12 md:mb-14 text-center">
-
-                    <h2 className="
-                        text-sm
-                        sm:text-base
-                        md:text-lg
-                        font-semibold
-                        text-primary
-                        mb-3
-                        tracking-[3px]
-                        uppercase
-                    ">
-                        Our Services
-                    </h2>
-
-                    <h1 className="
-                        text-3xl
-                        md:text-4xl
-                        font-bold
-                        text-heading
-                        leading-tight
-                        mb-5
-                    ">
-                        End-to-End Marketplace Solutions
-                    </h1>
-
-                    <p className="
-                        text-sm
-                        sm:text-base
-                        md:text-lg
-                        text-paragraph
-                        leading-relaxed
-                        max-w-2xl
-                        mx-auto
-                    ">
-                        From account setup to scaling your sales, we provide comprehensive
-                        services to help your brand succeed on every major e-commerce platform.
-                    </p>
-
-                </div>
-
-                {/* Cards */}
-                <div className="
-                    grid
-                    grid-cols-1
-                    sm:grid-cols-2
-                    xl:grid-cols-3
-                    gap-5
-                    md:gap-7
-                    lg:gap-5
-                ">
-
-                    {SERVICES.map((service, index) => (
-                        <div
-                            key={index}
-                            className="
+    const Content = () => {
+        return (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5  md:gap-7 lg:gap-5">
+                {SERVICES.map((service, index) => (
+                    <div
+                        key={index}
+                        className="
                                 group
                                 relative
                                 overflow-hidden
@@ -119,10 +65,10 @@ const Services = () => {
                                 hover:-translate-y-2
                                 hover:shadow-[0_20px_50px_rgba(176,106,141,0.16)]
                             "
-                        >
+                    >
 
-                            {/* Hover Glow */}
-                            <div className="
+                        {/* Hover Glow */}
+                        <div className="
                                 absolute
                                 inset-0
                                 opacity-0
@@ -136,9 +82,9 @@ const Services = () => {
                                 to-secondary/10
                             "></div>
 
-                            {/* Icon */}
-                            <div
-                                className="
+                        {/* Icon */}
+                        <div
+                            className="
                                     relative z-10
 
                                     w-14 h-14
@@ -163,12 +109,12 @@ const Services = () => {
                                     group-hover:text-white
                                     group-hover:scale-110
                                 "
-                            >
-                                <i className={service.icon}></i>
-                            </div>
+                        >
+                            <i className={service.icon}></i>
+                        </div>
 
-                            {/* Title */}
-                            <h3 className="
+                        {/* Title */}
+                        <h3 className="
                                 relative z-10
 
                                 text-lg
@@ -180,11 +126,11 @@ const Services = () => {
 
                                 my-3
                             ">
-                                {service.title}
-                            </h3>
+                            {service.title}
+                        </h3>
 
-                            {/* Description */}
-                            <p className="
+                        {/* Description */}
+                        <p className="
                                 relative z-10
 
                                 text-sm
@@ -193,11 +139,11 @@ const Services = () => {
                                 text-paragraph
                                 leading-relaxed
                             ">
-                                {service.description}
-                            </p>
+                            {service.description}
+                        </p>
 
-                            {/* Bottom Accent */}
-                            <div className="
+                        {/* Bottom Accent */}
+                        <div className="
                                 relative z-10
 
                                 w-12 h-1
@@ -215,14 +161,21 @@ const Services = () => {
                                 group-hover:w-24
                             "></div>
 
-                        </div>
-                    ))}
-
-                </div>
+                    </div>
+                ))}
 
             </div>
+        )
+    }
 
-        </section>
+    return (
+        <SectionsUI
+            topic="Our Services"
+            heading="End-to-End Marketplace Solutions"
+            text="From account setup to scaling your sales, we provide comprehensive services to help your brand succeed on every major e-commerce platform."
+            content={<Content />}
+            id="services"
+        />
     )
 }
 

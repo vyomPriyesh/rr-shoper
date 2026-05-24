@@ -14,13 +14,12 @@ const Footer = () => {
         {
             title: 'Quick Links',
             links: [
-                { label: 'Home', path: '/' },
-                { label: 'Services', path: '/services' },
-                { label: 'Platforms', path: '/platforms' },
-                { label: 'Packages', path: '/packages' },
-                { label: 'About', path: '/about' },
-                { label: 'Contact', path: '/contact' },
-            ],
+                { label: "Home", path: "/" },
+                { label: "Services", path: "services" },
+                { label: "Platforms", path: "platforms" },
+                { label: "About", path: "about" },
+                { label: "Contact", path: "contact" },
+            ]
         },
         {
             title: 'Our Services',

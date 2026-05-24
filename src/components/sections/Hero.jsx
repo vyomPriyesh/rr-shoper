@@ -59,7 +59,7 @@ const Hero = () => {
     }
 
     return (
-        <section className="relative min-h-screen flex items-center pt-20 md:pb-0 pb-10">
+        <section className="relative flex items-center pt-5 md:pb-0 pb-10">
             <div className="container mx-auto px-2 md:px-4 sm:px-6 lg:px-8 md:py-4">
                 {/* MAIN GRID */}
                 <div className="grid grid-cols-1 xl:grid-cols-2 md:gap-14 lg:gap-0 xl:gap-20 items-center">
@@ -72,7 +72,7 @@ const Hero = () => {
                             </span>
                         </Badge>
                         <h1 className="
-                            text-3xl sm:text-[3rem] md:text-[3.6rem] xl:text-[4.2rem] leading-[1.1] font-bold text-[#1A1A1A] font-['Times_New_Roman']">
+                            text-3xl sm:text-[3rem] md:text-[3.6rem] xl:text-[3.2rem] 2xl:text-[4.2rem] leading-[1.1] font-bold text-[#1A1A1A] font-['Times_New_Roman']">
                             Grow Your Online Business with{' '}
                             <span className="bg-gradient-to-r from-primary to-[#A17BA4] bg-clip-text text-transparent">
                                 Complete E-Commerce Support

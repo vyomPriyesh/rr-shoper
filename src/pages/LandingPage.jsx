@@ -9,7 +9,7 @@ import ContactSection from '../components/sections/ContactSection'
 
 const LandingPage = () => {
   return (
-    <div className='bg-gradient-to-br from-[#FFF8FC] via-[#F7EDF3] to-[#F2E1EA]'>
+    <>
       <Hero />
       <Services />
       <PlanPricing />
@@ -17,7 +17,7 @@ const LandingPage = () => {
       <Faqs />
       <CTASection />
       <ContactSection />
-    </div>
+    </>
   )
 }
 
