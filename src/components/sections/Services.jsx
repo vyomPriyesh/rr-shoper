@@ -1,41 +1,43 @@
 import React from 'react'
 import SectionsUI from '../layouts/SectionsUI';
+import dummyImg from '../../assets/images/dummyImg.jpg'
+
 
 const Services = () => {
 
     const SERVICES = [
         {
-            icon: "fas fa-user-plus",
+            img: "",
             title: "Account Opening",
             description:
                 "Complete seller account setup on Amazon, Flipkart, Meesho, Ajio, and more. We handle documentation, verification, and ensure fast approval.",
         },
         {
-            icon: "fas fa-list-check",
+            img: "",
             title: "Product Listing & Optimization",
             description:
                 "Professional product listings with SEO-optimized titles, descriptions, keywords, and high-quality images that convert browsers into buyers.",
         },
         {
-            icon: "fas fa-bullhorn",
+            img: "",
             title: "Marketing & Advertising",
             description:
                 "Strategic PPC campaigns, sponsored ads management, and promotional strategies to boost visibility and drive targeted traffic to your listings.",
         },
         {
-            icon: "fas fa-certificate",
+            img: "",
             title: "Brand Approval",
             description:
                 "Navigate the brand approval process seamlessly. We help you get brand registry and authorization to sell restricted categories.",
         },
         {
-            icon: "fas fa-trademark",
+            img: "",
             title: "Brand Creation & Registration",
             description:
                 "Build your brand from scratch — logo design, brand identity, trademark registration, and brand store creation on marketplaces.",
         },
         {
-            icon: "fas fa-boxes-stacked",
+            img: "",
             title: "Catalog Management",
             description:
                 "Ongoing catalog maintenance, inventory updates, pricing optimization, and A+ content creation to keep your listings competitive.",
@@ -82,7 +84,7 @@ const Services = () => {
                                 to-secondary/10
                             "></div>
 
-                        {/* Icon */}
+                        {/* img */}
                         <div
                             className="
                                     relative z-10
@@ -90,7 +92,7 @@ const Services = () => {
                                     w-14 h-14
                                     md:w-16 md:h-16
 
-                                    rounded-2xl
+                                    rounded-2xl overflow-hidden
 
                                     flex
                                     items-center
@@ -110,7 +112,7 @@ const Services = () => {
                                     group-hover:scale-110
                                 "
                         >
-                            <i className={service.icon}></i>
+                            <img src={service.img || dummyImg} />
                         </div>
 
                         {/* Title */}

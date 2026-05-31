@@ -10,6 +10,7 @@ import {
   Link,
   NavLink,
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 
 import {
@@ -20,10 +21,19 @@ import {
 import CommonButton from "../ui/CommonButton";
 import LanguageSwitcher from "../ui/LanguageSwitcher";
 import { userState } from "../../context/UserContext";
+import { useQuery } from "@tanstack/react-query";
+import apiList from "../../config/apiList";
+import api from "../../config/api";
+import { useToast } from "../../context/ToastContext";
 
 const Header = () => {
 
-  const { user, logout } = userState();
+  const { user, logout, setUser } = userState();
+  const { auth } = apiList();
+  const { showToast } = useToast();
+
+  const navigate = useNavigate();
+
 
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -66,6 +76,39 @@ const Header = () => {
     borderRadius: "999px",
     variant: "contained",
   };
+
+  const { data: profileData, error: profileErrorData, isError: profileError } = useQuery({
+    queryKey: ["profile", user?.token],
+    queryFn: async () => {
+      const response = await api.get(auth.profile, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      return response.data.data.result;
+    },
+    enabled: !!user?.token,
+  });
+
+  useEffect(() => {
+    if (profileError) {
+      if (profileErrorData?.response?.status == 401) {
+        showToast(profileErrorData?.response?.data?.error?.error_message?.message, "error")
+        logout();
+        return
+      }
+    } else {
+      if (profileData) {
+        const newProdileData = {
+          ...user,
+          ...profileData
+        }
+        setUser(newProdileData)
+      }
+    }
+  }, [profileData, profileError])
+
 
   useEffect(() => {
 
@@ -252,7 +295,7 @@ const Header = () => {
 
                     <p
                       className="
-                      text-sm font-semibold
+                      text-sm font-semibold capitalize
                       text-heading leading-none
                     "
                     >

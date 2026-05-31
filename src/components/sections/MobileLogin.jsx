@@ -8,7 +8,7 @@ import { userState } from "../../context/UserContext";
 
 const FirstAuthModal = ({ isOpen, onClose }) => {
 
-    const { login } = apiList();
+    const { auth } = apiList();
     const { setRefresh } = userState();
     const { showToast } = useToast();
 
@@ -29,7 +29,7 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
 
     const { mutate: handleSendOtp } = useMutation({
         mutationFn: async () => {
-            const response = await api.post(login.sendOtp, { mobile });
+            const response = await api.post(auth.sendOtp, { mobile });
             return response.data;
         },
         onSuccess: ({ data }) => {
@@ -44,7 +44,7 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
 
     const { mutate: handleVerify } = useMutation({
         mutationFn: async () => {
-            const response = await api.post(login.verifyOtp, { mobile, otp });
+            const response = await api.post(auth.verifyOtp, { mobile, otp });
             return response.data;
         },
         onSuccess: ({ message, data }) => {
@@ -61,6 +61,16 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
     });
 
     if (!isOpen) return null;
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+
+        if (!otpSent) {
+            handleSendOtp();
+        } else {
+            handleVerify();
+        }
+    };
 
     return (
         <>
@@ -151,7 +161,7 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
                                     </div>
                                 </div>
 
-                                <div className="space-y-3">
+                                <form onSubmit={handleFormSubmit} className="space-y-3">
                                     {/* Phone Input */}
                                     <div className="animate-slideUp">
                                         <InputField
@@ -169,7 +179,8 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
 
                                     {!otpSent ? (
                                         <button
-                                            onClick={handleSendOtp}
+                                            type="submit"
+                                            // onClick={handleSendOtp}
                                             disabled={mobile.length !== 10}
                                             className="
                         w-full h-14 md:h-16 rounded-2xl
@@ -211,6 +222,7 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
                                                 </span> */}
 
                                                 <button
+                                                    type="button"
                                                     onClick={handleSendOtp}
                                                     disabled={seconds > 0}
                                                     className={` ${seconds > 0 ? '' : 'text-primary'}
@@ -227,7 +239,8 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
 
                                             {/* Verify */}
                                             <button
-                                                onClick={handleVerify}
+                                                // onClick={handleVerify}
+                                                type="submit"
                                                 disabled={otp.length !== 6}
                                                 className="
                           w-full h-14 rounded-2xl
@@ -246,7 +259,7 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
                                             </button>
                                         </>
                                     )}
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>

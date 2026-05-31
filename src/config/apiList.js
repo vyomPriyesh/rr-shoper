@@ -1,8 +1,9 @@
 const apiList = () => {
     return {
-        login:{
+        auth: {
             sendOtp: "send-otp",
-            verifyOtp: "verify-otp"
+            verifyOtp: "verify-otp",
+            profile: "profile"
         }
     }
 }

@@ -8,6 +8,7 @@ import {
     FaChartLine
 } from 'react-icons/fa'
 import CommonButton from '../ui/CommonButton'
+import dummyImg from '../../assets/images/dummyImg.jpg'
 
 const Hero = () => {
 
@@ -30,15 +31,15 @@ const Hero = () => {
 
     // MAX 9 PLATFORMS
     const HERO_PLATFORMS = [
-        { icon: "fab fa-amazon", name: "Amazon" },
-        { icon: "fas fa-shopping-bag", name: "Flipkart" },
-        { icon: "fas fa-store", name: "Meesho" },
-        { icon: "fas fa-tshirt", name: "Ajio" },
-        { icon: "fas fa-bolt", name: "Snapdeal" },
-        { icon: "fas fa-tag", name: "Myntra" },
-        { icon: "fas fa-shopping-cart", name: "Shopify" },
-        { icon: "fas fa-store-alt", name: "Jiomart" },
-        { icon: "fas fa-box-open", name: "Nykaa" },
+        { img: "", name: "Amazon" },
+        { img: "", name: "Flipkart" },
+        { img: "", name: "Meesho" },
+        { img: "", name: "Ajio" },
+        { img: "", name: "Snapdeal" },
+        { img: "", name: "Myntra" },
+        { img: "", name: "Shopify" },
+        { img: "", name: "Jiomart" },
+        { img: "", name: "Nykaa" },
     ]
 
     function Counter({ end }) {
@@ -136,7 +137,7 @@ const Hero = () => {
                             </div>
                             {/* PLATFORM GRID */}
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
-                                {HERO_PLATFORMS.slice(0, 9).map(({ icon, name }) => (
+                                {HERO_PLATFORMS.slice(0, 9).map(({ img, name }) => (
                                     <div key={name}
                                         className="group relative rounded-2xl sm:rounded-3xl p-4 sm:p-5 flex flex-col items-center justify-center text-center gap-3 transition-all duration-300 hover:-translate-y-2 bg-gradient-to-b from-white to-white/80 border border-white/50 min-h-[120px]"
                                         style={{
@@ -148,14 +149,15 @@ const Hero = () => {
                                             `
                                         }}
                                     >
-                                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center bg-gradient-to-r from-primary/10 to-[#A17BA4]/10">
-                                            <i
+                                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center overflow-hidden justify-center bg-gradient-to-r from-primary/10 to-[#A17BA4]/10">
+                                            {/* <i
                                                 className={icon}
                                                 style={{
                                                     fontSize: '1.3rem',
                                                     color: '#A36081'
                                                 }}
-                                            />
+                                            /> */}
+                                            <img src={img || dummyImg} />
                                         </div>
 
                                         <span className="text-xs sm:text-sm font-bold text-[#1A1A1A]">
@@ -170,7 +172,7 @@ const Hero = () => {
                                 <FaCheckCircle />
                                 Account Approved
                             </div>
-                             {/* BOTTOM BADGE */}
+                            {/* BOTTOM BADGE */}
                             <div className="bg-[#A17BA4] text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
                                 <FaChartLine />
                                 +147% Sales Growth

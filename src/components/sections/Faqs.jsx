@@ -17,8 +17,6 @@ const FAQItem = ({ id, question, answer }) => {
         }))
     }
 
-    console.log(open)
-
     return (
         <div key={id}
             className={`bg-white rounded-3xl overflow-hidden border transition-all duration-300 hover:shadow-xl ${
@@ -105,7 +103,7 @@ const Faqs = () => {
         return (
             <div className="space-y-6 max-w-[800px] mx-auto">
                 {faqs.map((faq, index) => (
-                    <FAQItem {...faq} />
+                    <FAQItem  key={faq.id} {...faq} />
                 ))}
             </div>
         )
