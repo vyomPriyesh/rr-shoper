@@ -33,7 +33,7 @@ const PrivacyPolicies = () => {
                 title: 'Information Sharing',
                 subtitle: 'We do not sell, trade, or rent your personal information. Data may only be shared with',
                 points: [
-                    'E-commerce platforms (Amazon, Flipkart, etc.) for service purposes',
+                    'E-commerce platforms (Meesho, Amazon, Flipkart, Jiomart, and etc.) for service purposes',
                     'Legal authorities if required by law'
                 ]
             },

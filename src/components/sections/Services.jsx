@@ -10,7 +10,7 @@ const Services = () => {
             img: "",
             title: "Account Opening",
             description:
-                "Complete seller account setup on Amazon, Flipkart, Meesho, Ajio, and more. We handle documentation, verification, and ensure fast approval.",
+                "Complete seller account setup on Meesho, Amazon, Flipkart, Jiomart, and more. We handle documentation, verification, and ensure fast approval.",
         },
         {
             img: "",

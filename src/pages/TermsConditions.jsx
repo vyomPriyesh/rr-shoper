@@ -22,7 +22,7 @@ const TermsConditions = () => {
                 points: [
                     'Provide accurate and complete information',
                     'Share required access credentials securely',
-                    'Ensure compliance with platform policies (Amazon, Flipkart, etc.)'
+                    'Ensure compliance with platform policies (Meesho, Amazon, Flipkart, Jiomart, and more.)'
                 ]
             },
             {
