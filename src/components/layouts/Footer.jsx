@@ -184,6 +184,12 @@ const Footer = () => {
                         >
                             Privacy Policy
                         </Link>
+                        <Link
+                            to="/refund-cancellation-policy"
+                            className={linkClass}
+                        >
+                            Refund & Cancellation Policy
+                        </Link>
 
                         <Link
                             to="/terms-and-conditions"
