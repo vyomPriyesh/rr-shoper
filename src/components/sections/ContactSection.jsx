@@ -11,8 +11,11 @@ import {
     FaPaperPlane,
 } from 'react-icons/fa'
 import InputField from '../ui/InputField'
+import { userState } from '../../context/UserContext'
 
 const ContactSection = () => {
+
+    const { contactDetails } = userState();
 
     const [formData, setFormData] = useState({
         name: '',
@@ -59,7 +62,7 @@ const ContactSection = () => {
                                 </h4>
 
                                 <p className="mt-1 text-paragraph">
-                                    +91 98765 43210
+                                    {contactDetails?.mobile}
                                 </p>
                             </div>
                         </div>
@@ -76,7 +79,7 @@ const ContactSection = () => {
                                 </h4>
 
                                 <p className="mt-1 text-paragraph">
-                                    info@yourbusiness.com
+                                    {contactDetails?.email}
                                 </p>
                             </div>
                         </div>
@@ -93,7 +96,7 @@ const ContactSection = () => {
                                 </h4>
 
                                 <p className="mt-1 text-paragraph">
-                                    +91 98765 43210
+                                    {contactDetails?.mobile}
                                 </p>
                             </div>
                         </div>

@@ -1,7 +1,10 @@
 import React, { useMemo } from 'react'
 import PoliciesPointsUi from '../components/ui/PoliciesPointsUi';
+import { userState } from '../context/UserContext';
 
 const TermsConditions = () => {
+
+    const { contactDetails } = userState();
 
     const policiesPoints = useMemo(() => {
         return [
@@ -86,8 +89,13 @@ const TermsConditions = () => {
                 title: 'Contact Information',
                 subtitle: 'For any questions, contact us at:',
                 points: [
-                    'Email : sellersupport@rrshoper.in',
-                    'Mobile No. : +91 95741 41000'
+                    ...(contactDetails?.email
+                        ? [`Email : ${contactDetails.email}`]
+                        : []),
+
+                    ...(contactDetails?.mobile
+                        ? [`Mobile No. : ${contactDetails.mobile}`]
+                        : [])
                 ]
             }
         ];

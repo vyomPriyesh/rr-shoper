@@ -19,10 +19,15 @@ export const UserProvider = ({ children }) => {
         localStorage.removeItem("user");
     };
 
+    const contactDetails = {
+        mobile: '+91 9499839239',
+        email: 'sellersupport@rrshoper.in',
+    }
+
 
 
     return (
-        <UserContext.Provider value={{ user, setUser, logout, refresh, setRefresh }}>
+        <UserContext.Provider value={{ user, setUser, logout, refresh, setRefresh, contactDetails }}>
             {children}
         </UserContext.Provider>
     );
