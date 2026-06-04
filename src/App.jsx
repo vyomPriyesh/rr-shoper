@@ -13,9 +13,13 @@ import { userState } from "./context/UserContext"
 import PrivacyPolicies from "./pages/PrivacyPolicies"
 import RefundCancellationPolicies from "./pages/RefundCancellationPolicies"
 import TermsConditions from "./pages/TermsConditions"
+import apiList from "./config/apiList"
+import { useMutation } from "@tanstack/react-query"
+import api from "./config/api"
 function App() {
 
   const { user } = userState();
+  const { images } = apiList();
 
   const [open, setOpen] = useState(null);
 
@@ -27,9 +31,31 @@ function App() {
     }
   }, [user])
 
+  const { mutate: imageHandle } = useMutation({
+    mutationFn: ({ target }) => {
+      const files = Array.from(target.files);
+
+      const formData = new FormData();
+
+      files.forEach((file) => {
+        formData.append("images", file);
+      });
+
+      return api.post(images.upload, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    },
+    onSuccess: ({ data }) => {
+      console.log(data)
+    }
+  })
+
   return (
     <>
       <BrowserRouter>
+        <input type="file" name="" id="" onChange={imageHandle} />
         <MobileLogin isOpen={open} />
         <Header setOpen={setOpen} />
         <div className="bg-gradient-to-br from-[#FFF8FC] via-[#F7EDF3] to-[#F2E1EA]">

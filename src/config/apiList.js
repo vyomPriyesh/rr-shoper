@@ -4,6 +4,10 @@ const apiList = () => {
             sendOtp: "send-otp",
             verifyOtp: "verify-otp",
             profile: "profile"
+        },
+
+        images: {
+            upload: 'images/upload'
         }
     }
 }

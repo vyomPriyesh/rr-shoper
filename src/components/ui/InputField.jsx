@@ -1,7 +1,10 @@
 // components/common/InputField.jsx
 
+import { useMutation } from '@tanstack/react-query'
 import React, { useEffect, useRef, useState } from 'react'
 import { IoChevronDown } from 'react-icons/io5'
+import api from '../../config/api'
+import apiList from '../../config/apiList'
 
 const InputField = ({
     label,
@@ -20,6 +23,9 @@ const InputField = ({
     multiple = false,
     ...rest
 }) => {
+
+    const { images } = apiList();
+
     const [open, setOpen] = useState(false)
     const dropdownRef = useRef(null)
 
@@ -55,6 +61,27 @@ const InputField = ({
             onChange([...value, itemValue])
         }
     }
+
+    const { mutate: imageHandle } = useMutation({
+        mutationFn: ({ target }) => {
+            const files = Array.from(target.files);
+
+            const formData = new FormData();
+
+            files.forEach((file) => {
+                formData.append("images", file);
+            });
+
+            return api.post(images.upload, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+        },
+        onSuccess: ({ data }) => {
+            console.log(data)
+        }
+    })
 
     return (
         <div className="w-full">
@@ -125,24 +152,22 @@ const InputField = ({
                         "
                     >
                         <span
-                            className={`${
-                                value
-                                    ? 'text-heading'
-                                    : 'text-[#9CA3AF]'
-                            }`}
+                            className={`${value
+                                ? 'text-heading'
+                                : 'text-[#9CA3AF]'
+                                }`}
                         >
                             {value
                                 ? options.find(
-                                      (item) =>
-                                          item.value === value
-                                  )?.label
+                                    (item) =>
+                                        item.value === value
+                                )?.label
                                 : placeholder}
                         </span>
 
                         <IoChevronDown
-                            className={`transition-all duration-300 ${
-                                open ? 'rotate-180' : ''
-                            }`}
+                            className={`transition-all duration-300 ${open ? 'rotate-180' : ''
+                                }`}
                         />
                     </button>
 
@@ -152,10 +177,9 @@ const InputField = ({
                             bg-white rounded-2xl border border-borderColor
                             shadow-xl overflow-hidden
                             transition-all duration-300 origin-top
-                            ${
-                                open
-                                    ? 'opacity-100 visible scale-100'
-                                    : 'opacity-0 invisible scale-95'
+                            ${open
+                                ? 'opacity-100 visible scale-100'
+                                : 'opacity-0 invisible scale-95'
                             }
                         `}
                     >
@@ -171,10 +195,9 @@ const InputField = ({
                                     className={`
                                         w-full px-4 py-3 rounded-xl text-left
                                         transition-all duration-200
-                                        ${
-                                            value === item.value
-                                                ? 'bg-primary/10 text-primaryDark'
-                                                : 'hover:bg-background text-heading'
+                                        ${value === item.value
+                                            ? 'bg-primary/10 text-primaryDark'
+                                            : 'hover:bg-background text-heading'
                                         }
                                     `}
                                 >
@@ -232,9 +255,8 @@ const InputField = ({
                         </div>
 
                         <IoChevronDown
-                            className={`transition-all duration-300 ${
-                                open ? 'rotate-180' : ''
-                            }`}
+                            className={`transition-all duration-300 ${open ? 'rotate-180' : ''
+                                }`}
                         />
                     </button>
 
@@ -244,10 +266,9 @@ const InputField = ({
                             bg-white rounded-2xl border border-borderColor
                             shadow-xl overflow-hidden
                             transition-all duration-300 origin-top
-                            ${
-                                open
-                                    ? 'opacity-100 visible scale-100'
-                                    : 'opacity-0 invisible scale-95'
+                            ${open
+                                ? 'opacity-100 visible scale-100'
+                                : 'opacity-0 invisible scale-95'
                             }
                         `}
                     >
@@ -269,10 +290,9 @@ const InputField = ({
                                             w-full px-4 py-3 rounded-xl text-left
                                             transition-all duration-200
                                             flex items-center justify-between
-                                            ${
-                                                active
-                                                    ? 'bg-primary/10 text-primaryDark'
-                                                    : 'hover:bg-background text-heading'
+                                            ${active
+                                                ? 'bg-primary/10 text-primaryDark'
+                                                : 'hover:bg-background text-heading'
                                             }
                                         `}
                                     >
