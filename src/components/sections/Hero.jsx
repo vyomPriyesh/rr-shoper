@@ -9,8 +9,15 @@ import {
 } from 'react-icons/fa'
 import CommonButton from '../ui/CommonButton'
 import dummyImg from '../../assets/images/dummyImg.jpg'
+import apiList from '../../config/apiList'
+import { useQuery } from '@tanstack/react-query'
+import api from '../../config/api'
+import { userState } from '../../context/UserContext'
 
 const Hero = () => {
+
+    const { platforms, images } = apiList();
+    const { user } = userState();
 
     const btnProps = {
         gap: 1,
@@ -29,18 +36,12 @@ const Hero = () => {
         { number: 24, suffix: "/7", label: "Support Available" },
     ]
 
-    // MAX 9 PLATFORMS
-    const HERO_PLATFORMS = [
-        { img: "", name: "Amazon" },
-        { img: "", name: "Flipkart" },
-        { img: "", name: "Meesho" },
-        { img: "", name: "Ajio" },
-        { img: "", name: "Snapdeal" },
-        { img: "", name: "Myntra" },
-        { img: "", name: "Shopify" },
-        { img: "", name: "Jiomart" },
-        { img: "", name: "Nykaa" },
-    ]
+    const { data: { data: { data: HERO_PLATFORMS = [] } = {} } = {} } = useQuery({
+        queryKey: [user],
+        queryFn: () => api.post(platforms.all, {}),
+        enabled: !!user,
+        select: ({ data }) => data
+    })
 
     function Counter({ end }) {
         const [count, setCount] = useState(0)
@@ -137,7 +138,7 @@ const Hero = () => {
                             </div>
                             {/* PLATFORM GRID */}
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
-                                {HERO_PLATFORMS.slice(0, 9).map(({ img, name }) => (
+                                {HERO_PLATFORMS.slice(0, 9).map(({ image, name }) => (
                                     <div key={name}
                                         className="group relative rounded-2xl sm:rounded-3xl p-4 sm:p-5 flex flex-col items-center justify-center text-center gap-3 transition-all duration-300 hover:-translate-y-2 bg-gradient-to-b from-white to-white/80 border border-white/50 min-h-[120px]"
                                         style={{
@@ -157,10 +158,10 @@ const Hero = () => {
                                                     color: '#A36081'
                                                 }}
                                             /> */}
-                                            <img src={img || dummyImg} />
+                                            <img src={images.imgUrl + image.image || dummyImg} />
                                         </div>
 
-                                        <span className="text-xs sm:text-sm font-bold text-[#1A1A1A]">
+                                        <span className="text-base font-bold text-[#1A1A1A] capitalize">
                                             {name}
                                         </span>
                                     </div>

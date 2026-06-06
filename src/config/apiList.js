@@ -3,12 +3,17 @@ const apiList = () => {
         auth: {
             sendOtp: "send-otp",
             verifyOtp: "verify-otp",
-            profile: "profile"
+            profile: "profile",
         },
 
         images: {
-            upload: 'images/upload'
-        }
+            imgUrl:import.meta.env.VITE_IMAGES_URL,
+            upload: 'images/upload',
+        },
+
+        platforms:{
+            all:'customer-all-platforms',
+        },
     }
 }
 
