@@ -90,6 +90,10 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
         }
     });
 
+    useEffect(() => {
+        setEmail("")
+    }, [isOpen])
+
     if (!isOpen) return null;
 
     const handleFormSubmit = (e) => {
