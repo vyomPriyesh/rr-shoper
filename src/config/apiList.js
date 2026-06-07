@@ -7,12 +7,16 @@ const apiList = () => {
         },
 
         images: {
-            imgUrl:import.meta.env.VITE_IMAGES_URL,
+            imgUrl: import.meta.env.VITE_IMAGES_URL,
             upload: 'images/upload',
         },
 
-        platforms:{
-            all:'customer-all-platforms',
+        platforms: {
+            all: 'customer-all-platforms',
+        },
+
+        packages: {
+            all: 'customer-all-packages',
         },
     }
 }

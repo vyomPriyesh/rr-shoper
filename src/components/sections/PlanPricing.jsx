@@ -1,153 +1,47 @@
 import React, { useState } from 'react'
 import SectionsUI from '../layouts/SectionsUI'
+import { userState } from '../../context/UserContext'
+import apiList from '../../config/apiList';
+import { useQuery } from '@tanstack/react-query';
+import api from '../../config/api';
 
 const PlanPricing = () => {
 
-    const platforms = [
-        {
-            name: 'Amazon',
-            logo: 'https://cdn-icons-png.flaticon.com/512/5968/5968870.png',
-        },
-        {
-            name: 'Flipkart',
-            logo: 'https://cdn-icons-png.flaticon.com/512/5977/5977576.png',
-        },
-        {
-            name: 'Meesho',
-            logo: 'https://cdn-icons-png.flaticon.com/512/5968/5968520.png',
-        },
-        {
-            name: 'Ajio',
-            logo: 'https://cdn-icons-png.flaticon.com/512/732/732084.png',
-        },
-        {
-            name: 'Myntra',
-            logo: 'https://cdn-icons-png.flaticon.com/512/5968/5968255.png',
-        },
-        {
-            name: 'Nykaa',
-            logo: 'https://cdn-icons-png.flaticon.com/512/5968/5968672.png',
-        },
-        {
-            name: 'JioMart',
-            logo: 'https://cdn-icons-png.flaticon.com/512/732/732200.png',
-        },
-    ]
+    const { user } = userState();
+    const { packages, images } = apiList();
 
-    const pricingData = {
-        Amazon: [
-            {
-                title: 'Starter',
-                price: '₹4,999',
-                features: [
-                    'Account Setup',
-                    '5 Product Listings',
-                    'Basic SEO',
-                    'Email Support',
-                ],
-            },
-            {
-                title: 'Growth',
-                price: '₹9,999',
-                popular: true,
-                features: [
-                    '20 Product Listings',
-                    'SEO Optimization',
-                    'PPC Campaign Setup',
-                    'Priority Support',
-                ],
-            },
-            {
-                title: 'Enterprise',
-                price: '₹19,999',
-                features: [
-                    'Unlimited Listings',
-                    'Advanced Ads',
-                    'Brand Registry',
-                    'Dedicated Manager',
-                ],
-            },
-        ],
+    const { data: { platforms = [], pricingData = {} } = {}, refetch: allPackagesRefetch } = useQuery({
+        queryKey: ["all-packages", user],
+        queryFn: () => api.post(packages.all),
+        select: ({ data }) => {
+            const response = data.data.data
+            return {
+                platforms: response.map(list => list.platform),
+                pricingData: response.reduce((acc, item) => {
+                    if (!acc[item.platform.name]) {
+                        acc[item.platform.name] = [];
+                    }
 
-        Flipkart: [
-            {
-                title: 'Starter',
-                price: '₹3,999',
-                features: [
-                    'Seller Setup',
-                    'Catalog Upload',
-                    '5 Listings',
-                    'Support',
-                ],
-            },
-            {
-                title: 'Growth',
-                price: '₹8,999',
-                popular: true,
-                features: [
-                    'SEO Optimization',
-                    'Ad Campaign',
-                    '15 Listings',
-                    'Priority Support',
-                ],
-            },
-            {
-                title: 'Enterprise',
-                price: '₹16,999',
-                features: [
-                    'Unlimited Products',
-                    'Premium Marketing',
-                    'Brand Approval',
-                    'Dedicated Manager',
-                ],
-            },
-        ],
+                    acc[item.platform.name].push({
+                        name: item.name,
+                        price: item.price,
+                        services: item.services,
+                    });
 
-        Meesho: [
-            {
-                title: 'Starter',
-                price: '₹2,999',
-                features: [
-                    'Seller Setup',
-                    '5 Listings',
-                    'Catalog Upload',
-                    'Basic Support',
-                ],
-            },
-            {
-                title: 'Growth',
-                price: '₹6,999',
-                popular: true,
-                features: [
-                    'SEO & Keywords',
-                    'Promotion Setup',
-                    '20 Listings',
-                    'Priority Support',
-                ],
-            },
-            {
-                title: 'Enterprise',
-                price: '₹12,999',
-                features: [
-                    'Unlimited Listings',
-                    'Growth Strategy',
-                    'Dedicated Support',
-                    'Advanced Marketing',
-                ],
-            },
-        ],
-    }
+                    return acc;
+                }, {})
+            }
+        }
+    })
 
-    const [selectedPlatform, setSelectedPlatform] = useState('Amazon')
+    const [selectedPlatform, setSelectedPlatform] = useState('amazon')
 
     const Content = () => {
         return (
             <>
                 {/* Platform Tabs */}
                 <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12 lg:mb-16">
-
                     {platforms.map((platform, index) => (
-
                         <button
                             key={index}
                             onClick={() =>
@@ -162,14 +56,13 @@ const PlanPricing = () => {
                                 backdrop-blur-md border
                                 hover:-translate-y-1 hover:scale-105
 
-                                ${
-                                    selectedPlatform === platform.name
-                                        ? `
+                                ${selectedPlatform === platform.name
+                                    ? `
                                             bg-primary text-white border-primary
                                             shadow-[0_12px_35px_rgba(176,106,141,0.30)]
                                             scale-105
                                         `
-                                        : `
+                                    : `
                                             bg-white/80 text-heading border-white/60
                                             hover:border-[#E8C7D7]
                                         `
@@ -185,10 +78,9 @@ const PlanPricing = () => {
                                     bg-gradient-to-br
                                     from-white/20 via-transparent to-secondary/20
 
-                                    ${
-                                        selectedPlatform === platform.name
-                                            ? 'opacity-100'
-                                            : 'group-hover:opacity-100'
+                                    ${selectedPlatform === platform.name
+                                        ? 'opacity-100'
+                                        : 'group-hover:opacity-100'
                                     }
                                 `}
                             />
@@ -201,22 +93,21 @@ const PlanPricing = () => {
                                     w-9 h-9 sm:w-10 sm:h-10
                                     rounded-xl transition-all duration-500
 
-                                    ${
-                                        selectedPlatform === platform.name
-                                            ? 'bg-white shadow-inner'
-                                            : 'bg-[#FFF7FA] group-hover:bg-white'
+                                    ${selectedPlatform === platform.name
+                                        ? 'bg-white shadow-inner'
+                                        : 'bg-[#FFF7FA] group-hover:bg-white'
                                     }
                                 `}
                             >
                                 <img
-                                    src={platform.logo}
+                                    src={images.imgUrl + platform.image.image}
                                     alt={platform.name}
                                     className="w-5 h-5 sm:w-6 sm:h-6 object-contain"
                                 />
                             </div>
 
                             {/* Name */}
-                            <span className="relative z-10 text-xs sm:text-sm md:text-[15px] font-semibold tracking-wide">
+                            <span className="relative z-10 text-xs sm:text-sm md:text-[15px] font-semibold tracking-wide capitalize">
                                 {platform.name}
                             </span>
 
@@ -242,14 +133,13 @@ const PlanPricing = () => {
                                 transition-all duration-500
                                 flex flex-col h-full
 
-                                ${
-                                    plan.popular
-                                        ? `
+                                ${plan.popular
+                                    ? `
                                             bg-primary text-white
                                             md:scale-[1.03]
                                             shadow-[0_20px_50px_rgba(176,106,141,0.25)]
                                         `
-                                        : `
+                                    : `
                                             bg-white/80 backdrop-blur-md
                                             border border-white/60
                                             text-heading
@@ -262,7 +152,7 @@ const PlanPricing = () => {
                         >
 
                             {/* Badge */}
-                            {plan.popular && (
+                            {plan?.popular && (
                                 <div className="absolute top-5 right-5 bg-white text-primary text-xs font-bold px-3 py-1 rounded-full">
                                     Most Popular
                                 </div>
@@ -270,7 +160,7 @@ const PlanPricing = () => {
 
                             {/* Title */}
                             <h3 className="text-2xl font-bold mb-4">
-                                {plan.title}
+                                {plan.name}
                             </h3>
 
                             {/* Price */}
@@ -285,10 +175,10 @@ const PlanPricing = () => {
                                 </span>
                             </div>
 
-                            {/* Features */}
+                            {/* Services */}
                             <div className="space-y-4 mb-8">
 
-                                {plan.features.map((feature, i) => (
+                                {plan.services.map((feature, i) => (
 
                                     <div
                                         key={i}
@@ -301,10 +191,9 @@ const PlanPricing = () => {
                                                 flex items-center justify-center
                                                 text-[11px] mt-0.5
 
-                                                ${
-                                                    plan.popular
-                                                        ? 'bg-white text-primary'
-                                                        : 'bg-[#F8EEF3] text-primary'
+                                                ${plan?.popular
+                                                    ? 'bg-white text-primary'
+                                                    : 'bg-[#F8EEF3] text-primary'
                                                 }
                                             `}
                                         >
@@ -328,13 +217,12 @@ const PlanPricing = () => {
                                         text-sm sm:text-base font-semibold
                                         transition-all duration-300
 
-                                        ${
-                                            plan.popular
-                                                ? `
+                                        ${plan?.popular
+                                            ? `
                                                     bg-white text-primary
                                                     hover:bg-[#F8EEF3]
                                                 `
-                                                : `
+                                            : `
                                                     bg-primary text-white
                                                     hover:bg-primaryDark
                                                 `
