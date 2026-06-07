@@ -33,6 +33,7 @@ const PlanPricing = () => {
                         name: item.name,
                         price: item.price,
                         services: item.services,
+                        popular: item.popular,
                     });
 
                     return acc;
