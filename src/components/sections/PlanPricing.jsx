@@ -16,7 +16,14 @@ const PlanPricing = () => {
         select: ({ data }) => {
             const response = data.data.data
             return {
-                platforms: response.map(list => list.platform),
+                platforms: [
+                    ...new Map(
+                        response.map(item => [
+                            item.platform._id,
+                            item.platform
+                        ])
+                    ).values()
+                ],
                 pricingData: response.reduce((acc, item) => {
                     if (!acc[item.platform.name]) {
                         acc[item.platform.name] = [];
@@ -159,7 +166,7 @@ const PlanPricing = () => {
                             )}
 
                             {/* Title */}
-                            <h3 className="text-2xl font-bold mb-4">
+                            <h3 className="text-2xl font-bold mb-4 capitalize">
                                 {plan.name}
                             </h3>
 
