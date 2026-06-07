@@ -4,6 +4,7 @@ const apiList = () => {
             sendOtp: "send-otp",
             verifyOtp: "verify-otp",
             profile: "profile",
+            findCustomer: (email) => `findCustomer/${email}`,
         },
 
         images: {

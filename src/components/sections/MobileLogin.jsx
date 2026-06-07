@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import InputField from "../ui/InputField";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "../../config/api";
 import apiList from "../../config/apiList";
 import { useToast } from "../../context/ToastContext";
@@ -13,9 +13,35 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
     const { showToast } = useToast();
 
     const [mobile, setMobile] = useState("");
+    const [email, setEmail] = useState("")
     const [otp, setOtp] = useState("");
     const [otpSent, setOtpSent] = useState(false);
     const [seconds, setSeconds] = useState(30);
+
+    const { data: customerMobile, refetch: findUserRefetch, isError, } = useQuery({
+        queryKey: ['findUser'],
+        queryFn: () => api.get(auth.findCustomer(email)),
+        enabled: false,
+        select: ({ data }) => {
+            return data.data.mobile
+        }
+    })
+
+    useEffect(() => {
+        if (customerMobile && !isError) {
+            setMobile(customerMobile)
+        } else {
+            setMobile("")
+        }
+    }, [customerMobile, isError])
+
+    useEffect(() => {
+        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || ""))
+        if (isValid) {
+            findUserRefetch()
+        }
+    }, [email])
+
 
     useEffect(() => {
         if (!otpSent || seconds === 0) return;
@@ -27,14 +53,14 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
         return () => clearInterval(timer);
     }, [otpSent, seconds]);
 
-    const { mutate: handleSendOtp } = useMutation({
+    const { mutate: handleSendOtp, isPending } = useMutation({
         mutationFn: async () => {
-            const response = await api.post(auth.sendOtp, { mobile });
+            const response = await api.post(auth.sendOtp, { mobile, email });
             return response.data;
         },
-        onSuccess: ({ data }) => {
+        onSuccess: ({ data, message }) => {
             if (mobile.length === 10) {
-                showToast(data.result.otp, "success")
+                showToast(message, "success")
                 setOtp("");
                 setOtpSent(true);
                 setSeconds(30);
@@ -57,6 +83,10 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
                 ...data.result.user,
                 token: data.result.token
             }));
+        },
+        onError: ({ response }) => {
+            const message = response.data.error.error_message
+            showToast(message, "warning");
         }
     });
 
@@ -163,11 +193,22 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
 
                                 <form onSubmit={handleFormSubmit} className="space-y-3">
                                     {/* Phone Input */}
-                                    <div className="animate-slideUp">
+                                    <div className="animate-slideUp space-y-5">
+                                        <InputField
+                                            type="text"
+                                            value={email}
+                                            placeholder="Enter your E-mail"
+                                            onChange={(e) =>
+                                                setEmail(
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
                                         <InputField
                                             type="tel"
                                             maxLength={10}
                                             value={mobile}
+                                            disabled={customerMobile && !isError}
                                             placeholder="Enter 10-digit mobile"
                                             onChange={(e) =>
                                                 setMobile(
@@ -181,9 +222,9 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
                                         <button
                                             type="submit"
                                             // onClick={handleSendOtp}
-                                            disabled={mobile.length !== 10}
+                                            disabled={!email || mobile.length !== 10}
                                             className="
-                        w-full h-14 md:h-16 rounded-2xl
+                        w-full h-12 md:h-14 rounded-2xl
                         bg-gradient-to-r from-[#A36081] to-[#8D4F6C]
                         text-white text-lg md:text-xl font-bold
                         shadow-xl hover:shadow-2xl
