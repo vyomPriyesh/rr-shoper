@@ -39,7 +39,6 @@ const Hero = () => {
     const { data: { data: { data: HERO_PLATFORMS = [] } = {} } = {} } = useQuery({
         queryKey: ["all-platforms", user],
         queryFn: () => api.post(platforms.all, {}),
-        enabled: !!user,
         select: ({ data }) => data
     })
 
