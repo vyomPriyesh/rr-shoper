@@ -30,8 +30,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <MobileLogin isOpen={open} />
-        <Header setOpen={setOpen} />
+        <MobileLogin isOpen={false} />
+        <Header />
         <div className="bg-gradient-to-br from-[#FFF8FC] via-[#F7EDF3] to-[#F2E1EA]">
           <Routes>
             <Route path="/" element={<LandingPage />} />

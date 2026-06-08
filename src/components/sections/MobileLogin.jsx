@@ -6,7 +6,7 @@ import apiList from "../../config/apiList";
 import { useToast } from "../../context/ToastContext";
 import { userState } from "../../context/UserContext";
 
-const FirstAuthModal = ({ isOpen, onClose }) => {
+const MobileLogin = ({ isOpen, onClose }) => {
 
     const { auth } = apiList();
     const { setRefresh } = userState();
@@ -314,4 +314,4 @@ const FirstAuthModal = ({ isOpen, onClose }) => {
     );
 };
 
-export default FirstAuthModal;
+export default MobileLogin;
