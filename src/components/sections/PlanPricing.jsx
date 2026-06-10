@@ -208,7 +208,7 @@ const PlanPricing = () => {
                                             ✓
                                         </div>
 
-                                        <span className="text-sm sm:text-[15px] leading-relaxed">
+                                        <span className="text-sm sm:text-[15px] leading-relaxed capitalize">
                                             {feature}
                                         </span>
                                     </div>

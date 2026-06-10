@@ -475,7 +475,7 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
                                                 text-[11px] mt-0.5
 
                                                 ${e?.popular?`bg-white text-primary`:`bg-[#F8EEF3] text-primary`}
-                                            `,children:`✓`}),(0,j.jsx)(`span`,{className:`text-sm sm:text-[15px] leading-relaxed`,children:t})]},n))}),(0,j.jsx)(`div`,{className:`mt-auto`,children:(0,j.jsx)(`button`,{className:`
+                                            `,children:`✓`}),(0,j.jsx)(`span`,{className:`text-sm sm:text-[15px] leading-relaxed capitalize`,children:t})]},n))}),(0,j.jsx)(`div`,{className:`mt-auto`,children:(0,j.jsx)(`button`,{className:`
                                         w-full py-3.5 rounded-2xl
                                         text-sm sm:text-base font-semibold
                                         transition-all duration-300
