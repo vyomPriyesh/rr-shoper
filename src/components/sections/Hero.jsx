@@ -28,10 +28,10 @@ const Hero = () => {
 
     // MAX 6 STATS
     const HERO_STATS = [
-        { number: 500, suffix: "+", label: "Brands Served" },
+        { number: 500, suffix: "+", label: "Businesses Supported" },
         { number: 500, suffix: "+", label: "Products Listed" },
         { number: 6, suffix: "+", label: "Platforms Covered" },
-        { number: 120, suffix: "+", label: "Campaigns Managed" },
+        { number: 120, suffix: "+", label: "Seller Accounts Managed" },
         { number: 98, suffix: "%", label: "Client Satisfaction" },
         { number: 24, suffix: "/7", label: "Support Available" },
     ]
@@ -74,16 +74,17 @@ const Hero = () => {
                         </Badge>
                         <h1 className="
                             text-3xl sm:text-[3rem] md:text-[3.6rem] xl:text-[3.2rem] 2xl:text-[4.2rem] leading-[1.1] font-bold text-[#1A1A1A] font-['Times_New_Roman']">
-                            Grow Your Online Business with{' '}
+                            Complete Marketplace Management{' '}
                             <span className="bg-gradient-to-r from-primary to-[#A17BA4] bg-clip-text text-transparent">
-                                Complete E-Commerce Support
+                                Solutions for Online Sellers
                             </span>
                         </h1>
-                        <p className="text-sm sm:text-lg lg:text-xl leading-relaxed text-gray-600 max-w-2xl">
-                            Your <span className="font-bold text-primary">premium</span> marketplace growth partner for Amazon,
-                            Flipkart, Meesho, Myntra, and more — helping brands scale with strategy,
-                            ads, and operational excellence.
-                        </p>
+                        <div className="flex flex-col gap-2">
+                            <span className="font-bold text-primary capitalize text-lg">Professional ecommerce operational support services for marketplace sellers</span>
+                            <p className="text-sm sm:text-lg lg:text-xl leading-relaxed text-gray-600 max-w-2xl">
+                                Supporting online sellers with account setup, catalog management, listing optimization, and marketplace operations.
+                            </p>
+                        </div>
                         {/* BUTTONS */}
                         <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
                             <CommonButton
@@ -93,7 +94,7 @@ const Hero = () => {
                                 className="w-full sm:w-auto justify-center shadow-xl hover:scale-105 transition-all duration-300"
                             >
                                 <FaPeopleCarry size={18} />
-                                <span>Get Free Consultation</span>
+                                <span>Book Consultation</span>
                             </CommonButton>
                             <CommonButton
                                 {...btnProps}
@@ -103,7 +104,7 @@ const Hero = () => {
                             >
                                 <FaArrowRight size={14} className="text-primary" />
                                 <span className="text-primary font-bold">
-                                    Explore Services
+                                    View Services
                                 </span>
                             </CommonButton>
                         </div>
@@ -128,12 +129,12 @@ const Hero = () => {
                             <div className="
                                 absolute top-3 right-3 sm:-top-5 sm:-right-5 bg-primary text-white px-3 sm:px-5 py-2 rounded-2xl shadow-xl hidden md:flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
                                 <FaCheckCircle />
-                                Account Approved
+                                Seller Account Setup
                             </div>
                             {/* BOTTOM BADGE */}
                             <div className="absolute bottom-3 left-3 sm:-bottom-5 sm:-left-5 bg-[#A17BA4] text-white px-3 sm:px-5 py-2 rounded-2xl shadow-xl hidden md:flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
                                 <FaChartLine />
-                                +147% Sales Growth
+                                Marketplace Experts
                             </div>
                             {/* PLATFORM GRID */}
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
@@ -157,7 +158,7 @@ const Hero = () => {
                                                     color: '#A36081'
                                                 }}
                                             /> */}
-                                            <img src={images.imgUrl + image.image || dummyImg} />
+                                            <img src={images.imgUrl + image.image || dummyImg} className='imgBlendColor' loading='lazy' />
                                         </div>
 
                                         <span className="text-base font-bold text-[#1A1A1A] capitalize">
@@ -170,12 +171,12 @@ const Hero = () => {
                         <div className="md:hidden grid grid-cols-2 gap-3 mt-10">
                             <div className="bg-primary text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
                                 <FaCheckCircle />
-                                Account Approved
+                                Seller Account Setup
                             </div>
                             {/* BOTTOM BADGE */}
                             <div className="bg-[#A17BA4] text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
                                 <FaChartLine />
-                                +147% Sales Growth
+                                Marketplace Experts
                             </div>
                         </div>
                     </div>

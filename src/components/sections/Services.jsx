@@ -7,40 +7,40 @@ const Services = () => {
 
     const SERVICES = [
         {
-            img: "",
-            title: "Account Opening",
+            img: "https://api.rrshoper.in/assets/png_1781192791488.png",
+            title: "Seller Account Setup",
             description:
-                "Complete seller account setup on Meesho, Amazon, Flipkart, Jiomart, and more. We handle documentation, verification, and ensure fast approval.",
+                "Assistance with marketplace seller account registration, documentation verification, and onboarding support across major ecommerce platforms.",
         },
         {
-            img: "",
-            title: "Product Listing & Optimization",
+            img: "https://api.rrshoper.in/assets/png_1781192787310.png",
+            title: "Product Listing Management",
             description:
-                "Professional product listings with SEO-optimized titles, descriptions, keywords, and high-quality images that convert browsers into buyers.",
+                "Product catalog creation, attribute management, image uploads, SKU organization, and listing support for marketplace compliance.",
         },
         {
-            img: "",
-            title: "Marketing & Advertising",
+            img: "https://api.rrshoper.in/assets/png_1781192783590.png",
+            title: "Marketplace Compliance Support",
             description:
-                "Strategic PPC campaigns, sponsored ads management, and promotional strategies to boost visibility and drive targeted traffic to your listings.",
+                "Assistance with marketplace policies, seller documentation, restricted category guidance, and account health management.",
         },
         {
-            img: "",
-            title: "Brand Approval",
+            img: "https://api.rrshoper.in/assets/png_1781192775895.png",
+            title: "Brand Registry Assistance",
             description:
-                "Navigate the brand approval process seamlessly. We help you get brand registry and authorization to sell restricted categories.",
+                "Guidance for marketplace brand registry processes, trademark documentation, and seller authorization support.",
         },
         {
-            img: "",
-            title: "Brand Creation & Registration",
+            img: "https://api.rrshoper.in/assets/png_1781192799977.png",
+            title: "Brand Store Setup Assistance",
             description:
-                "Build your brand from scratch — logo design, brand identity, trademark registration, and brand store creation on marketplaces.",
+                "Assistance with marketplace brand store setup, catalog structuring, and seller profile configuration.",
         },
         {
-            img: "",
+            img: "https://api.rrshoper.in/assets/png_1781192779955.png",
             title: "Catalog Management",
             description:
-                "Ongoing catalog maintenance, inventory updates, pricing optimization, and A+ content creation to keep your listings competitive.",
+                "Ongoing catalog maintenance, inventory updates, product information management, and listing organization support.",
         },
     ];
 
@@ -107,12 +107,12 @@ const Services = () => {
                                     transition-all
                                     duration-500
 
-                                    group-hover:bg-primary
                                     group-hover:text-white
                                     group-hover:scale-110
                                 "
+                                    // group-hover:bg-primary
                         >
-                            <img src={service.img || dummyImg} />
+                            <img src={service.img || dummyImg} className='imgBlendColor' loading='lazy' />
                         </div>
 
                         {/* Title */}
@@ -173,8 +173,8 @@ const Services = () => {
     return (
         <SectionsUI
             topic="Our Services"
-            heading="End-to-End Marketplace Solutions"
-            text="From account setup to scaling your sales, we provide comprehensive services to help your brand succeed on every major e-commerce platform."
+            heading="Ecommerce Operations & Seller Support"
+            text="We provide operational support services for ecommerce sellers including account setup, catalog management, product listing assistance, and marketplace compliance support."
             content={<Content />}
             id="services"
         />

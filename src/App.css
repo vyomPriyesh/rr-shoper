@@ -241,3 +241,7 @@ html {
 .animate-floatThree {
     animation: floatThree 8s ease-in-out infinite;
 }
+
+.imgBlendColor{
+    mix-blend-mode: darken;
+}
