@@ -250,7 +250,7 @@ const PlanPricing = () => {
     }
 
     return (
-        <SectionsUI
+        platforms && <SectionsUI
             topic="Plans & Pricing"
             heading="Choose Your Marketplace Plan"
             text="Pricing changes based on marketplace platforms. Select your platform to explore custom plans."
