@@ -41,6 +41,7 @@ function App() {
             <Route path="/contact" element={<ContactSection />} />
             <Route path="/services" element={<Services />} />
             <Route path="/platforms" element={<PlanPricing />} />
+            <Route path="/platforms/:platformName" element={<PlanPricing />} />
             <Route path="/privacy-policy" element={<PrivacyPolicies />} />
             <Route path="/refund-cancellation-policy" element={<RefundCancellationPolicies />} />
             <Route path="/terms-and-conditions" element={<TermsConditions />} />

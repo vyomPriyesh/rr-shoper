@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../sections/Logo'
 
@@ -11,56 +11,52 @@ const Footer = () => {
 
     const { platFormData } = StateStore();
 
-    console.log(platFormData)
-
-    const footerData = [
-        {
-            title: 'Quick Links',
-            links: [
-                { label: "Home", path: "/" },
-                { label: "Services", path: "services" },
-                { label: "Platforms", path: "platforms" },
-                { label: "About", path: "about" },
-                { label: "Contact", path: "contact" },
-            ]
-        },
-        // {
-        //     title: 'Our Services',
-        //     links: [
-        //         {
-        //             label: 'Account Opening',
-        //             path: '/services/account-opening',
-        //         },
-        //         {
-        //             label: 'Product Listing',
-        //             path: '/services/product-listing',
-        //         },
-        //         {
-        //             label: 'Marketing & Ads',
-        //             path: '/services/marketing',
-        //         },
-        //         {
-        //             label: 'Brand Registration',
-        //             path: '/services/brand-registration',
-        //         },
-        //         {
-        //             label: 'Catalog Management',
-        //             path: '/services/catalog-management',
-        //         },
-        //     ],
-        // },
-        {
-            title: 'Platforms',
-            links: [
-                { label: 'Amazon India', path: '/platforms/amazon' },
-                { label: 'Flipkart', path: '/platforms/flipkart' },
-                { label: 'Meesho', path: '/platforms/meesho' },
-                { label: 'Ajio', path: '/platforms/ajio' },
-                { label: 'Snapdeal', path: '/platforms/snapdeal' },
-                { label: 'Myntra', path: '/platforms/myntra' },
-            ],
-        },
-    ]
+    const footerData = useMemo(() => {
+        return [
+            {
+                title: 'Quick Links',
+                links: [
+                    { label: "Home", path: "/" },
+                    { label: "Services", path: "services" },
+                    { label: "Platforms", path: "platforms" },
+                    { label: "About", path: "about" },
+                    { label: "Contact", path: "contact" },
+                ]
+            },
+            // {
+            //     title: 'Our Services',
+            //     links: [
+            //         {
+            //             label: 'Account Opening',
+            //             path: '/services/account-opening',
+            //         },
+            //         {
+            //             label: 'Product Listing',
+            //             path: '/services/product-listing',
+            //         },
+            //         {
+            //             label: 'Marketing & Ads',
+            //             path: '/services/marketing',
+            //         },
+            //         {
+            //             label: 'Brand Registration',
+            //             path: '/services/brand-registration',
+            //         },
+            //         {
+            //             label: 'Catalog Management',
+            //             path: '/services/catalog-management',
+            //         },
+            //     ],
+            // },
+            {
+                title: 'Platforms',
+                links: platFormData.map((item, i) => ({
+                    label: item.name,
+                    path: `/platforms/${item.name}`
+                }))
+            },
+        ]
+    }, [platFormData])
 
     const linkClass = `
         relative inline-block
@@ -76,8 +72,7 @@ const Footer = () => {
         after:bg-primary
         after:transition-all
         after:duration-300
-        hover:after:w-full
-    `
+        hover:after:w-full capitalize`
 
     return (
         <footer className="py-3 px-3 sm:px-6 lg:px-8 bg-white">

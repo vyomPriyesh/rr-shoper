@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SectionsUI from '../layouts/SectionsUI'
 import { userState } from '../../context/UserContext'
 import apiList from '../../config/apiList';
 import { useQuery } from '@tanstack/react-query';
 import api from '../../config/api';
+import { useParams } from 'react-router-dom';
 
 const PlanPricing = () => {
 
     const { user } = userState();
     const { packages, images } = apiList();
+
+    const { platformName } = useParams();
 
     const { data: { platforms = [], pricingData = {} } = {}, refetch: allPackagesRefetch } = useQuery({
         queryKey: ["all-packages"],
@@ -43,6 +46,12 @@ const PlanPricing = () => {
     })
 
     const [selectedPlatform, setSelectedPlatform] = useState('amazon')
+
+    useEffect(() => {
+        if (platformName && pricingData[platformName]) {
+            setSelectedPlatform(platformName)
+        }
+    }, [platformName, pricingData])
 
     const Content = () => {
         return (
