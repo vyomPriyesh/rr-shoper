@@ -276,19 +276,15 @@ const Header = () => {
                 >
 
                   {/* Avatar */}
-                  <div
+                  <img
                     className="
                     w-10 h-10 rounded-full
-                    bg-primary text-white
-
                     flex items-center
                     justify-center
-
                     text-sm font-semibold
                   "
-                  >
-                    <FaRegUser />
-                  </div>
+                    src={user?.image || `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${user?.name}`}
+                  />
 
                   {/* Name */}
                   <div className="text-left">
