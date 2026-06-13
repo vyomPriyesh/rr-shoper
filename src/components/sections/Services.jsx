@@ -64,8 +64,7 @@ const Services = () => {
                                 transition-all
                                 duration-500
                                 shadow-[0_8px_30px_rgba(176,106,141,0.08)]
-                                hover:-translate-y-2
-                                hover:shadow-[0_20px_50px_rgba(176,106,141,0.16)]
+                               
                             "
                     >
 
@@ -74,7 +73,6 @@ const Services = () => {
                                 absolute
                                 inset-0
                                 opacity-0
-                                group-hover:opacity-100
                                 transition-all
                                 duration-500
 
@@ -103,14 +101,7 @@ const Services = () => {
 
                                     bg-[#F8EEF3]
                                     text-primary
-
-                                    transition-all
-                                    duration-500
-
-                                    group-hover:text-white
-                                    group-hover:scale-110
                                 "
-                                    // group-hover:bg-primary
                         >
                             <img src={service.img || dummyImg} className='imgBlendColor' loading='lazy' />
                         </div>
@@ -159,8 +150,6 @@ const Services = () => {
 
                                 transition-all
                                 duration-500
-
-                                group-hover:w-24
                             "></div>
 
                     </div>

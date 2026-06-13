@@ -1,14 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../sections/Logo'
-import {
-    FaFacebookF,
-    FaInstagram,
-    FaLinkedinIn,
-    FaYoutube,
-} from 'react-icons/fa'
+
+import { BiSupport } from 'react-icons/bi'
+import SocialMedia from '../ui/SocialMedia'
+import { LuBadgeInfo } from 'react-icons/lu'
+import { StateStore } from '../../context/StateStoreContext'
 
 const Footer = () => {
+
+    const { platFormData } = StateStore();
+
+    console.log(platFormData)
 
     const footerData = [
         {
@@ -59,25 +62,6 @@ const Footer = () => {
         },
     ]
 
-    const socialLinks = [
-        {
-            icon: <FaFacebookF />,
-            path: '/',
-        },
-        {
-            icon: <FaInstagram />,
-            path: '/',
-        },
-        {
-            icon: <FaLinkedinIn />,
-            path: '/',
-        },
-        {
-            icon: <FaYoutube />,
-            path: '/',
-        },
-    ]
-
     const linkClass = `
         relative inline-block
         text-paragraph
@@ -96,9 +80,9 @@ const Footer = () => {
     `
 
     return (
-        <footer className="py-4 px-4 sm:px-6 lg:px-8 bg-white">
+        <footer className="py-3 px-3 sm:px-6 lg:px-8 bg-white">
 
-            <div className="container mx-auto p-3 md:p-6 lg:p-10 rounded-[32px] border border-borderColor bg-background">
+            <div className="container mx-auto p-2 md:p-6 !pb-0 lg:p-10 rounded-[32px] border border-borderColor bg-background">
 
                 {/* Top */}
                 <div className="flex flex-col lg:flex-row gap-14">
@@ -114,40 +98,17 @@ const Footer = () => {
 
                         {/* Social */}
                         <div className="mt-4 flex items-center flex-wrap gap-4">
-
-                            {socialLinks.map((item, index) => (
-                                <Link
-                                    key={index}
-                                    to={item.path}
-                                    className="
-                                        w-12 h-12 text-xl rounded-2xl text-white
-                                        flex items-center justify-center
-                                        bg-primary
-                                        transition-all duration-300
-                                        hover:text-primary
-                                        hover:bg-white
-                                        hover:-translate-y-1
-                                        hover:shadow-xl
-                                        border border-transparent
-                                        hover:border-primary
-                                    "
-                                >
-                                    {item.icon}
-                                </Link>
-                            ))}
+                            <SocialMedia />
                         </div>
                     </div>
 
                     {/* Right */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
-
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-10 w-full">
                         {footerData.map((section, index) => (
                             <div key={index}>
-
-                                <h3 className="md:text-xl text-base font-semibold text-heading mb-6">
+                                <h3 className="md:text-xl text-base font-semibold text-primary mb-6">
                                     {section.title}
                                 </h3>
-
                                 <ul className="md:space-y-3 space-y-2">
                                     {section.links.map((link, i) => (
                                         <li key={i}>
@@ -162,15 +123,28 @@ const Footer = () => {
                                 </ul>
                             </div>
                         ))}
+                        {/* <div className="md:col-span-1 col-span-2">
+                            <h3 className="md:text-xl text-base font-semibold text-primary mb-6">
+                                Need Help ?
+                            </h3>
+                            <p>Our team is here to help you with your seller account journey.</p>
+                            <button className='text-white bg-primary px-4 py-2 mt-5 rounded-lg flex flow-row items-center gap-3 hover:scale-105 transition-all duration-500 hover:shadow-lg'>
+                                <BiSupport className='text-xl' />
+                                <spam className='font-semibold'>Contact Support</spam>
+                            </button>
+                        </div> */}
                     </div>
                 </div>
 
                 {/* Bottom */}
                 <div className="mt-12 pt-6 border-t border-borderColor flex flex-col sm:flex-row items-center justify-between gap-4">
-
-                    <p className="text-sm text-paragraph text-center sm:text-left">
-                        © 2026 RR SHOPER. All rights reserved.
-                    </p>
+                    <div className="flex flex-row md:items-center gap-3 md:w-1/2 md:border-0 border border-primary rounded-lg p-3">
+                        <span className='text-primary text-2xl'><LuBadgeInfo /></span>
+                        <p className="md:text-base text-sm text-paragraph">
+                            We provide independent marketplace support services and are not affiliated with, endorsed by, or officially connected to Amazon, Flipkart, Meesho, or any other marketplace.
+                            All trademarks and logos belong to their respective owners.
+                        </p>
+                    </div>
 
                     <div className="flex items-center gap-5 flex-wrap justify-center">
                         <Link
@@ -194,6 +168,11 @@ const Footer = () => {
                             Refund & Cancellation Policy
                         </Link>
                     </div>
+                </div>
+                <div className="mt-12 border-t border-borderColor py-3 flex justify-center">
+                    <p className="text-base text-paragraph text-center">
+                        © 2026 RR SHOPER. All rights reserved.
+                    </p>
                 </div>
             </div>
         </footer>

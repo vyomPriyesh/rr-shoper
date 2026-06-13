@@ -13,11 +13,13 @@ import apiList from '../../config/apiList'
 import { useQuery } from '@tanstack/react-query'
 import api from '../../config/api'
 import { userState } from '../../context/UserContext'
+import { StateStore } from '../../context/StateStoreContext'
 
 const Hero = () => {
 
     const { platforms, images } = apiList();
     const { user } = userState();
+    const { platFormData, platFormLDataoading: isLoading } = StateStore();
 
     const btnProps = {
         gap: 1,
@@ -35,12 +37,6 @@ const Hero = () => {
         { number: 98, suffix: "%", label: "Client Satisfaction" },
         { number: 24, suffix: "/7", label: "Support Available" },
     ]
-
-    const { data: { data: { data: HERO_PLATFORMS = [] } = {} } = {}, isLoading } = useQuery({
-        queryKey: ["all-platforms"],
-        queryFn: () => api.post(platforms.all, {}),
-        select: ({ data }) => data
-    })
 
     function Counter({ end }) {
         const [count, setCount] = useState(0)
@@ -131,7 +127,7 @@ const Hero = () => {
                                 Marketplace Experts
                             </div>
                             {/* PLATFORM GRID */}
-                            {(HERO_PLATFORMS?.length == 0 && isLoading) ?
+                            {(platFormData?.length == 0 && isLoading) ?
                                 <div role="status" class="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
                                     <div class="w-full grid grid-cols-2 sm:grid-cols-3 gap-5">
                                         {Array.from({ length: 2 }).map((_, index) => (
@@ -145,7 +141,7 @@ const Hero = () => {
                                 </div>
                                 :
                                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
-                                    {HERO_PLATFORMS.slice(0, 9).map(({ image, name }) => (
+                                    {platFormData.slice(0, 9).map(({ image, name }) => (
                                         <div key={name}
                                             className="group relative rounded-2xl sm:rounded-3xl p-4 sm:p-5 flex flex-col items-center justify-center text-center gap-3 transition-all duration-300 hover:-translate-y-2 bg-gradient-to-b from-white to-white/80 border border-white/50 min-h-[120px]"
                                             style={{

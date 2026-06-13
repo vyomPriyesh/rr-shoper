@@ -39,13 +39,13 @@ const WorkProcess = () => {
                     {steps.map((step, i) => (
                         <div
                             key={i}
-                            className="group bg-white border border-primary/10 rounded-3xl p-7 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+                            className="group bg-white border border-primary/10 rounded-3xl p-7 shadow-sm"
                         >
 
                             {/* Step Number */}
                             <div className="flex justify-center lg:justify-start mb-6">
                                 <div className="relative">
-                                    <div className="h-20 w-20 rounded-full bg-primary text-white text-3xl font-bold flex items-center justify-center shadow-lg transition-all duration-300 group-hover:scale-110">
+                                    <div className="h-20 w-20 rounded-full bg-primary text-white text-3xl font-bold flex items-center justify-center shadow-lg ">
                                         {i + 1}
                                     </div>
 
@@ -64,7 +64,7 @@ const WorkProcess = () => {
                             </p>
 
                             {/* Hover Line */}
-                            <div className="mt-6 h-1 w-0 bg-primary rounded-full group-hover:w-full transition-all duration-500"></div>
+                            {/* <div className="mt-6 h-1 w-0 bg-primary rounded-full group-hover:w-full transition-all duration-500"></div> */}
                         </div>
                     ))}
                 </div>

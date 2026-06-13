@@ -13,6 +13,8 @@ import { userState } from "./context/UserContext"
 import PrivacyPolicies from "./pages/PrivacyPolicies"
 import RefundCancellationPolicies from "./pages/RefundCancellationPolicies"
 import TermsConditions from "./pages/TermsConditions"
+import MyProfileRoutes from "./pages/MyProfileRoutes"
+
 function App() {
 
   const { user } = userState();
@@ -30,12 +32,12 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <MobileLogin isOpen={false} />
+        <MobileLogin isOpen={open} />
         <Header />
         <div className="bg-gradient-to-br from-[#FFF8FC] via-[#F7EDF3] to-[#F2E1EA]">
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            {/* <Route path="/about" element={<AboutPage />} /> */}
+            <Route path="/my-profile/*" element={<MyProfileRoutes />} />
             <Route path="/contact" element={<ContactSection />} />
             <Route path="/services" element={<Services />} />
             <Route path="/platforms" element={<PlanPricing />} />

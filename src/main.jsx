@@ -4,6 +4,7 @@ import App from './App.jsx'
 import { UserProvider } from './context/UserContext.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ToastProvider } from './context/ToastContext.jsx'
+import { StateStoreProvider } from './context/StateStoreContext.jsx'
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -20,7 +21,9 @@ createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queryClient}>
         <ToastProvider>
             <UserProvider>
-                <App />
+                <StateStoreProvider>
+                    <App />
+                </StateStoreProvider>
             </UserProvider>
         </ToastProvider>
     </QueryClientProvider>

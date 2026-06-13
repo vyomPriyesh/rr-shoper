@@ -38,7 +38,7 @@ const ContactSection = () => {
                         Contact Us
                     </span>
 
-                    <h2 className="mt-4 text-4xl font-bold leading-tight text-heading">
+                    <h2 className="mt-4 text-2xl lg:text-4xl font-bold leading-tight text-heading">
                         Get Marketplace Assistance
                     </h2>
 
@@ -51,16 +51,16 @@ const ContactSection = () => {
 
                         {/* Phone */}
                         <div className="flex items-start gap-5">
-                            <div className="w-14 h-14 text-xl rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
+                            <div className="md:w-14 md:h-14 w-12 h-12 text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
                                 <FaPhoneAlt />
                             </div>
 
                             <div>
-                                <h4 className="text-base md:text-xl font-semibold text-heading">
+                                <h4 className="text-base md:text-lg font-semibold text-heading">
                                     Phone
                                 </h4>
 
-                                <p className="mt-1 text-paragraph">
+                                <p className=" text-paragraph text-sm md:text-base">
                                     {contactDetails?.mobile}
                                 </p>
                             </div>
@@ -68,16 +68,16 @@ const ContactSection = () => {
 
                         {/* Email */}
                         <div className="flex items-start gap-5">
-                            <div className="w-14 h-14 text-xl rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
+                            <div className="md:w-14 md:h-14 w-12 h-12 text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
                                 <FaEnvelope />
                             </div>
 
                             <div>
-                                <h4 className="text-base md:text-xl font-semibold text-heading">
+                                <h4 className="text-base md:text-lg font-semibold text-heading">
                                     Email
                                 </h4>
 
-                                <p className="mt-1 text-paragraph">
+                                <p className=" text-paragraph text-sm md:text-base">
                                     {contactDetails?.email}
                                 </p>
                             </div>
@@ -85,81 +85,54 @@ const ContactSection = () => {
 
                         {/* WhatsApp */}
                         <div className="flex items-start gap-5">
-                            <div className="w-14 h-14 text-xl rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
+                            <div className="md:w-14 md:h-14 w-12 h-12 text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
                                 <FaWhatsapp />
                             </div>
 
                             <div>
-                                <h4 className="text-base md:text-xl font-semibold text-heading">
+                                <h4 className="text-base md:text-lg font-semibold text-heading">
                                     WhatsApp
                                 </h4>
 
-                                <p className="mt-1 text-paragraph">
+                                <p className=" text-paragraph text-sm md:text-base">
                                     {contactDetails?.mobile}
                                 </p>
                             </div>
                         </div>
                         {/* Business Hours */}
                         <div className="flex items-start gap-5">
-                            <div className="w-14 h-14 text-xl rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
+                            <div className="md:w-14 md:h-14 w-12 h-12 text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
                                 <FaRegClock />
                             </div>
 
                             <div>
-                                <h4 className="text-base md:text-xl font-semibold text-heading">
+                                <h4 className="text-base md:text-lg font-semibold text-heading">
                                     Business Hours
                                 </h4>
 
-                                <p className="mt-1 text-paragraph leading-7">
+                                <p className=" text-paragraph text-sm md:text-base leading-7">
                                     Mon – Sat: 9:00 AM – 6:00 PM
                                 </p>
                             </div>
                         </div>
                         {/* Address */}
                         <div className="flex items-start gap-5">
-                            <div className="w-14 h-14 text-xl rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
+                            <div className="md:w-14 md:h-14 w-12 h-12 text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
                                 <FaMapMarkerAlt />
                             </div>
 
                             <div>
-                                <h4 className="text-base md:text-xl font-semibold text-heading">
+                                <h4 className="text-base md:text-lg font-semibold text-heading">
                                     Address
                                 </h4>
 
-                                <p className="mt-1 text-paragraph leading-7">
+                                <p className=" text-paragraph text-sm md:text-base leading-7">
                                     123 Business Park, Sector 45
                                     <br />
                                     Surat, Gujarat 395006
                                 </p>
                             </div>
                         </div>
-                    </div>
-
-                    {/* Social Icons */}
-                    <div className="mt-12 flex items-center gap-4">
-
-                        {[
-                            <FaFacebookF />,
-                            <FaInstagram />,
-                            <FaLinkedinIn />,
-                            <FaYoutube />,
-                        ].map((icon, index) => (
-                            <button
-                                key={index}
-                                className="
-                                    w-12 h-12 text-xl rounded-2xl bg-white
-                                    flex items-center justify-center
-                                    text-primary
-                                    transition-all duration-300
-                                    hover:bg-primary
-                                    hover:text-white
-                                    hover:-translate-y-1
-                                    shadow-md
-                                "
-                            >
-                                {icon}
-                            </button>
-                        ))}
                     </div>
                 </div>
 

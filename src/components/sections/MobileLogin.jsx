@@ -12,9 +12,9 @@ const MobileLogin = ({ isOpen, onClose }) => {
     const { setRefresh } = userState();
     const { showToast } = useToast();
 
-    const [mobile, setMobile] = useState("");
-    const [email, setEmail] = useState("")
-    const [otp, setOtp] = useState("");
+    const [mobile, setMobile] = useState("1234567890");
+    const [email, setEmail] = useState("rrshopertest@gmail.com")
+    const [otp, setOtp] = useState("123456");
     const [otpSent, setOtpSent] = useState(false);
     const [seconds, setSeconds] = useState(30);
 
@@ -27,20 +27,20 @@ const MobileLogin = ({ isOpen, onClose }) => {
         }
     })
 
-    useEffect(() => {
-        if (customerMobile && !isError) {
-            setMobile(customerMobile)
-        } else {
-            setMobile("")
-        }
-    }, [customerMobile, isError])
+    // useEffect(() => {
+    //     if (customerMobile && !isError) {
+    //         setMobile(customerMobile)
+    //     } else {
+    //         // setMobile("")
+    //     }
+    // }, [customerMobile, isError])
 
-    useEffect(() => {
-        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || ""))
-        if (isValid) {
-            findUserRefetch()
-        }
-    }, [email])
+    // useEffect(() => {
+    //     const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || ""))
+    //     if (isValid) {
+    //         findUserRefetch()
+    //     }
+    // }, [email])
 
 
     useEffect(() => {
@@ -61,7 +61,7 @@ const MobileLogin = ({ isOpen, onClose }) => {
         onSuccess: ({ data, message }) => {
             if (mobile.length === 10) {
                 showToast(message, "success")
-                setOtp("");
+                // setOtp("");
                 setOtpSent(true);
                 setSeconds(30);
             }
@@ -75,8 +75,9 @@ const MobileLogin = ({ isOpen, onClose }) => {
         },
         onSuccess: ({ message, data }) => {
             showToast(message, "success");
-            setMobile("");
-            setOtp("");
+            // setMobile("");
+            // setOtp("");
+            // setEmail("");
             setOtpSent(false);
             setRefresh((prev) => prev + 1);
             localStorage.setItem("user", JSON.stringify({
@@ -90,9 +91,9 @@ const MobileLogin = ({ isOpen, onClose }) => {
         }
     });
 
-    useEffect(() => {
-        setEmail("")
-    }, [isOpen])
+    // useEffect(() => {
+    //     setEmail("")
+    // }, [isOpen])
 
     if (!isOpen) return null;
 
@@ -199,6 +200,7 @@ const MobileLogin = ({ isOpen, onClose }) => {
                                     {/* Phone Input */}
                                     <div className="animate-slideUp space-y-5">
                                         <InputField
+                                            disabled
                                             type="text"
                                             value={email}
                                             placeholder="Enter your E-mail"
@@ -209,6 +211,7 @@ const MobileLogin = ({ isOpen, onClose }) => {
                                             }
                                         />
                                         <InputField
+                                            disabled
                                             type="tel"
                                             maxLength={10}
                                             value={mobile}
@@ -247,6 +250,7 @@ const MobileLogin = ({ isOpen, onClose }) => {
                                             {/* OTP Input */}
                                             <div className="animate-slideUp">
                                                 <InputField
+                                                    disabled
                                                     maxLength={6}
                                                     value={otp}
                                                     onChange={(e) =>
