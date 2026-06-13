@@ -36,8 +36,8 @@ const Hero = () => {
         { number: 24, suffix: "/7", label: "Support Available" },
     ]
 
-    const { data: { data: { data: HERO_PLATFORMS = [] } = {} } = {} } = useQuery({
-        queryKey: ["all-platforms", user],
+    const { data: { data: { data: HERO_PLATFORMS = [] } = {} } = {}, isLoading } = useQuery({
+        queryKey: ["all-platforms"],
         queryFn: () => api.post(platforms.all, {}),
         select: ({ data }) => data
     })
@@ -116,12 +116,6 @@ const Hero = () => {
                             className="relative rounded-[28px] sm:rounded-[32px] p-5 sm:p-8 lg:p-10 xl:p-7 bg-gradient-to-br from-white via-white/90 to-[#F8F5F8] border-white/50 shadow-2xl"
                             style={{
                                 animation: "floatCard 6s ease-in-out infinite",
-                                // `boxShadow: `
-                                //     20px 20px 60px rgba(163,96,129,0.15),
-                                //     -20px -20px 60px rgba(255,255,255,0.95),
-                                //     inset -10px -10px 30px rgba(255,255,255,0.9),
-                                //     inset 10px 10px 30px rgba(163,96,129,0.08)
-                                // ``
                             }}
                         >
 
@@ -137,36 +131,43 @@ const Hero = () => {
                                 Marketplace Experts
                             </div>
                             {/* PLATFORM GRID */}
-                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
-                                {HERO_PLATFORMS.slice(0, 9).map(({ image, name }) => (
-                                    <div key={name}
-                                        className="group relative rounded-2xl sm:rounded-3xl p-4 sm:p-5 flex flex-col items-center justify-center text-center gap-3 transition-all duration-300 hover:-translate-y-2 bg-gradient-to-b from-white to-white/80 border border-white/50 min-h-[120px]"
-                                        style={{
-                                            boxShadow: `
+                            {(HERO_PLATFORMS?.length == 0 && isLoading) ?
+                                <div role="status" class="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+                                    <div class="w-full grid grid-cols-2 sm:grid-cols-3 gap-5">
+                                        {Array.from({ length: 2 }).map((_, index) => (
+                                            <div key={index} class="bg-gray-300 rounded-2xl sm:rounded-3xl aspect-square w-full h-[140px] mb-4 flex flex-col items-center justify-center ">
+                                                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center overflow-hidden justify-center bg-gray-100">
+                                                    <img src={dummyImg} alt="" />
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                :
+                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
+                                    {HERO_PLATFORMS.slice(0, 9).map(({ image, name }) => (
+                                        <div key={name}
+                                            className="group relative rounded-2xl sm:rounded-3xl p-4 sm:p-5 flex flex-col items-center justify-center text-center gap-3 transition-all duration-300 hover:-translate-y-2 bg-gradient-to-b from-white to-white/80 border border-white/50 min-h-[120px]"
+                                            style={{
+                                                boxShadow: `
                                                 10px 10px 25px rgba(163,96,129,0.15),
                                                 -8px -8px 20px rgba(255,255,255,0.95),
                                                 inset -6px -6px 15px rgba(255,255,255,0.9),
                                                 inset 6px 6px 15px rgba(163,96,129,0.08)
                                             `
-                                        }}
-                                    >
-                                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center overflow-hidden justify-center bg-gradient-to-r from-primary/10 to-[#A17BA4]/10">
-                                            {/* <i
-                                                className={icon}
-                                                style={{
-                                                    fontSize: '1.3rem',
-                                                    color: '#A36081'
-                                                }}
-                                            /> */}
-                                            <img src={images.imgUrl + image.image || dummyImg} className='imgBlendColor' loading='lazy' />
-                                        </div>
+                                            }}
+                                        >
+                                            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center overflow-hidden justify-center bg-gradient-to-r from-primary/10 to-[#A17BA4]/10">
+                                                <img src={images.imgUrl + image.image || dummyImg} className='imgBlendColor' loading='lazy' />
+                                            </div>
 
-                                        <span className="text-base font-bold text-[#1A1A1A] capitalize">
-                                            {name}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
+                                            <span className="text-base font-bold text-[#1A1A1A] capitalize">
+                                                {name}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            }
                         </div>
                         <div className="md:hidden grid grid-cols-2 gap-3 mt-10">
                             <div className="bg-primary text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10">

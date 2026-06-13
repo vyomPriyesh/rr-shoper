@@ -5,9 +5,9 @@ const WorkProcess = () => {
 
     const steps = [
         {
-            title: 'Free Consultation',
+            title: 'Seller Consultation',
             description:
-                `Share your business details and goals. We'll analyze your needs and recommend the best strategy.`
+                `Share your business details and marketplace requirements. We guide you through the seller onboarding process.`
         },
         {
             title: 'Account Setup',
@@ -15,14 +15,14 @@ const WorkProcess = () => {
                 `We handle all documentation and create your seller accounts on chosen marketplaces.`
         },
         {
-            title: 'Product Launch',
+            title: 'Product Listing',
             description:
-                `Professional listing creation with optimized content, images, and keywords for maximum visibility.`
+                `Professional product listing setup with clear descriptions, images, and marketplace-compliant information.`
         },
         {
-            title: 'Scale & Grow',
+            title: 'Seller Support',
             description:
-                `Ongoing optimization, advertising campaigns, and support to continuously grow your sales.`
+                `Ongoing seller account assistance, catalog updates, and marketplace support to help maintain smooth operations.`
         },
     ]
 
@@ -76,7 +76,7 @@ const WorkProcess = () => {
         <SectionsUI
             topic="How It Works"
             heading="Simple Steps to Start Selling"
-            text="Our streamlined process gets you from zero to selling in no time."
+            text="We simplify marketplace onboarding and seller account management for online businesses."
             content={<Content />}
         />
     )

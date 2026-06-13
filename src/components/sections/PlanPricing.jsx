@@ -11,7 +11,7 @@ const PlanPricing = () => {
     const { packages, images } = apiList();
 
     const { data: { platforms = [], pricingData = {} } = {}, refetch: allPackagesRefetch } = useQuery({
-        queryKey: ["all-packages", user],
+        queryKey: ["all-packages"],
         queryFn: () => api.post(packages.all),
         select: ({ data }) => {
             const response = data.data.data

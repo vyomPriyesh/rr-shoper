@@ -21,31 +21,31 @@ const Footer = () => {
                 { label: "Contact", path: "contact" },
             ]
         },
-        {
-            title: 'Our Services',
-            links: [
-                {
-                    label: 'Account Opening',
-                    path: '/services/account-opening',
-                },
-                {
-                    label: 'Product Listing',
-                    path: '/services/product-listing',
-                },
-                {
-                    label: 'Marketing & Ads',
-                    path: '/services/marketing',
-                },
-                {
-                    label: 'Brand Registration',
-                    path: '/services/brand-registration',
-                },
-                {
-                    label: 'Catalog Management',
-                    path: '/services/catalog-management',
-                },
-            ],
-        },
+        // {
+        //     title: 'Our Services',
+        //     links: [
+        //         {
+        //             label: 'Account Opening',
+        //             path: '/services/account-opening',
+        //         },
+        //         {
+        //             label: 'Product Listing',
+        //             path: '/services/product-listing',
+        //         },
+        //         {
+        //             label: 'Marketing & Ads',
+        //             path: '/services/marketing',
+        //         },
+        //         {
+        //             label: 'Brand Registration',
+        //             path: '/services/brand-registration',
+        //         },
+        //         {
+        //             label: 'Catalog Management',
+        //             path: '/services/catalog-management',
+        //         },
+        //     ],
+        // },
         {
             title: 'Platforms',
             links: [
@@ -83,7 +83,7 @@ const Footer = () => {
         text-paragraph
         transition-all duration-300
         hover:text-primary
-        
+        text-sm md:text-base
         after:absolute
         after:left-0
         after:-bottom-1
@@ -96,9 +96,9 @@ const Footer = () => {
     `
 
     return (
-        <footer className="py-6 px-4 sm:px-6 lg:px-8 bg-white">
+        <footer className="py-4 px-4 sm:px-6 lg:px-8 bg-white">
 
-            <div className="container mx-auto p-6 lg:p-10 rounded-[32px] border border-borderColor bg-background">
+            <div className="container mx-auto p-3 md:p-6 lg:p-10 rounded-[32px] border border-borderColor bg-background">
 
                 {/* Top */}
                 <div className="flex flex-col lg:flex-row gap-14">
@@ -109,10 +109,7 @@ const Footer = () => {
                         <Logo />
 
                         <p className="text-paragraph leading-8 text-base">
-                            Your trusted partner for complete e-commerce
-                            marketplace solutions. Helping brands launch,
-                            list, market, and scale on major platforms
-                            since 2019.
+                            Your trusted partner for seller account setup, product listing, catalog management, and marketplace support services.
                         </p>
 
                         {/* Social */}
@@ -123,7 +120,7 @@ const Footer = () => {
                                     key={index}
                                     to={item.path}
                                     className="
-                                        w-12 h-12 rounded-2xl text-white
+                                        w-12 h-12 text-xl rounded-2xl text-white
                                         flex items-center justify-center
                                         bg-primary
                                         transition-all duration-300
@@ -147,12 +144,11 @@ const Footer = () => {
                         {footerData.map((section, index) => (
                             <div key={index}>
 
-                                <h3 className="text-xl font-semibold text-heading mb-6">
+                                <h3 className="md:text-xl text-base font-semibold text-heading mb-6">
                                     {section.title}
                                 </h3>
 
-                                <ul className="space-y-4">
-
+                                <ul className="md:space-y-3 space-y-2">
                                     {section.links.map((link, i) => (
                                         <li key={i}>
                                             <Link
@@ -177,25 +173,25 @@ const Footer = () => {
                     </p>
 
                     <div className="flex items-center gap-5 flex-wrap justify-center">
-
                         <Link
                             to="/privacy-policy"
                             className={linkClass}
                         >
                             Privacy Policy
                         </Link>
-                        <Link
-                            to="/refund-cancellation-policy"
-                            className={linkClass}
-                        >
-                            Refund & Cancellation Policy
-                        </Link>
-
+                        <span className='border-r-2 border-gray-300 h-5'></span>
                         <Link
                             to="/terms-and-conditions"
                             className={linkClass}
                         >
                             Terms & Conditions
+                        </Link>
+                        <span className='border-r-2 border-gray-300 h-5'></span>
+                        <Link
+                            to="/refund-cancellation-policy"
+                            className={linkClass}
+                        >
+                            Refund & Cancellation Policy
                         </Link>
                     </div>
                 </div>

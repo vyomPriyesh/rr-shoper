@@ -21,14 +21,12 @@ const CTASection = () => {
 
                     {/* Heading */}
                     <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-                        Ready to Grow Your E-Commerce Business?
+                        Ready to Start Selling Online?
                     </h2>
 
                     {/* Description */}
                     <p className="mt-6 text-white/90 text-base sm:text-lg leading-8 max-w-2xl mx-auto">
-                        Join 500+ successful brands who trust Priyesh Business
-                        to manage their marketplace presence. Get your free
-                        consultation today.
+                        We help businesses with seller account setup, product listing, and marketplace support services.
                     </p>
 
                     {/* Buttons */}
@@ -58,7 +56,7 @@ const CTASection = () => {
     "
                         >
                             <HiOutlineCalendarDays className="text-xl" />
-                            Get Free Consultation
+                           Get Seller Consultation
                         </button>
 
                         {/* Secondary Button */}
@@ -90,7 +88,7 @@ const CTASection = () => {
     "
                         >
                             <FaWhatsapp className="text-xl" />
-                            Chat on WhatsApp
+                           Contact Support
                         </button>
                     </div>
                 </div>

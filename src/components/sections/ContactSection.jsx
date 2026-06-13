@@ -9,6 +9,7 @@ import {
     FaLinkedinIn,
     FaYoutube,
     FaPaperPlane,
+    FaRegClock,
 } from 'react-icons/fa'
 import InputField from '../ui/InputField'
 import { userState } from '../../context/UserContext'
@@ -28,7 +29,7 @@ const ContactSection = () => {
 
     return (
         <section className="pb-10 pt-6 px-4 lg:px-8">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
                 {/* Left Content */}
                 <div className="lg:pr-10">
@@ -38,13 +39,11 @@ const ContactSection = () => {
                     </span>
 
                     <h2 className="mt-4 text-4xl font-bold leading-tight text-heading">
-                        Let's Start Your E-Commerce Journey
+                        Get Marketplace Assistance
                     </h2>
 
                     <p className="mt-4 text-paragraph text-lg leading-8 max-w-xl">
-                        Have questions or ready to get started? Reach out to us
-                        through any of the channels below, or fill out the form
-                        and we'll get back to you within 24 hours.
+                        Contact us for seller account setup, marketplace onboarding, product listing, and support services. Our team will respond within 24 hours.
                     </p>
 
                     {/* Contact Info */}
@@ -52,12 +51,12 @@ const ContactSection = () => {
 
                         {/* Phone */}
                         <div className="flex items-start gap-5">
-                            <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
+                            <div className="w-14 h-14 text-xl rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
                                 <FaPhoneAlt />
                             </div>
 
                             <div>
-                                <h4 className="text-xl font-semibold text-heading">
+                                <h4 className="text-base md:text-xl font-semibold text-heading">
                                     Phone
                                 </h4>
 
@@ -69,12 +68,12 @@ const ContactSection = () => {
 
                         {/* Email */}
                         <div className="flex items-start gap-5">
-                            <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
+                            <div className="w-14 h-14 text-xl rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
                                 <FaEnvelope />
                             </div>
 
                             <div>
-                                <h4 className="text-xl font-semibold text-heading">
+                                <h4 className="text-base md:text-xl font-semibold text-heading">
                                     Email
                                 </h4>
 
@@ -86,12 +85,12 @@ const ContactSection = () => {
 
                         {/* WhatsApp */}
                         <div className="flex items-start gap-5">
-                            <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
+                            <div className="w-14 h-14 text-xl rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
                                 <FaWhatsapp />
                             </div>
 
                             <div>
-                                <h4 className="text-xl font-semibold text-heading">
+                                <h4 className="text-base md:text-xl font-semibold text-heading">
                                     WhatsApp
                                 </h4>
 
@@ -100,15 +99,30 @@ const ContactSection = () => {
                                 </p>
                             </div>
                         </div>
+                        {/* Business Hours */}
+                        <div className="flex items-start gap-5">
+                            <div className="w-14 h-14 text-xl rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
+                                <FaRegClock />
+                            </div>
 
+                            <div>
+                                <h4 className="text-base md:text-xl font-semibold text-heading">
+                                    Business Hours
+                                </h4>
+
+                                <p className="mt-1 text-paragraph leading-7">
+                                    Mon – Sat: 9:00 AM – 6:00 PM
+                                </p>
+                            </div>
+                        </div>
                         {/* Address */}
                         <div className="flex items-start gap-5">
-                            <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
+                            <div className="w-14 h-14 text-xl rounded-2xl bg-white flex items-center justify-center text-primary shadow-md">
                                 <FaMapMarkerAlt />
                             </div>
 
                             <div>
-                                <h4 className="text-xl font-semibold text-heading">
+                                <h4 className="text-base md:text-xl font-semibold text-heading">
                                     Address
                                 </h4>
 
@@ -133,7 +147,7 @@ const ContactSection = () => {
                             <button
                                 key={index}
                                 className="
-                                    w-12 h-12 rounded-2xl bg-white
+                                    w-12 h-12 text-xl rounded-2xl bg-white
                                     flex items-center justify-center
                                     text-primary
                                     transition-all duration-300
@@ -207,7 +221,7 @@ const ContactSection = () => {
                         />
 
                         {/* Single Select */}
-                        <InputField
+                        {/* <InputField
                             label="Business Type"
                             type="drop-single-select"
                             placeholder="Select business type"
@@ -232,10 +246,10 @@ const ContactSection = () => {
                                     value: 'retailer',
                                 },
                             ]}
-                        />
+                        /> */}
 
                         {/* Multi Select */}
-                        <InputField
+                        {/* <InputField
                             label="Services Interested In"
                             type="drop-multi-select"
                             placeholder="Select services"
@@ -264,7 +278,7 @@ const ContactSection = () => {
                                     value: 'seo',
                                 },
                             ]}
-                        />
+                        /> */}
 
                         {/* Message */}
                         <InputField
@@ -295,7 +309,7 @@ const ContactSection = () => {
         "
                         >
                             <FaPaperPlane />
-                            Send Message
+                            Contact Support
                         </button>
                     </form>
                 </div>

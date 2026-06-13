@@ -256,7 +256,7 @@ const Header = () => {
               )}
             </div>
 
-            <LanguageSwitcher />
+            {/* <LanguageSwitcher /> */}
 
             {/* Desktop Profile */}
             {user &&
@@ -463,7 +463,7 @@ const Header = () => {
               >
 
                 {/* User Info */}
-                <div
+                {/* <div
                   className="
                     px-4 py-4
                     border-b border-[#F1E5EB]
@@ -473,22 +473,22 @@ const Header = () => {
                   <p
                     className="
                       text-sm font-semibold
-                      text-heading
+                      text-heading capitalize
                     "
                   >
-                    John Doe
+                     {user?.name || user?.mobile}
                   </p>
 
                   <p
                     className="
-                      text-xs text-paragraph
+                      text-xs text-paragraph capitalize
                       mt-1
                     "
                   >
-                    johndoe@gmail.com
+                     {user?.name || user?.email}
                   </p>
 
-                </div>
+                </div> */}
 
                 <div className="p-2">
 
@@ -603,12 +603,14 @@ const Header = () => {
             )
           )}
 
-          <CommonButton
-            text="Get Free Consultation"
+          <CommonButton bgColor="#A36081"
+            color="white"
+            className="w-full sm:w-auto justify-center shadow-xl hover:scale-105 transition-all duration-300"
+            text="Book Consultation"
             {...btnProps}
           />
 
-          <LanguageSwitcher />
+          {/* <LanguageSwitcher /> */}
         </div>
       </div>
     </header>
