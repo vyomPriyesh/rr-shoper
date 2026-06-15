@@ -489,7 +489,7 @@ const Header = () => {
                 <div className="p-2">
 
                   <Link
-                    to="/profile"
+                    to="/my-profile"
                     onClick={
                       handleCloseDropdown
                     }
