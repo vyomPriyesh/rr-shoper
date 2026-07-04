@@ -14,6 +14,7 @@ import { useQuery } from '@tanstack/react-query'
 import api from '../../config/api'
 import { userState } from '../../context/UserContext'
 import { StateStore } from '../../context/StateStoreContext'
+import { BounceAnimation, SlideLeftByChar } from 'priyesh-bhanderi-react-packages'
 
 const Hero = () => {
 
@@ -62,19 +63,26 @@ const Hero = () => {
                 <div className="grid grid-cols-1 xl:grid-cols-2 md:gap-14 lg:gap-0 xl:gap-20 items-center">
                     {/* LEFT CONTENT */}
                     <div className="w-full grid grid-cols-1 gap-3 md:gap-10 mb-10">
-                        <Badge className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-xl border border-white/50 w-fit rounded-full lg:mb-5 xl:mb-10 mb-5 md:py-1 md:px-3 xl:py-2 xl:px-5 shadow-xl">
-                            <FaCrown className="text-[#fabc0f] text-sm sm:text-lg" />
-                            <span className="text-primary font-semibold text-xs sm:text-sm md:text-sm xl:text-base">
-                                Trusted by 500+ Brands Across India
-                            </span>
-                        </Badge>
-                        <h1 className="
-                            text-3xl sm:text-[3rem] md:text-[3.6rem] xl:text-[3.2rem] 2xl:text-[4.2rem] leading-[1.1] font-bold text-[#1A1A1A] font-['Times_New_Roman']">
-                            Complete Marketplace Management{' '}
-                            <span className="bg-gradient-to-r from-primary to-[#A17BA4] bg-clip-text text-transparent">
-                                Solutions for Online Sellers
-                            </span>
-                        </h1>
+                        <BounceAnimation>
+                            <Badge className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-xl border border-white/50 w-fit rounded-full lg:mb-5 xl:mb-10 mb-5 md:py-1 md:px-3 xl:py-2 xl:px-5 shadow-xl">
+                                <FaCrown className="text-[#fabc0f] text-sm sm:text-lg" />
+                                <span className="text-primary font-semibold text-xs sm:text-sm md:text-sm xl:text-base">
+                                    Trusted by 500+ Brands Across India
+                                </span>
+                            </Badge>
+                        </BounceAnimation>
+                        <SlideLeftByChar
+                            className="text-3xl sm:text-[3rem] md:text-[3.6rem] xl:text-[3.2rem] 2xl:text-[4.2rem] leading-[1.1] font-bold text-[#1A1A1A] font-['Times_New_Roman']"
+                            texts={[
+                                {
+                                    text: "Complete Marketplace Management ",
+                                },
+                                {
+                                    text: "Solutions for Online Sellers",
+                                    className: "bg-gradient-to-r from-primary to-[#A17BA4] bg-clip-text text-transparent",
+                                },
+                            ]}
+                        />
                         <div className="flex flex-col gap-2">
                             <span className="font-bold text-primary capitalize text-lg">Professional ecommerce operational support services for marketplace sellers</span>
                             <p className="text-sm sm:text-lg lg:text-xl leading-relaxed text-gray-600 max-w-2xl">
@@ -127,11 +135,11 @@ const Hero = () => {
                                 Marketplace Experts
                             </div>
                             {/* PLATFORM GRID */}
-                            {(platFormData?.length == 0 && isLoading) ?
-                                <div role="status" class="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
-                                    <div class="w-full grid grid-cols-2 sm:grid-cols-3 gap-5">
+                            {(platFormData?.length == 0 || isLoading) ?
+                                <div role="status" className="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+                                    <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-5">
                                         {Array.from({ length: 2 }).map((_, index) => (
-                                            <div key={index} class="bg-gray-300 rounded-2xl sm:rounded-3xl aspect-square w-full h-[140px] mb-4 flex flex-col items-center justify-center ">
+                                            <div key={index} className="bg-gray-300 rounded-2xl sm:rounded-3xl aspect-square w-full h-[140px] mb-4 flex flex-col items-center justify-center ">
                                                 <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center overflow-hidden justify-center bg-gray-100">
                                                     <img src={dummyImg} alt="" />
                                                 </div>

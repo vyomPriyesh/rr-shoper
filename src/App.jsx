@@ -14,6 +14,7 @@ import PrivacyPolicies from "./pages/PrivacyPolicies"
 import RefundCancellationPolicies from "./pages/RefundCancellationPolicies"
 import TermsConditions from "./pages/TermsConditions"
 import MyProfileRoutes from "./pages/MyProfileRoutes"
+import Lenis from "lenis";
 
 function App() {
 
@@ -29,12 +30,33 @@ function App() {
     }
   }, [user])
 
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <>
       <BrowserRouter>
         <MobileLogin isOpen={open} />
         <Header />
-        <div className="bg-gradient-to-br from-[#FFF8FC] via-[#F7EDF3] to-[#F2E1EA]">
+        <div className="full-mountain-image bg-gradient-to-br from-[#fceef6] via-[#faf0f6] to-[#fcedf5] pt-20">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/my-profile/*" element={<MyProfileRoutes />} />

@@ -245,3 +245,22 @@ html {
 .imgBlendColor{
     mix-blend-mode: darken;
 }
+
+.header_animation {
+    animation: header 0.5s ease-out forwards;
+    
+}
+
+@keyframes header {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+    filter: blur(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+    filter: blur(0px);
+  }
+}

@@ -205,13 +205,12 @@ const Header = () => {
       className={`
         ${menuOpen
           ? isScrolled
-            ? "sticky"
+            ? "fixed"
             : ""
-          : "sticky"
+          : "fixed"
         }
-
-        top-0 left-0 right-0 z-50
-        bg-[#FFFFFF]/95 backdrop-blur-md
+        left-0 right-0 z-50
+        bg-[#FFFFFF]/95 backdrop-blur-md header_animation
       `}
     >
 
