@@ -14,7 +14,7 @@ import { useQuery } from '@tanstack/react-query'
 import api from '../../config/api'
 import { userState } from '../../context/UserContext'
 import { StateStore } from '../../context/StateStoreContext'
-import { BounceAnimation, SlideLeftByChar } from 'priyesh-bhanderi-react-packages'
+import { BounceAnimation, SlideAnimation, SlideLeftByChar, WaveTextAnimation } from 'priyesh-bhanderi-react-packages'
 
 const Hero = () => {
 
@@ -56,6 +56,17 @@ const Hero = () => {
         return <>{count.toLocaleString()}</>
     }
 
+    const animations = {
+        hidden: {
+            x: 100,
+            opacity: 0,
+        },
+        visible: {
+            x: 0,
+            opacity: 1,
+        },
+    }
+
     return (
         <section className="relative flex items-center pt-5 md:pb-0 pb-10">
             <div className="container mx-auto px-2 md:px-4 sm:px-6 lg:px-8 md:py-4">
@@ -72,7 +83,7 @@ const Hero = () => {
                             </Badge>
                         </BounceAnimation>
                         <SlideLeftByChar
-                            className="text-3xl sm:text-[3rem] md:text-[3.6rem] xl:text-[3.2rem] 2xl:text-[4.2rem] leading-[1.1] font-bold text-[#1A1A1A] font-['Times_New_Roman']"
+                            className="text-3xl md:text-[3.6rem] xl:text-[3.2rem] 2xl:text-[4.2rem] leading-[1.1] font-bold text-[#1A1A1A] font-['Times_New_Roman']"
                             texts={[
                                 {
                                     text: "Complete Marketplace Management ",
@@ -83,12 +94,13 @@ const Hero = () => {
                                 },
                             ]}
                         />
-                        <div className="flex flex-col gap-2">
-                            <span className="font-bold text-primary capitalize text-lg">Professional ecommerce operational support services for marketplace sellers</span>
-                            <p className="text-sm sm:text-lg lg:text-xl leading-relaxed text-gray-600 max-w-2xl">
-                                Supporting online sellers with account setup, catalog management, listing optimization, and marketplace operations.
-                            </p>
-                        </div>
+                        <WaveTextAnimation className="text-sm sm:text-lg lg:text-xl leading-relaxed text-gray-600 max-w-2xl text-wave" text="Professional ecommerce operational support services for marketplace sellers Supporting online sellers with account setup, catalog management, listing optimization, and marketplace operations." />
+                        {/* <p className="text-sm sm:text-lg lg:text-xl leading-relaxed text-gray-600 max-w-2xl"> Professional ecommerce operational support services for marketplace sellers
+                            Supporting online sellers with account setup, catalog management, listing optimization, and marketplace operations.
+                        </p> */}
+                        {/* <div className="flex flex-col gap-2"> */}
+                        {/* <span className="font-bold text-primary capitalize text-lg">Professional ecommerce operational support services for marketplace sellers</span> */}
+                        {/* </div> */}
                         {/* BUTTONS */}
                         <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
                             <CommonButton
@@ -115,76 +127,78 @@ const Hero = () => {
                     </div>
 
                     {/* RIGHT CARD */}
-                    <div className="relative w-full">
-                        <div
-                            className="relative rounded-[28px] sm:rounded-[32px] p-5 sm:p-8 lg:p-10 xl:p-7 bg-gradient-to-br from-white via-white/90 to-[#F8F5F8] border-white/50 shadow-2xl"
-                            style={{
-                                animation: "floatCard 6s ease-in-out infinite",
-                            }}
-                        >
+                    <SlideAnimation delay={0.2} animationVariants={animations}>
+                        <div className="relative w-full">
+                            <div
+                                className="relative rounded-[28px] sm:rounded-[32px] p-5 sm:p-8 lg:p-10 xl:p-7 bg-gradient-to-br from-white via-white/90 to-[#F8F5F8] border-white/50 shadow-2xl"
+                                style={{
+                                    animation: "floatCard 6s ease-in-out infinite",
+                                }}
+                            >
 
-                            {/* TOP BADGE */}
-                            <div className="
+                                {/* TOP BADGE */}
+                                <div className="
                                 absolute top-3 right-3 sm:-top-5 sm:-right-5 bg-primary text-white px-3 sm:px-5 py-2 rounded-2xl shadow-xl hidden md:flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
-                                <FaCheckCircle />
-                                Seller Account Setup
-                            </div>
-                            {/* BOTTOM BADGE */}
-                            <div className="absolute bottom-3 left-3 sm:-bottom-5 sm:-left-5 bg-[#A17BA4] text-white px-3 sm:px-5 py-2 rounded-2xl shadow-xl hidden md:flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
-                                <FaChartLine />
-                                Marketplace Experts
-                            </div>
-                            {/* PLATFORM GRID */}
-                            {(platFormData?.length == 0 || isLoading) ?
-                                <div role="status" className="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
-                                    <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-5">
-                                        {Array.from({ length: 2 }).map((_, index) => (
-                                            <div key={index} className="bg-gray-300 rounded-2xl sm:rounded-3xl aspect-square w-full h-[140px] mb-4 flex flex-col items-center justify-center ">
-                                                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center overflow-hidden justify-center bg-gray-100">
-                                                    <img src={dummyImg} alt="" />
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
+                                    <FaCheckCircle />
+                                    Seller Account Setup
                                 </div>
-                                :
-                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
-                                    {platFormData.slice(0, 9).map(({ image, name }) => (
-                                        <div key={name}
-                                            className="group relative rounded-2xl sm:rounded-3xl p-4 sm:p-5 flex flex-col items-center justify-center text-center gap-3 transition-all duration-300 hover:-translate-y-2 bg-gradient-to-b from-white to-white/80 border border-white/50 min-h-[120px]"
-                                            style={{
-                                                boxShadow: `
+                                {/* BOTTOM BADGE */}
+                                <div className="absolute bottom-3 left-3 sm:-bottom-5 sm:-left-5 bg-[#A17BA4] text-white px-3 sm:px-5 py-2 rounded-2xl shadow-xl hidden md:flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
+                                    <FaChartLine />
+                                    Marketplace Experts
+                                </div>
+                                {/* PLATFORM GRID */}
+                                {(platFormData?.length == 0 || isLoading) ?
+                                    <div role="status" className="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+                                        <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-5">
+                                            {Array.from({ length: 2 }).map((_, index) => (
+                                                <div key={index} className="bg-gray-300 rounded-2xl sm:rounded-3xl aspect-square w-full h-[140px] mb-4 flex flex-col items-center justify-center ">
+                                                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center overflow-hidden justify-center bg-gray-100">
+                                                        <img src={dummyImg} alt="" />
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    :
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
+                                        {platFormData.slice(0, 9).map(({ image, name }) => (
+                                            <div key={name}
+                                                className="group relative rounded-2xl sm:rounded-3xl p-4 sm:p-5 flex flex-col items-center justify-center text-center gap-3 transition-all duration-300 hover:-translate-y-2 bg-gradient-to-b from-white to-white/80 border border-white/50 min-h-[120px]"
+                                                style={{
+                                                    boxShadow: `
                                                 10px 10px 25px rgba(163,96,129,0.15),
                                                 -8px -8px 20px rgba(255,255,255,0.95),
                                                 inset -6px -6px 15px rgba(255,255,255,0.9),
                                                 inset 6px 6px 15px rgba(163,96,129,0.08)
                                             `
-                                            }}
-                                        >
-                                            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center overflow-hidden justify-center bg-gradient-to-r from-primary/10 to-[#A17BA4]/10">
-                                                <img src={images.imgUrl + image.image || dummyImg} className='imgBlendColor' loading='lazy' />
-                                            </div>
+                                                }}
+                                            >
+                                                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center overflow-hidden justify-center bg-gradient-to-r from-primary/10 to-[#A17BA4]/10">
+                                                    <img src={images.imgUrl + image.image || dummyImg} className='imgBlendColor' loading='lazy' />
+                                                </div>
 
-                                            <span className="text-base font-bold text-[#1A1A1A] capitalize">
-                                                {name}
-                                            </span>
-                                        </div>
-                                    ))}
+                                                <span className="text-base font-bold text-[#1A1A1A] capitalize">
+                                                    {name}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                }
+                            </div>
+                            <div className="md:hidden grid grid-cols-2 gap-3 mt-10">
+                                <div className="bg-primary text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
+                                    <FaCheckCircle />
+                                    Seller Account Setup
                                 </div>
-                            }
-                        </div>
-                        <div className="md:hidden grid grid-cols-2 gap-3 mt-10">
-                            <div className="bg-primary text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
-                                <FaCheckCircle />
-                                Seller Account Setup
-                            </div>
-                            {/* BOTTOM BADGE */}
-                            <div className="bg-[#A17BA4] text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
-                                <FaChartLine />
-                                Marketplace Experts
+                                {/* BOTTOM BADGE */}
+                                <div className="bg-[#A17BA4] text-white px-3 sm:px-5 py-2 rounded shadow-xl md:hidden flex items-center gap-2 text-xs sm:text-sm font-bold z-10">
+                                    <FaChartLine />
+                                    Marketplace Experts
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </SlideAnimation>
                 </div>
 
                 {/* STATS SECTION */}

@@ -54,7 +54,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <MobileLogin isOpen={open} />
+        <MobileLogin isOpen={false} />
         <Header />
         <div className="full-mountain-image bg-gradient-to-br from-[#fceef6] via-[#faf0f6] to-[#fcedf5] pt-20">
           <Routes>
