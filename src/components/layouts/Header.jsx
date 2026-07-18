@@ -25,6 +25,7 @@ import { useQuery } from "@tanstack/react-query";
 import apiList from "../../config/apiList";
 import api from "../../config/api";
 import { useToast } from "../../context/ToastContext";
+import Lenis from "lenis";
 
 const Header = () => {
 
@@ -33,7 +34,7 @@ const Header = () => {
   const { showToast } = useToast();
 
   const navigate = useNavigate();
-
+  const lenisRef = useRef(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -111,13 +112,33 @@ const Header = () => {
 
 
   useEffect(() => {
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
+    const lenis = new Lenis({
+      duration: 1.2,
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
     });
 
-  }, [pathname]);
+    lenisRef.current = lenis;
+
+    const raf = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  const handleMenuClick = () => {
+    lenisRef.current?.scrollTo(0, {
+      duration: 1.2,
+    });
+  };
 
   useEffect(() => {
 
@@ -231,10 +252,10 @@ const Header = () => {
 
               {NAV_LINKS.map(
                 ({ label, to }) => (
-
                   <NavLink
                     key={to}
                     to={to}
+                    onClick={handleMenuClick}
                     className={({
                       isActive,
                     }) =>
@@ -250,7 +271,6 @@ const Header = () => {
                   >
                     {label}
                   </NavLink>
-
                 )
               )}
             </div>

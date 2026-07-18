@@ -14,7 +14,6 @@ import PrivacyPolicies from "./pages/PrivacyPolicies"
 import RefundCancellationPolicies from "./pages/RefundCancellationPolicies"
 import TermsConditions from "./pages/TermsConditions"
 import MyProfileRoutes from "./pages/MyProfileRoutes"
-import Lenis from "lenis";
 
 function App() {
 
@@ -29,27 +28,6 @@ function App() {
       setOpen(true);
     }
   }, [user])
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
 
   return (
     <>
