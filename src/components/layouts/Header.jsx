@@ -12,7 +12,7 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-
+import { MdOutlineDashboard } from "react-icons/md";
 import {
   FaChevronDown,
   FaRegUser,
@@ -364,31 +364,14 @@ const Header = () => {
                 >
 
                   <div className="p-2">
-
                     <Link
-                      to="/my-profile"
-                      onClick={
-                        handleCloseDropdown
-                      }
-                      className="
-                      flex items-center gap-3
-
-                      px-4 py-3 rounded-xl
-
-                      text-sm font-medium
-                      text-heading
-
-                      hover:bg-[#F8F1F5]
-                      hover:text-primary
-
-                      transition-all duration-300
-                    "
+                      to="/dashboard"
+                      onClick={handleCloseDropdown}
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-heading hover:bg-[#F8F1F5] hover:text-primary transition-all duration-300"
                     >
-                      <FaRegUser />
-
-                      My Profile
+                      <MdOutlineDashboard className="text-lg" />
+                      Dashboard
                     </Link>
-
                     <button
                       onClick={() => {
                         logout();
@@ -509,28 +492,12 @@ const Header = () => {
 
                   <Link
                     to="/my-profile"
-                    onClick={
-                      handleCloseDropdown
-                    }
-                    className="
-                      flex items-center gap-3
-
-                      px-4 py-3 rounded-xl
-
-                      text-sm font-medium
-                      text-heading
-
-                      hover:bg-[#F8F1F5]
-                      hover:text-primary
-
-                      transition-all duration-300
-                    "
+                    onClick={handleCloseDropdown}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-heading hover:bg-[#F8F1F5] hover:text-primary transition-all duration-300"
                   >
-                    <FaRegUser />
-
-                    My Profile
+                    <MdOutlineDashboard className="text-lg" />
+                    Dashboard
                   </Link>
-
                   <button
                     onClick={() => {
 

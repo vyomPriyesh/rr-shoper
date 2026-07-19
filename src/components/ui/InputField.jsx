@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IoChevronDown } from 'react-icons/io5'
 import api from '../../config/api'
 import apiList from '../../config/apiList'
+import ImagesUploadUi from './ImagesUploadUi'
 
 const InputField = ({
     label,
@@ -17,10 +18,11 @@ const InputField = ({
 
     // textarea
     rows = 5,
-
+    className = '',
     // select
     options = [],
     multiple = false,
+    imageLimit,
     ...rest
 }) => {
 
@@ -62,27 +64,6 @@ const InputField = ({
         }
     }
 
-    const { mutate: imageHandle } = useMutation({
-        mutationFn: ({ target }) => {
-            const files = Array.from(target.files);
-
-            const formData = new FormData();
-
-            files.forEach((file) => {
-                formData.append("images", file);
-            });
-
-            return api.post(images.upload, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            });
-        },
-        onSuccess: ({ data }) => {
-            console.log(data)
-        }
-    })
-
     return (
         <div className="w-full">
             {label && (
@@ -94,21 +75,20 @@ const InputField = ({
             {/* ================= INPUT ================= */}
             {type !== 'textarea' &&
                 type !== 'drop-single-select' &&
-                type !== 'drop-multi-select' && (
+                type !== 'drop-multi-select' && type !== 'upload' && (
                     <input
                         type={type}
                         value={value}
                         onChange={onChange}
                         placeholder={placeholder}
-                        className="
-                            w-full h-14 rounded-2xl border border-borderColor
+                        className={`
+                            w-full h-14 rounded-xl border border-borderColor
                             px-5 outline-none bg-white
                             text-heading
                             placeholder:text-[#9CA3AF]
                             transition-all duration-300
                             focus:border-primary
-                            focus:ring-4 focus:ring-primary/10
-                        "
+                            focus:ring-4 focus:ring-primary/10 ${className}`}
                         {...rest}
                     />
                 )}
@@ -142,14 +122,12 @@ const InputField = ({
                     <button
                         type="button"
                         onClick={() => setOpen(!open)}
-                        className="
-                            w-full h-14 rounded-2xl border border-borderColor
+                        className={` w-full h-14 rounded-xl border border-borderColor
                             px-5 bg-white text-left
                             flex items-center justify-between
                             transition-all duration-300
                             focus:border-primary
-                            focus:ring-4 focus:ring-primary/10
-                        "
+                            focus:ring-4 focus:ring-primary/10 ${className}`}
                     >
                         <span
                             className={`${value
@@ -174,7 +152,7 @@ const InputField = ({
                     <div
                         className={`
                             absolute top-full left-0 w-full mt-3 z-50
-                            bg-white rounded-2xl border border-borderColor
+                            bg-white rounded-xl border border-borderColor
                             shadow-xl overflow-hidden
                             transition-all duration-300 origin-top
                             ${open
@@ -183,7 +161,7 @@ const InputField = ({
                             }
                         `}
                     >
-                        <div className="p-2">
+                        <div className="p-2 space-y-2">
                             {options.map((item, index) => (
                                 <button
                                     key={index}
@@ -193,7 +171,7 @@ const InputField = ({
                                         setOpen(false)
                                     }}
                                     className={`
-                                        w-full px-4 py-3 rounded-xl text-left
+                                        w-full px-4 py-1 rounded text-left
                                         transition-all duration-200
                                         ${value === item.value
                                             ? 'bg-primary/10 text-primaryDark'
@@ -208,6 +186,14 @@ const InputField = ({
                     </div>
                 </div>
             )}
+
+            {type === 'upload' && (
+                <>
+                    <ImagesUploadUi multiple={multiple} value={value} onChange={onChange} imageLimit={imageLimit} />
+                </>
+            )
+            }
+            
 
             {/* ================= MULTI SELECT ================= */}
             {type === 'drop-multi-select' && (

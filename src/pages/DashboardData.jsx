@@ -1,20 +1,32 @@
 import React from 'react'
 import { FaUser } from 'react-icons/fa'
-import { IoBagCheck } from 'react-icons/io5'
+import { IoBagCheck, IoTicketSharp } from 'react-icons/io5'
 import { NavLink, Outlet, Route, Router, Routes } from 'react-router-dom'
-import MyProfile from './MyProfile/MyProfile'
-import MyService from './MyProfile/MyService'
+import MyProfile from './dashboard/MyProfile'
+import MyService from './dashboard/MyService'
+import { MdOutlineDashboard } from 'react-icons/md'
+import DashboardPage from './dashboard/DashboardPage'
+import Tickets from './dashboard/Tickets'
 
-const MyProfileRoutes = () => {
+
+const DashboardData = () => {
 
     const links = [
         {
-            name: "My Profile", to: "my-profile",
+            name: "Dashboard", to: "dashboard",
+            icon: MdOutlineDashboard
+        },
+        {
+            name: "My Profile", to: "dashboard/my-profile",
             icon: FaUser
         },
         {
-            name: "My Service", to: "my-profile/my-service",
+            name: "My Service", to: "dashboard/my-service",
             icon: IoBagCheck
+        },
+        {
+            name: "Tickets", to: "dashboard/tickets",
+            icon: IoTicketSharp
         },
     ]
 
@@ -27,7 +39,7 @@ const MyProfileRoutes = () => {
                         <NavLink
                             to={"/" + list.to}
                             key={index}
-                            end={list.to === "my-profile"}
+                            end={list.to === "dashboard"}
                             className={({ isActive }) => {
                                 return `${isActive ? 'bg-primary font-semibold text-white' : 'hover:bg-primary hover:text-white'} flex flex-row gap-3 rounded-md px-3 py-2 transition duration-300 ease-in-out`
                             }}
@@ -40,8 +52,10 @@ const MyProfileRoutes = () => {
                 </div>
                 <div className="w-3/4 rounded-lg border border-primary p-5">
                     <Routes>
-                        <Route path="/" element={<MyProfile />} />
+                        <Route path="/" element={<DashboardPage />} />
+                        <Route path="/my-profile" element={<MyProfile />} />
                         <Route path="/my-service" element={<MyService />} />
+                        <Route path="/tickets" element={<Tickets />} />
                     </Routes>
                 </div>
             </div>
@@ -49,4 +63,4 @@ const MyProfileRoutes = () => {
     )
 }
 
-export default MyProfileRoutes
+export default DashboardData

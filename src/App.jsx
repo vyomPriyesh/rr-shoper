@@ -13,7 +13,7 @@ import { userState } from "./context/UserContext"
 import PrivacyPolicies from "./pages/PrivacyPolicies"
 import RefundCancellationPolicies from "./pages/RefundCancellationPolicies"
 import TermsConditions from "./pages/TermsConditions"
-import MyProfileRoutes from "./pages/MyProfileRoutes"
+import DashboardData from "./pages/DashboardData"
 
 function App() {
 
@@ -37,7 +37,7 @@ function App() {
         <div className="full-mountain-image bg-gradient-to-br from-[#fceef6] via-[#faf0f6] to-[#fcedf5] pt-20">
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/my-profile/*" element={<MyProfileRoutes />} />
+            <Route path="/dashboard/*" element={<DashboardData />} />
             <Route path="/contact" element={<ContactSection />} />
             <Route path="/services" element={<Services />} />
             <Route path="/platforms" element={<PlanPricing />} />

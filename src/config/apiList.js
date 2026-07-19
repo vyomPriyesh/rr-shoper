@@ -19,6 +19,15 @@ const apiList = () => {
         packages: {
             all: 'customer-all-packages',
         },
+
+        allOptions: {
+            get: 'all-options',
+        },
+
+        tickets: {
+            getTicketForm: (id) => `ticket-form/by-ticket-title/${id}`,
+            add: (id) => `ticket-form/${id}`,
+        }
     }
 }
 

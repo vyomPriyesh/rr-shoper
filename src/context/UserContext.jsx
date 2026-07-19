@@ -1,8 +1,13 @@
+import { useQuery } from "@tanstack/react-query";
 import { createContext, useContext, useEffect, useState } from "react";
+import apiList from "../config/apiList";
+import api from "../config/api";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+
+    const { allOptions } = apiList();
 
     const [user, setUser] = useState(null);
     const [refresh, setRefresh] = useState(0);
@@ -19,6 +24,10 @@ export const UserProvider = ({ children }) => {
         localStorage.removeItem("user");
     };
 
+    const { data: { data: { data: options = {} } = {} } = {} } = useQuery({
+        queryFn: () => api.get(allOptions.get)
+    })
+
     const contactDetails = {
         mobile: '+91 9499839239',
         email: 'sellersupport@rrshoper.in',
@@ -27,7 +36,7 @@ export const UserProvider = ({ children }) => {
 
 
     return (
-        <UserContext.Provider value={{ user, setUser, logout, refresh, setRefresh, contactDetails }}>
+        <UserContext.Provider value={{ user, setUser, logout, refresh, setRefresh, contactDetails, options }}>
             {children}
         </UserContext.Provider>
     );
