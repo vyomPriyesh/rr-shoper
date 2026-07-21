@@ -17,22 +17,10 @@ import DashboardData from "./pages/DashboardData"
 
 function App() {
 
-  const { user } = userState();
-
-  const [open, setOpen] = useState(null);
-
-  useEffect(() => {
-    if (user) {
-      setOpen(false);
-    } else {
-      setOpen(true);
-    }
-  }, [user])
-
   return (
     <>
       <BrowserRouter>
-        <MobileLogin isOpen={false} />
+        <MobileLogin />
         <Header />
         <div className="full-mountain-image bg-gradient-to-br from-[#fceef6] via-[#faf0f6] to-[#fcedf5] pt-20">
           <Routes>

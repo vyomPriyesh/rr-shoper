@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import InputField from "../ui/InputField";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "../../config/api";
@@ -6,42 +6,49 @@ import apiList from "../../config/apiList";
 import { useToast } from "../../context/ToastContext";
 import { userState } from "../../context/UserContext";
 
-const MobileLogin = ({ isOpen, onClose }) => {
+const MobileLogin = ({ onClose }) => {
 
     const { auth } = apiList();
-    const { setRefresh } = userState();
+    const { setRefresh, options, user } = userState();
     const { showToast } = useToast();
 
-    const [mobile, setMobile] = useState("1234567890");
-    const [email, setEmail] = useState("rrshopertest@gmail.com")
-    const [otp, setOtp] = useState("123456");
+    const testData = {
+        mobile: "1234567890",
+        email: "rrshopertest@gmail.com",
+        otp: "123456"
+    }
+
+    const [mobile, setMobile] = useState(null);
+    const [email, setEmail] = useState(null)
+    const [otp, setOtp] = useState(null);
     const [otpSent, setOtpSent] = useState(false);
     const [seconds, setSeconds] = useState(30);
+    const [open, setOpen] = useState(null);
 
-    const { data: customerMobile, refetch: findUserRefetch, isError, } = useQuery({
-        queryKey: ['findUser'],
-        queryFn: () => api.get(auth.findCustomer(email)),
-        enabled: false,
-        select: ({ data }) => {
-            return data.data.mobile
+    useEffect(() => {
+        if (user?.token) {
+            setOpen(false);
+        } else {
+            setOpen(true);
+        }
+    }, [user?.token])
+
+    const { mutate: findUserRefetch } = useMutation({
+        mutationFn: async () => await api.get(auth.findCustomer(email)),
+        onSuccess: ({ data }) => {
+            setMobile(data?.data?.mobile)
+        },
+        onError: () => {
+            setMobile(null)
         }
     })
 
-    // useEffect(() => {
-    //     if (customerMobile && !isError) {
-    //         setMobile(customerMobile)
-    //     } else {
-    //         // setMobile("")
-    //     }
-    // }, [customerMobile, isError])
-
-    // useEffect(() => {
-    //     const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || ""))
-    //     if (isValid) {
-    //         findUserRefetch()
-    //     }
-    // }, [email])
-
+    useEffect(() => {
+        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || ""))
+        if (isValid) {
+            findUserRefetch()
+        }
+    }, [email])
 
     useEffect(() => {
         if (!otpSent || seconds === 0) return;
@@ -61,7 +68,7 @@ const MobileLogin = ({ isOpen, onClose }) => {
         onSuccess: ({ data, message }) => {
             if (mobile.length === 10) {
                 showToast(message, "success")
-                // setOtp("");
+                setOtp(options?.testUser ? testData?.otp : "");
                 setOtpSent(true);
                 setSeconds(30);
             }
@@ -75,11 +82,12 @@ const MobileLogin = ({ isOpen, onClose }) => {
         },
         onSuccess: ({ message, data }) => {
             showToast(message, "success");
-            // setMobile("");
-            // setOtp("");
-            // setEmail("");
+            setMobile("");
+            setOtp("");
+            setEmail("");
             setOtpSent(false);
             setRefresh((prev) => prev + 1);
+            setOpen(false)
             localStorage.setItem("user", JSON.stringify({
                 ...data.result.user,
                 token: data.result.token
@@ -87,15 +95,25 @@ const MobileLogin = ({ isOpen, onClose }) => {
         },
         onError: ({ response }) => {
             const message = response.data.error.error_message
-            showToast(message, "warning");
+            showToast(message, "error");
         }
     });
 
-    // useEffect(() => {
-    //     setEmail("")
-    // }, [isOpen])
+    useEffect(() => {
+        if (open) {
+            setEmail("");
+            setMobile("");
+            setOtp("");
+            setOtpSent(false);
+            setSeconds(30);
+            if (options?.testUser) {
+                setMobile(testData.mobile)
+                setEmail(testData.email)
+            }
+        }
+    }, [open, options?.testUser]);
 
-    if (!isOpen) return null;
+    if (!open) return null;
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -200,7 +218,6 @@ const MobileLogin = ({ isOpen, onClose }) => {
                                     {/* Phone Input */}
                                     <div className="animate-slideUp space-y-5">
                                         <InputField
-                                            disabled
                                             type="text"
                                             value={email}
                                             placeholder="Enter your E-mail"
@@ -211,11 +228,9 @@ const MobileLogin = ({ isOpen, onClose }) => {
                                             }
                                         />
                                         <InputField
-                                            disabled
                                             type="tel"
                                             maxLength={10}
-                                            value={mobile}
-                                            disabled={customerMobile && !isError}
+                                            value={mobile ?? ''}
                                             placeholder="Enter 10-digit mobile"
                                             onChange={(e) =>
                                                 setMobile(
@@ -228,8 +243,7 @@ const MobileLogin = ({ isOpen, onClose }) => {
                                     {!otpSent ? (
                                         <button
                                             type="submit"
-                                            // onClick={handleSendOtp}
-                                            disabled={!email || mobile.length !== 10}
+                                            disabled={!email || mobile?.length !== 10}
                                             className="
                         w-full h-12 md:h-14 rounded-2xl
                         bg-gradient-to-r from-[#A36081] to-[#8D4F6C]
@@ -250,7 +264,6 @@ const MobileLogin = ({ isOpen, onClose }) => {
                                             {/* OTP Input */}
                                             <div className="animate-slideUp">
                                                 <InputField
-                                                    disabled
                                                     maxLength={6}
                                                     value={otp}
                                                     onChange={(e) =>
