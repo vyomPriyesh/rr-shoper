@@ -29,7 +29,7 @@ const MobileLogin = ({ onClose }) => {
         if (user?.token) {
             setOpen(false);
         } else {
-            setOpen(true);
+            setTimeout(() => setOpen(true), 10000)
         }
     }, [user?.token])
 
