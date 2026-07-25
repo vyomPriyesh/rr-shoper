@@ -59,7 +59,7 @@ const Tickets = () => {
                 addClick={() => navigate('add-ticket')}
             />
             <div className="bg-white p-3 rounded-lg">
-                {!statusOptions || isLoading ?
+                {!statusOptions ?
                     <div className="bg-gray-300 rounded-md aspect-square w-40 h-8 flex flex-col items-center justify-center animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse">
                     </div>
                     :
