@@ -6,6 +6,7 @@ import ImageWithPreview from './ImageWithPreview';
 import apiList from '../../config/apiList';
 import api from '../../config/api';
 import { useToast } from '../../context/ToastContext';
+import Loader from './Loader';
 
 const ImagesUploadUi = ({ multiple = false, onChange, value, imageLimit = 1 }) => {
 
@@ -114,8 +115,7 @@ const ImagesUploadUi = ({ multiple = false, onChange, value, imageLimit = 1 }) =
             onChange();
             return true;
         }
-
-        const updated = (value || []).filter(item => item.uid !== file.uid);
+        const updated = (value || []).filter(item => item.name !== file.name);
 
         onChange(updated);
 
@@ -124,6 +124,7 @@ const ImagesUploadUi = ({ multiple = false, onChange, value, imageLimit = 1 }) =
 
     return (
         <div>
+        {isPending &&<Loader />}
             <Upload
                 listType="picture-card"
                 multiple={multiple}
@@ -143,7 +144,7 @@ const ImagesUploadUi = ({ multiple = false, onChange, value, imageLimit = 1 }) =
 
                     if (batchFileInfoList.length > imageLimit) {
                         showToast(
-                            `You can upload ${remaining} only image ${remaining > 1 ? "s" : ""}.`,
+                            `You can upload ${remaining} only image${remaining > 1 ? "s" : ""}.`,
                             "warning"
                         );
                     }

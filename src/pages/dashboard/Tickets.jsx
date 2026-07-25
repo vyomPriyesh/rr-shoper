@@ -1,182 +1,54 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import api from '../../config/api'
 import apiList from '../../config/apiList'
 import { useToast } from '../../context/ToastContext'
 import { userState } from '../../context/UserContext'
-import CommanModal from '../ui/CommanModal'
 import PageTitleAddbtn from '../ui/PageTitleAddbtn'
-import InputField from '../../components/ui/InputField'
+import { useNavigate } from 'react-router-dom'
+import ButtonUi from '../ui/ButtonUi'
+import { timeAgo } from '../../components/ui/DateDisplay'
+import PaginationData from '../ui/PaginationData'
+import dummyImg from '../../assets/images/dummyImg.jpg'
+import { Empty } from 'antd'
 
-const normalizeFormFields = (payload) => {
-    if (Array.isArray(payload)) return payload
-
-    if (Array.isArray(payload?.fields)) return payload.fields
-    if (Array.isArray(payload?.data)) return payload.data
-    if (Array.isArray(payload?.form)) return payload.form
-
-    if (payload && typeof payload === 'object') {
-        return Object.entries(payload).map(([key, value]) => {
-            if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-                return {
-                    name: key,
-                    label: value.label || key,
-                    type: value.type || 'text',
-                    placeholder: value.placeholder || '',
-                    options: value.options || [],
-                }
-            }
-
-            return {
-                name: key,
-                label: key,
-                type: 'text',
-                placeholder: '',
-                options: [],
-            }
-        })
-    }
-
-    return []
-}
 
 const Tickets = () => {
+
+    const navigate = useNavigate();
+
     const { tickets } = apiList()
     const { showToast } = useToast()
-    const { options } = userState()
+    const { options, user } = userState()
 
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    const [selectedTicket, setSelectedTicket] = useState('')
-    const [formValues, setFormValues] = useState({})
+    const [pagination, setPagination] = useState({ page: 1, limit: 5 })
+    const [selectedStatus, setSelectedStatus] = useState(null)
 
-    const { data: ticketForm, isLoading, isFetching } = useQuery({
-        queryKey: ['ticket-form', selectedTicket],
-        queryFn: () => api.get(tickets.getTicketForm(selectedTicket)),
-        enabled: Boolean(selectedTicket),
-        select: (response) => response?.data?.data ?? response?.data ?? response ?? {},
+    const { data: { data: allTickets = [], pagination: paginationData = {}, statusCounts = [] } = {}, isLoading } = useQuery({
+        queryKey: ['all-platforms', pagination, selectedStatus],
+        queryFn: () => api.post(tickets.all, { ...pagination, status: selectedStatus }),
+        enabled: !!user && !!selectedStatus,
+        select: ({ data }) => data.data.result
     })
+
+    const statusOptions = useMemo(() => {
+        return options?.ticketStatuses?.map(list => ({
+            ...list,
+            counts: statusCounts.find(item => item._id == list.value)?.count || 0
+        }))
+    }, [statusCounts, options?.ticketStatuses])
 
     useEffect(() => {
-        setFormValues({})
-    }, [selectedTicket])
+        setSelectedStatus((options?.ticketStatuses?.[0]?.value))
+    }, [options?.ticketStatuses])
 
-    const fields = normalizeFormFields(ticketForm)
-
-    const { mutate: submitTicket, isPending } = useMutation({
-        mutationFn: async () => api.post(tickets.create(selectedTicket), {
-            ticketTitle: selectedTicket,
-            ...formValues,
-        }),
-        onSuccess: (response) => {
-            showToast(response?.data?.message || 'Ticket submitted successfully.', 'success')
-            setIsModalOpen(false)
-            setSelectedTicket('')
-            setFormValues({})
-        },
-        onError: (error) => {
-            const message = error?.response?.data?.message || error?.response?.data?.error?.error_message || 'Unable to submit ticket right now.'
-            showToast(message, 'warning')
-        },
-    })
-
-    const handleFieldChange = (name, value) => {
-        setFormValues((prev) => ({
-            ...prev,
-            [name]: value,
-        }))
+    const description = (data) => {
+        const textareaKey = Object.keys(data).find(list => list.includes('textarea'))
+        return data[textareaKey]
     }
 
-    const handleDone = () => {
-        if (!selectedTicket) {
-            showToast('Please select a ticket title first.', 'warning')
-            return
-        }
-
-        // submitTicket()
-    }
-
-    const renderField = (field, index) => {
-        const fieldName = field.name || field.key || field.field_name || `field_${index}`
-        const fieldLabel = field.label || field.title || fieldName
-        const fieldType = field.type || 'text'
-        const options = Array.isArray(field.options) ? field.options : []
-        const selectOptions = options.map((option) => {
-            if (typeof option === 'string') {
-                return { label: option, value: option }
-            }
-
-            return {
-                label: option.label || option.value || option.name || '',
-                value: option.value || option.name || '',
-            }
-        })
-
-        switch (fieldType) {
-            case 'textarea':
-                return (
-                    <div key={fieldName} className="space-y-2">
-                        <InputField
-                            type='textarea'
-                            className='!h-12'
-                            placeholder={field.placeholder || `Enter ${fieldLabel}`}
-                            value={formValues[fieldName]}
-                            onChange={(e) => handleFieldChange(fieldName, e.target.value)}
-                            rows={4}
-                        />
-                    </div>
-                )
-            case 'select':
-            case 'dropdown':
-                return (
-                    <div key={fieldName} className="space-y-2">
-                        <InputField
-                            type='drop-single-select'
-                            className='!h-12'
-                            placeholder={field.placeholder || `Select ${fieldLabel}`}
-                            options={selectOptions}
-                            value={formValues[fieldName]}
-                            onChange={(e) => handleFieldChange(fieldName, e)}
-                        />
-                    </div>
-                )
-            case 'input':
-                return (
-                    <div key={fieldName} className="space-y-2">
-                        <InputField
-                            type='text'
-                            className='!h-12'
-                            placeholder={field.placeholder || `Enter ${fieldLabel}`}
-                            value={formValues[fieldName]}
-                            onChange={(e) => handleFieldChange(fieldName, e.target.value)}
-                        />
-                    </div>
-                )
-            case 'upload':
-                return (
-                    <div key={fieldName} className="space-y-2">
-                        <InputField
-                            type='upload'
-                            className='!h-12'
-                            multiple={field.multiple || false}
-                            value={formValues[fieldName]}
-                            imageLimit={field.imageLimit}
-                            onChange={(e) => handleFieldChange(fieldName, e)}
-                        />
-                    </div>
-                )
-            default:
-                return (
-                    <div key={fieldName} className="space-y-2">
-                        <InputField
-                            type='text'
-                            className='!h-12'
-                            placeholder={field.placeholder || `Enter ${fieldLabel}`}
-                            value={formValues[fieldName]}
-                            onChange={(e) => handleFieldChange(fieldName, e.target.value)}
-                        />
-                    </div>
-                )
-        }
+    const handlePagination = (data) => {
+        setPagination(data)
     }
 
     return (
@@ -184,45 +56,99 @@ const Tickets = () => {
             <PageTitleAddbtn
                 title="Tickets"
                 add
-                addClick={() => setIsModalOpen(true)}
+                addClick={() => navigate('add-ticket')}
             />
-
-            <CommanModal
-                open={isModalOpen}
-                title="Create Ticket"
-                onClose={() => {
-                    setIsModalOpen(false)
-                    setSelectedTicket('')
-                    setFormValues({})
-                }}
-                onDone={handleDone}
-                width={800}
-            >
-                <div className="space-y-4">
-                    <div className="space-y-2">
-                        <InputField
-                            type='drop-single-select'
-                            className='!h-12'
-                            placeholder='Select ticket title'
-                            options={options?.ticketsTitles}
-                            value={selectedTicket}
-                            onChange={(e) => setSelectedTicket(e)}
-                        />
+            <div className="bg-white p-3 rounded-lg">
+                {!statusOptions || isLoading ?
+                    <div className="bg-gray-300 rounded-md aspect-square w-40 h-8 flex flex-col items-center justify-center animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse">
                     </div>
+                    :
+                    <div className="flex flex-row w-fit rounded-md overflow-hidden border border-primary overflow-y-auto dashboard-menu">
+                        {statusOptions?.map((list, i) => (
+                            <ButtonUi
+                                key={i}
+                                onClick={() => setSelectedStatus(list.value)}
+                                text={<span className='flex flex-row gap-2 text-nowrap'>{list.label} <span className={`${selectedStatus == list.value ? 'bg-white text-primary' : 'bg-primary text-white'} transition-all duration-300 ease-out  rounded-full aspect-square w-5 h-5 flex justify-center items-center`}>{list.counts}</span></span>}
+                                className={`${selectedStatus == list.value ? '!bg-primary hover:bg-primary hover:text-white rounded-none' : 'rounded-none !font-medium !bg-transparent text-primary border-white hover:bg-transparent hover:text-primary'} !text-xs md:!text-sm`}
+                            />
+                        ))}
+                    </div>
+                }
+            </div>
+            <div className="bg-white p-2 rounded-lg">
+                <div className="flex flex-col">
+                    {isLoading ? (
+                        <>
+                            {Array.from({ length: 5 }).map((_, i) => (
+                                <div className="flex flex-row py-3 px-2 items-center animate-pulse" key={i}>
+                                    {/* Left */}
+                                    <div className="w-1/2 flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-full bg-gray-300 shrink-0" />
 
-                    {selectedTicket && (
-                        <div className="space-y-3 rounded-2xl border border-gray-200 bg-gray-50 p-4">
-                            {isLoading || isFetching ? (
-                                <p className="text-sm text-gray-500">Loading form...</p>
-                            ) : fields.length > 0 ? (
-                                fields.map((field, index) => renderField(field, index))
-                            ) : (
-                                <p className="text-sm text-gray-500">No form fields found for this ticket.</p>
-                            )}
-                        </div>
+                                        <div className="flex flex-col gap-2 w-full">
+                                            <div className="h-4 w-32 rounded bg-gray-300" />
+                                            <div className="h-3 w-24 rounded bg-gray-200" />
+                                        </div>
+                                    </div>
+
+                                    {/* Right */}
+                                    <div className="w-1/2 flex justify-end">
+                                        <div className="flex flex-col items-end gap-2 w-full">
+                                            <div className="h-3 w-20 rounded bg-gray-300" />
+                                            <div className="h-4 w-48 rounded bg-gray-200" />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </>
+                    ) : (
+                        <>
+                            {allTickets.length == 0 && <Empty
+                                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                                description="No tickets found"
+                            />}
+                            {allTickets.map((list, i) => (
+                                <div className="flex flex-row py-3 px-2 items-center hover:bg-secondary/20 rounded hover:shadow-lg transition-all duration-300 ease-out cursor-pointer" key={i}>
+                                    <div className="w-1/2 flex flex-row items-center gap-3">
+                                        <img
+                                            className="w-10 h-10 rounded-full"
+                                            src={
+                                                list?.user?.image ||
+                                                `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${list?.user?.name}`
+                                            }
+                                            alt=""
+                                        />
+
+                                        <div className="flex flex-col">
+                                            <h6 className="font-semibold">{list?.title?.title}</h6>
+                                            <span className="capitalize text-sm">
+                                                Platform :{" "}
+                                                <span className="text-base">
+                                                    {list?.platform?.name}
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="w-1/2 flex justify-end">
+                                        <div className="flex flex-col items-end">
+                                            <h6 className="font-semibold text-sm">
+                                                {timeAgo(list?.createdAt)}
+                                            </h6>
+                                            <span className="text-base line-clamp-1">
+                                                {description(list?.values)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </>
                     )}
+                    <div className="flex justify-end">
+                        <PaginationData {...paginationData} onChange={handlePagination} />
+                    </div>
                 </div>
-            </CommanModal>
+            </div>
         </div>
     )
 }

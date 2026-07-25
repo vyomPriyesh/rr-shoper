@@ -6,6 +6,7 @@ import { IoChevronDown } from 'react-icons/io5'
 import api from '../../config/api'
 import apiList from '../../config/apiList'
 import ImagesUploadUi from './ImagesUploadUi'
+import { RxCross2 } from "react-icons/rx";
 
 const InputField = ({
     label,
@@ -53,14 +54,12 @@ const InputField = ({
 
     // multi select logic
     const handleMultiSelect = (itemValue) => {
-        if (!Array.isArray(value)) return
-
-        if (value.includes(itemValue)) {
+        if (value?.includes(itemValue)) {
             onChange(
                 value.filter((item) => item !== itemValue)
             )
         } else {
-            onChange([...value, itemValue])
+            onChange([...value || '', itemValue])
         }
     }
 
@@ -83,7 +82,7 @@ const InputField = ({
                         placeholder={placeholder}
                         className={`
                             w-full h-14 rounded-xl border border-borderColor
-                            px-5 outline-none bg-white
+                            px-3 outline-none bg-white
                             text-heading
                             placeholder:text-[#9CA3AF]
                             transition-all duration-300
@@ -101,8 +100,8 @@ const InputField = ({
                     onChange={onChange}
                     placeholder={placeholder}
                     className="
-                        w-full rounded-2xl border border-borderColor
-                        px-5 py-4 outline-none resize-none bg-white
+                        w-full rounded-xl border border-borderColor
+                        p-3 outline-none resize-none bg-white
                         text-heading
                         placeholder:text-[#9CA3AF]
                         transition-all duration-300
@@ -122,8 +121,8 @@ const InputField = ({
                     <button
                         type="button"
                         onClick={() => setOpen(!open)}
-                        className={` w-full h-14 rounded-xl border border-borderColor
-                            px-5 bg-white text-left
+                        className={`w-full h-14 rounded-xl border border-borderColor
+                            px-3 bg-white text-left capitalize
                             flex items-center justify-between
                             transition-all duration-300
                             focus:border-primary
@@ -153,7 +152,7 @@ const InputField = ({
                         className={`
                             absolute top-full left-0 w-full mt-3 z-50
                             bg-white rounded-xl border border-borderColor
-                            shadow-xl overflow-hidden
+                            shadow-xl overflow-hidden capitalize
                             transition-all duration-300 origin-top
                             ${open
                                 ? 'opacity-100 visible scale-100'
@@ -171,7 +170,7 @@ const InputField = ({
                                         setOpen(false)
                                     }}
                                     className={`
-                                        w-full px-4 py-1 rounded text-left
+                                        w-full px-4 py-1 rounded text-left capitalize
                                         transition-all duration-200
                                         ${value === item.value
                                             ? 'bg-primary/10 text-primaryDark'
@@ -193,7 +192,7 @@ const InputField = ({
                 </>
             )
             }
-            
+
 
             {/* ================= MULTI SELECT ================= */}
             {type === 'drop-multi-select' && (
@@ -205,8 +204,8 @@ const InputField = ({
                         type="button"
                         onClick={() => setOpen(!open)}
                         className="
-                            w-full min-h-[56px] rounded-2xl border border-borderColor
-                            px-5 py-3 bg-white text-left
+                            w-full min-h-[56px] rounded-xl border border-borderColor
+                            px-5 py-3 bg-white text-left capitalize
                             flex items-center justify-between gap-4
                             transition-all duration-300
                             focus:border-primary
@@ -218,12 +217,17 @@ const InputField = ({
                                 value.map((item, index) => (
                                     <span
                                         key={index}
-                                        className="
-                                            px-3 py-1 rounded-full
+                                        className="capitalize
+                                            px-3 py-1 rounded
                                             bg-primary/10
                                             text-primaryDark
                                             text-sm font-medium
                                         "
+                                        // onClick={() =>
+                                        //     handleMultiSelect(
+                                        //         item
+                                        //     )
+                                        // }
                                     >
                                         {
                                             options.find(
@@ -249,8 +253,8 @@ const InputField = ({
                     <div
                         className={`
                             absolute top-full left-0 w-full mt-3 z-50
-                            bg-white rounded-2xl border border-borderColor
-                            shadow-xl overflow-hidden
+                            bg-white rounded-xl border border-borderColor
+                            shadow-xl overflow-hidden capitalize
                             transition-all duration-300 origin-top
                             ${open
                                 ? 'opacity-100 visible scale-100'
@@ -258,11 +262,10 @@ const InputField = ({
                             }
                         `}
                     >
-                        <div className="max-h-64 overflow-y-auto p-2">
+                        <div className="max-h-64 overflow-y-auto p-2  space-y-2">
                             {options.map((item, index) => {
                                 const active =
                                     value?.includes(item.value)
-
                                 return (
                                     <button
                                         key={index}
@@ -274,7 +277,7 @@ const InputField = ({
                                         }
                                         className={`
                                             w-full px-4 py-3 rounded-xl text-left
-                                            transition-all duration-200
+                                            transition-all duration-200 capitalize
                                             flex items-center justify-between
                                             ${active
                                                 ? 'bg-primary/10 text-primaryDark'
@@ -285,7 +288,9 @@ const InputField = ({
                                         {item.label}
 
                                         {active && (
-                                            <div className="w-2 h-2 rounded-full bg-primary" />
+                                            <span className="rounded-full text-primary">
+                                                <RxCross2 />
+                                            </span>
                                         )}
                                     </button>
                                 )
