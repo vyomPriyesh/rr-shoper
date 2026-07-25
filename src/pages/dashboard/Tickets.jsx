@@ -24,7 +24,7 @@ const Tickets = () => {
     const [pagination, setPagination] = useState({ page: 1, limit: 5 })
     const [selectedStatus, setSelectedStatus] = useState(null)
 
-    const { data: { data: allTickets , pagination: paginationData = {}, statusCounts = [] } = {}, isLoading } = useQuery({
+    const { data: { data: allTickets, pagination: paginationData = {}, statusCounts = [] } = {}, isLoading = true, isPending } = useQuery({
         queryKey: ['all-platforms', pagination, selectedStatus],
         queryFn: () => api.post(tickets.all, { ...pagination, status: selectedStatus }),
         enabled: !!user && !!selectedStatus,
@@ -77,7 +77,7 @@ const Tickets = () => {
             </div>
             <div className="bg-white p-2 rounded-lg">
                 <div className="flex flex-col">
-                    {isLoading ? (
+                    {isPending || isLoading ? (
                         <>
                             {Array.from({ length: 5 }).map((_, i) => (
                                 <div className="flex flex-row py-3 px-2 items-center animate-pulse" key={i}>
@@ -103,7 +103,7 @@ const Tickets = () => {
                         </>
                     ) : (
                         <>
-                            {!isLoading && allTickets?.length == 0 && <Empty
+                            {allTickets?.length == 0 && <Empty
                                 image={Empty.PRESENTED_IMAGE_SIMPLE}
                                 description="No tickets found"
                             />}
