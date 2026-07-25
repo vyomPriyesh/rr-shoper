@@ -103,7 +103,7 @@ const Tickets = () => {
                         </>
                     ) : (
                         <>
-                            {allTickets.length == 0 && <Empty
+                            {!isLoading && allTickets.length == 0 && <Empty
                                 image={Empty.PRESENTED_IMAGE_SIMPLE}
                                 description="No tickets found"
                             />}
