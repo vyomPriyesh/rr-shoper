@@ -50,7 +50,8 @@ const PaginationData = ({
     };
 
     return (
-        <div className="flex flex-wrap items-center justify-between gap-4 mt-6">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
+
             {showSizeChanger && (
                 <select
                     value={limit}
@@ -60,7 +61,7 @@ const PaginationData = ({
                             limit: Number(e.target.value),
                         })
                     }
-                    className="border rounded-md px-3 py-2 outline-none"
+                    className="border rounded-md px-3 py-2 outline-none w-full sm:w-auto"
                 >
                     {pageSizeOptions.map((size) => (
                         <option key={size} value={size}>
@@ -70,52 +71,82 @@ const PaginationData = ({
                 </select>
             )}
 
-            <div className="flex items-center gap-2">
-                <button
-                    disabled={page === 1}
-                    onClick={() => onChange({ page: page - 1, limit })}
-                    className="w-9 h-9 flex items-center justify-center rounded disabled:opacity-40"
-                >
-                    <FiChevronLeft />
-                </button>
+            <div className="w-full sm:w-auto overflow-x-auto scrollbar-hide">
+                <div className="flex items-center justify-center gap-1 sm:gap-2 min-w-max">
 
-                {getPages().map((item, index) =>
-                    item === "..." ? (
-                        <span key={index} className="px-2 text-gray-400">
-                            ...
-                        </span>
-                    ) : (
-                        <button
-                            key={item}
-                            onClick={() =>
-                                onChange({
-                                    page: item,
-                                    limit,
-                                })
-                            }
-                            className={`w-9 h-9 rounded-md border transition ${
-                                item === page
-                                    ? "bg-primary text-white border-primary"
-                                    : "border-transparent hover:border-primary text-primary"
-                            }`}
-                        >
-                            {item}
-                        </button>
-                    )
-                )}
+                    <button
+                        disabled={page === 1}
+                        onClick={() =>
+                            onChange({
+                                page: page - 1,
+                                limit,
+                            })
+                        }
+                        className="
+                            w-8 h-8 sm:w-9 sm:h-9
+                            flex items-center justify-center
+                            rounded-md
+                            border
+                            disabled:opacity-40
+                        "
+                    >
+                        <FiChevronLeft size={18} />
+                    </button>
 
-                <button
-                    disabled={page === totalPages}
-                    onClick={() =>
-                        onChange({
-                            page: page + 1,
-                            limit,
-                        })
-                    }
-                    className="w-9 h-9 flex items-center justify-center rounded disabled:opacity-40"
-                >
-                    <FiChevronRight />
-                </button>
+                    {getPages().map((item, index) =>
+                        item === "..." ? (
+                            <span
+                                key={index}
+                                className="px-1 sm:px-2 text-gray-400"
+                            >
+                                ...
+                            </span>
+                        ) : (
+                            <button
+                                key={item}
+                                onClick={() =>
+                                    onChange({
+                                        page: item,
+                                        limit,
+                                    })
+                                }
+                                className={`
+                                    w-8 h-8 sm:w-9 sm:h-9
+                                    rounded-md
+                                    border
+                                    text-sm sm:text-base
+                                    transition
+                                    ${item === page
+                                        ? "bg-primary text-white border-primary"
+                                        : "border-transparent hover:border-primary text-primary"
+                                    }
+                                `}
+                            >
+                                {item}
+                            </button>
+                        )
+                    )}
+
+                    <button
+                        disabled={page === totalPages}
+                        onClick={() =>
+                            onChange({
+                                page: page + 1,
+                                limit,
+                            })
+                        }
+                        className="
+                            w-8 h-8 sm:w-9 sm:h-9
+                            flex items-center justify-center
+                            rounded-md
+                            border
+                            disabled:opacity-40
+                        "
+                    >
+                        <FiChevronRight size={18} />
+                    </button>
+
+                </div>
             </div>
         </div>
     );

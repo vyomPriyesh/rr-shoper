@@ -410,7 +410,7 @@ const Header = () => {
           <div className="flex items-center gap-2 lg:hidden">
 
             {/* Mobile Profile */}
-            <div
+            {user && <div
               ref={profileRef}
               className="relative"
             >
@@ -529,6 +529,7 @@ const Header = () => {
                 </div>
               </div>
             </div>
+            }
 
             {/* Mobile Toggle */}
             <button
