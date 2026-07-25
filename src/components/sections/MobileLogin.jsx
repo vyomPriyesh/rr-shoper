@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import InputField from "../ui/InputField";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "../../config/api";
@@ -25,13 +25,30 @@ const MobileLogin = ({ onClose }) => {
     const [seconds, setSeconds] = useState(30);
     const [open, setOpen] = useState(null);
 
+    const timeoutRef = useRef(null);
+
     useEffect(() => {
         if (user?.token) {
             setOpen(false);
+
+            // clear pending timeout
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+                timeoutRef.current = null;
+            }
         } else {
-            setTimeout(() => setOpen(true), 10000)
+            timeoutRef.current = setTimeout(() => {
+                setOpen(true);
+            }, 10000);
         }
-    }, [user?.token])
+
+        // cleanup on unmount or dependency change
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, [user?.token]);
 
     const { mutate: findUserRefetch } = useMutation({
         mutationFn: async () => await api.get(auth.findCustomer(email)),
