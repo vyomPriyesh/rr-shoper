@@ -1,15 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import api from '../../config/api'
-import apiList from '../../config/apiList'
-import { useToast } from '../../context/ToastContext'
-import { userState } from '../../context/UserContext'
-import PageTitleAddbtn from '../ui/PageTitleAddbtn'
-import { useNavigate } from 'react-router-dom'
-import ButtonUi from '../ui/ButtonUi'
-import { timeAgo } from '../../components/ui/DateDisplay'
-import PaginationData from '../ui/PaginationData'
-import dummyImg from '../../assets/images/dummyImg.jpg'
+import api from '../../../config/api'
+import apiList from '../../../config/apiList'
+import { useToast } from '../../../context/ToastContext'
+import { userState } from '../../../context/UserContext'
+import PageTitleAddbtn from '../../ui/PageTitleAddbtn'
+import { Link, useNavigate } from 'react-router-dom'
+import ButtonUi from '../../ui/ButtonUi'
+import { timeAgo } from '../../../components/ui/DateDisplay'
+import PaginationData from '../../ui/PaginationData'
 import { Empty } from 'antd'
 
 
@@ -111,7 +110,7 @@ const Tickets = () => {
                                 description="No tickets found"
                             />}
                             {allTickets?.map((list, i) => (
-                                <div className="flex flex-col sm:flex-row py-3 px-2 sm:items-center hover:bg-secondary/20 rounded hover:shadow-lg transition-all duration-300 ease-out cursor-pointer bg-secondary/10" key={i}>
+                                <Link to={list?._id} className="flex flex-col sm:flex-row py-3 px-2 sm:items-center hover:bg-secondary/20 rounded hover:shadow-lg transition-all duration-300 ease-out cursor-pointer bg-secondary/10" key={i}>
                                     <div className="sm:w-1/2 flex flex-row items-center gap-3">
                                         <img
                                             className="w-10 h-10 rounded-full"
@@ -143,7 +142,7 @@ const Tickets = () => {
                                             </span>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </>
                     )}

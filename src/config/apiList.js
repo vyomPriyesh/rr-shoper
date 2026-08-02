@@ -27,7 +27,8 @@ const apiList = () => {
         tickets: {
             getTicketForm: (id) => `ticket-form/by-ticket-title/${id}`,
             add: `ticket/add-ticket`,
-            all: 'allTicket'
+            all: 'allTicket',
+            view: (id) => `ticket/${id}`
         }
     }
 }

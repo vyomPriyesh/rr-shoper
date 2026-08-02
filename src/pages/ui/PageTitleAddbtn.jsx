@@ -1,7 +1,7 @@
 import React from 'react'
 import ButtonUi from './ButtonUi'
 
-const PageTitleAddbtn = ({ title, add, addClick, addText, className, otherButtons = [], ...rest }) => {
+const PageTitleAddbtn = ({ title, add, addClick, addText, className, otherButtons = [], displayStatus, ...rest }) => {
     return (
         <div className="flex justify-between gap-5">
             <h2 className='text-xl font-semibold'>{title}</h2>
@@ -14,6 +14,7 @@ const PageTitleAddbtn = ({ title, add, addClick, addText, className, otherButton
                 {add &&
                     <ButtonUi disabled={rest.disabled} onClick={addClick} type={rest.type} text={addText || 'Add'} {...rest} className='text-sm md:!px-4 !px-3' />
                 }
+                {displayStatus && displayStatus}
             </div>
         </div>
     )

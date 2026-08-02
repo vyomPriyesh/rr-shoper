@@ -68,12 +68,6 @@ const ImagesUploadUi = ({ multiple = false, onChange, value, imageLimit = 1 }) =
         },
     });
 
-    const handleChange = ({ fileList }) => {
-        if (!fileList.length) return;
-
-        imageHandle({ files: fileList });
-    };
-
     const handlePreview = (file) => {
         setPreview({
             open: true,

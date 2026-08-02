@@ -75,9 +75,7 @@ const AddTickets = () => {
             ...(multiple && {
                 [`add_mutiple_${name}`]: true,
             }),
-            ...(type =='textarea' && {
-                [`textarea_${name}`]: value
-            })
+            [`${type}_${name}_for_manage`]: value
         }))
 
         const isFieldEmpty = ({ type, multiple, value }) => {

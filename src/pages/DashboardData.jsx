@@ -6,8 +6,9 @@ import MyProfile from './dashboard/MyProfile'
 import MyService from './dashboard/MyService'
 import { MdOutlineDashboard } from 'react-icons/md'
 import DashboardPage from './dashboard/DashboardPage'
-import Tickets from './dashboard/Tickets'
+import Tickets from './dashboard/tickets/Tickets'
 import AddTickets from './dashboard/tickets/AddTickets'
+import ViewTicket from './dashboard/tickets/ViewTicket'
 
 
 const DashboardData = () => {
@@ -56,6 +57,7 @@ const DashboardData = () => {
                         <Route path="/my-service" element={<MyService />} />
                         <Route path="/tickets" element={<Tickets />} />
                         <Route path="/tickets/add-ticket" element={<AddTickets />} />
+                        <Route path="/tickets/:id" element={<ViewTicket />} />
                     </Routes>
                 </div>
             </div>
