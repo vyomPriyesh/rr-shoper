@@ -117,7 +117,7 @@ const ContactSection = () => {
                         </div>
                         {/* Address */}
                         <div className="flex items-start gap-5">
-                            <div className="md:w-14 md:h-14 w-12 h-12 text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
+                            <div className="md:w-14 md:h-14 w-12 h-12 aspect-square text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
                                 <FaMapMarkerAlt />
                             </div>
 
@@ -127,9 +127,9 @@ const ContactSection = () => {
                                 </h4>
 
                                 <p className=" text-paragraph text-sm md:text-base leading-7">
-                                    123 Business Park, Sector 45
+                                    Amiras hotel pase, Time Shoppers, 216, Varachha Main Rd, Bhagavan Nagar, Sarthana Jakat Naka, Sarthi Society,
                                     <br />
-                                    Surat, Gujarat 395006
+                                    Nana Varachha, Surat, Gujarat 395006
                                 </p>
                             </div>
                         </div>
