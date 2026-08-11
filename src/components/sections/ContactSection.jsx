@@ -28,7 +28,7 @@ const ContactSection = () => {
     })
 
     return (
-        <section className="pb-10 pt-6 px-4 lg:px-8">
+        <div className="pb-10 pt-6 px-4 lg:px-8">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
                 {/* Left Content */}
@@ -137,7 +137,7 @@ const ContactSection = () => {
                 </div>
 
                 {/* Right Form */}
-                <div className="bg-white rounded-[32px] p-6 lg:p-6 shadow-[0_10px_40px_rgba(176,106,141,0.08)] border border-borderColor">
+                <section className="bg-white rounded-[32px] p-6 lg:p-6 shadow-[0_10px_40px_rgba(176,106,141,0.08)] border border-borderColor">
 
                     <h3 className="text-3xl font-bold text-heading">
                         Send Us a Message
@@ -285,9 +285,9 @@ const ContactSection = () => {
                             Contact Support
                         </button>
                     </form>
-                </div>
+                </section>
             </div>
-        </section>
+        </div>
     )
 }
 

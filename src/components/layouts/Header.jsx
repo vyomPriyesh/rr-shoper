@@ -140,27 +140,27 @@ const Header = () => {
     });
   };
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+  //   const handleScroll = () => {
+  //     setIsScrolled(window.scrollY > 50);
+  //   };
 
-    window.addEventListener(
-      "scroll",
-      handleScroll
-    );
+  //   window.addEventListener(
+  //     "scroll",
+  //     handleScroll
+  //   );
 
-    return () => {
+  //   return () => {
 
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
+  //     window.removeEventListener(
+  //       "scroll",
+  //       handleScroll
+  //     );
 
-    };
+  //   };
 
-  }, []);
+  // }, []);
 
   useEffect(() => {
 
