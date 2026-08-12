@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Badge from '../ui/Badge'
 import {
     FaArrowRight,
@@ -15,12 +15,16 @@ import api from '../../config/api'
 import { userState } from '../../context/UserContext'
 import { StateStore } from '../../context/StateStoreContext'
 import { BounceAnimation, SlideAnimation, SlideLeftByChar, WaveTextAnimation } from 'priyesh-bhanderi-react-packages'
+import { useNavigate } from 'react-router-dom'
+import Lenis from "lenis";
 
 const Hero = () => {
 
     const { platforms, images } = apiList();
     const { user } = userState();
     const { platFormData, platFormLDataoading: isLoading } = StateStore();
+
+    const navigate = useNavigate();
 
     const btnProps = {
         gap: 1,
@@ -67,6 +71,37 @@ const Hero = () => {
         },
     }
 
+    const lenisRef = useRef(null);
+
+    useEffect(() => {
+        const lenis = new Lenis({
+            duration: 1.2,
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        lenisRef.current = lenis;
+
+        const raf = (time) => {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        };
+
+        requestAnimationFrame(raf);
+
+        return () => {
+            lenis.destroy();
+        };
+    }, []);
+
+    const handleMenuClick = () => {
+        lenisRef.current?.scrollTo(0, {
+            duration: 1.2,
+        });
+    };
+
     return (
         <section className="relative flex items-center pt-5 md:pb-0 pb-10">
             <div className="container mx-auto px-2 md:px-4 sm:px-6 lg:px-8 md:py-4">
@@ -107,6 +142,7 @@ const Hero = () => {
                                 {...btnProps}
                                 bgColor="#A36081"
                                 color="white"
+                                onClick={() => { handleMenuClick(), navigate('/contact') }}
                                 className="w-full sm:w-auto justify-center shadow-xl hover:scale-105 transition-all duration-300"
                             >
                                 <FaPeopleCarry size={18} />
@@ -116,6 +152,7 @@ const Hero = () => {
                                 {...btnProps}
                                 bgColor="white"
                                 color="#1A1A1A"
+                                onClick={() => { handleMenuClick(), navigate('/services') }}
                                 className="w-full sm:w-auto justify-center border-2 border-primary/30 shadow-xl hover:bg-primary/5 transition-all duration-300"
                             >
                                 <FaArrowRight size={14} className="text-primary" />

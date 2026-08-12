@@ -123,13 +123,31 @@ const ContactSection = () => {
 
                             <div>
                                 <h4 className="text-base md:text-lg font-semibold text-heading">
-                                    Address
+                                    Office Address
                                 </h4>
 
                                 <p className=" text-paragraph text-sm md:text-base leading-7">
                                     Amiras hotel pase, Time Shoppers, 216, Varachha Main Rd, Bhagavan Nagar, Sarthana Jakat Naka, Sarthi Society,
                                     <br />
                                     Nana Varachha, Surat, Gujarat 395006
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="flex items-start gap-5">
+                            <div className="md:w-14 md:h-14 w-12 h-12 aspect-square text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
+                                <FaMapMarkerAlt />
+                            </div>
+
+                            <div>
+                                <h4 className="text-base md:text-lg font-semibold text-heading">
+                                    GST Address
+                                </h4>
+
+                                <p className=" text-paragraph text-sm md:text-base leading-7">
+                                    3RD FLOOR,SHOP NO.334, TIMES TRADE CENTER, 
+                                    <br />
+                                    Surat, Gujarat, 395010
                                 </p>
                             </div>
                         </div>

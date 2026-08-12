@@ -61,10 +61,10 @@ const Header = () => {
       label: "Platforms",
       to: "/platforms",
     },
-    {
-      label: "About",
-      to: "/about",
-    },
+    // {
+    //   label: "About",
+    //   to: "/about",
+    // },
     {
       label: "Contact",
       to: "/contact",
