@@ -25,6 +25,7 @@ const RefundCancellationPolicies = () => {
                     'Cancellation requests may only be considered before service processing begins',
                     'Once work has been initiated, cancellation requests will not be accepted',
                     'Any approved cancellation will be subject to management review and service status'
+                    'Approved refunds will be processed within 5-7 business days.',
                 ]
             },
             {
