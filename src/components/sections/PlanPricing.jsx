@@ -81,7 +81,7 @@ const PlanPricing = () => {
     })
 
     const purchaseData = useCallback((package_id) => {
-        const packages = user?.package.find(list => list.package_id == package_id)
+        const packages = user?.package?.find(list => list.package_id == package_id)
         const expire_time = packages?.package_expire ? `Expired At ${unixDisplayDate(packages?.package_expire)}` : null
 
         return {
