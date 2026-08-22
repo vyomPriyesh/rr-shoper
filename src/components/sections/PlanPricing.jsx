@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import SectionsUI from '../layouts/SectionsUI'
 import { userState } from '../../context/UserContext'
 import apiList from '../../config/apiList';
@@ -7,6 +7,7 @@ import api from '../../config/api';
 import { useParams } from 'react-router-dom';
 import { useToast } from '../../context/ToastContext';
 import Loader from '../ui/Loader';
+import { unixDisplayDate } from '../ui/DateDisplay';
 
 const PlanPricing = () => {
 
@@ -57,9 +58,7 @@ const PlanPricing = () => {
         }
     }, [platformName, pricingData])
 
-    console.log(pricingData)
-
-    const { mutate: requestPaymentHandle, isFetching: requestPaymentFetching } = useMutation({
+    const { mutate: requestPaymentHandle, isPending: requestPaymentPending } = useMutation({
         mutationFn: (payload) => api.post(payments.requestPayment, payload),
         onSuccess: ({ data }) => {
 
@@ -80,6 +79,18 @@ const PlanPricing = () => {
             showToast(message, "error");
         }
     })
+
+    const purchaseData = useCallback((package_id) => {
+        const packages = user?.package.find(list => list.package_id == package_id)
+        const expire_time = packages?.package_expire ? `Expired At ${unixDisplayDate(packages?.package_expire)}` : null
+
+        return {
+            not_purchased: !packages,
+            expire_time: packages?.package_expire_status ? 'Renew Package' : packages ? expire_time : null
+
+        }
+
+    }, [user?.package, unixDisplayDate])
 
     const Content = () => {
         return (
@@ -174,7 +185,7 @@ const PlanPricing = () => {
                             key={index}
                             className={`
                                 relative overflow-hidden rounded-[28px]
-                                p-6 sm:p-7 lg:p-8
+                                p-6
                                 transition-all duration-500
                                 flex flex-col h-full
 
@@ -198,15 +209,20 @@ const PlanPricing = () => {
 
                             {/* Badge */}
                             {plan?.popular && (
-                                <div className="absolute top-5 right-5 bg-white text-primary text-xs font-bold px-3 py-1 rounded-full">
+                                <div className="absolute top-5 right-6 bg-white text-primary text-xs font-bold px-3 py-1 rounded-full">
                                     Most Popular
                                 </div>
                             )}
 
                             {/* Title */}
-                            <h3 className="text-2xl font-bold mb-4 capitalize">
-                                {plan.name}
-                            </h3>
+                            <div className={`flex justify-between flex-row mb-5 place-items-center ${plan?.popular ? 'mt-7' : ''}`}>
+                                <h3 className="text-2xl font-bold capitalize">
+                                    {plan.name}
+                                </h3>
+                                {purchaseData(plan.package_id)?.expire_time &&
+                                    <span className={`text-sm font-medium  ${plan?.popular ? 'bg-white text-primary' : ' text-white bg-primary'}  px-2 py-1 rounded-xl`}>{purchaseData(plan.package_id)?.expire_time}</span>
+                                }
+                            </div>
 
                             {/* Price */}
                             <div className="flex items-end gap-1 mb-7">
@@ -254,33 +270,32 @@ const PlanPricing = () => {
                             </div>
 
                             {/* Button */}
-                            <div className="mt-auto">
-
-                                <button
-                                    onClick={() => requestPaymentHandle({ amount: plan.price, package_id: plan.package_id })}
-                                    className={`
+                            {purchaseData(plan.package_id)?.not_purchased &&
+                                <div className="mt-auto">
+                                    <button
+                                        onClick={() => requestPaymentHandle({ amount: plan.price, package_id: plan.package_id })}
+                                        className={`
                                         w-full py-3.5 rounded-2xl
                                         text-sm sm:text-base font-semibold
                                         transition-all duration-300
 
                                         ${plan?.popular
-                                            ? `
+                                                ? `
                                                     bg-white text-primary
                                                     hover:bg-[#F8EEF3]
                                                 `
-                                            : `
+                                                : `
                                                     bg-primary text-white
                                                     hover:bg-primaryDark
                                                 `
-                                        }
+                                            }
                                     `}
-                                >
-                                    Get Started
-                                </button>
-
-                            </div>
+                                    >
+                                        Get Started
+                                    </button>
+                                </div>
+                            }
                         </div>
-
                     ))}
                 </div>
             </>
@@ -289,7 +304,7 @@ const PlanPricing = () => {
 
     return (
         <>
-            {requestPaymentFetching && <Loader />}
+            {requestPaymentPending && <Loader />}
             <SectionsUI
                 topic="Plans & Pricing"
                 heading="Choose Your Marketplace Plan"

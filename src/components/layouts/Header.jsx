@@ -89,6 +89,7 @@ const Header = () => {
 
       return response.data.data.result;
     },
+    refetchInterval: 60 * 60 * 1000,
     enabled: !!user?.token,
   });
 

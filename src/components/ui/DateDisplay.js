@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export const timeAgo = (date) => {
     const now = new Date();
     const past = new Date(date);
@@ -28,3 +30,15 @@ export const timeAgo = (date) => {
 
     return "Just now";
 };
+
+export const displayDate = (date) => {
+    return dayjs(date).format('DD-MM-YYYY')
+}
+
+export const displayDateTime = (date) => {
+    return dayjs(date).format('DD-MM-YYYY hh:mm A')
+}
+
+export const unixDisplayDate = (date) => {
+    return dayjs.unix(date).format("DD MMM YYYY hh:mm A")
+}
