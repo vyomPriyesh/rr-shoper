@@ -85,7 +85,7 @@ const PlanPricing = () => {
         const expire_time = packages?.package_expire ? `Expired At ${unixDisplayDate(packages?.package_expire)}` : null
 
         return {
-            not_purchased: packages?.package_expire_status ? false : !packages,
+            not_purchased: packages?.package_expire_status ? true : !packages,
             expire_time: packages?.package_expire_status ? 'Renew Package' : packages ? expire_time : null
 
         }
