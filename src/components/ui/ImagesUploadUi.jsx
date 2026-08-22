@@ -30,6 +30,7 @@ const ImagesUploadUi = ({ multiple = false, onChange, value, imageLimit = 1 }) =
             });
 
             return api.post(images.upload, formData, {
+                baseURL: `${import.meta.env.VITE_IMAGES_URL}/api/`,
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -118,7 +119,7 @@ const ImagesUploadUi = ({ multiple = false, onChange, value, imageLimit = 1 }) =
 
     return (
         <div>
-        {isPending &&<Loader />}
+            {isPending && <Loader />}
             <Upload
                 listType="picture-card"
                 multiple={multiple}

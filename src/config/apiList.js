@@ -29,6 +29,11 @@ const apiList = () => {
             add: `ticket/add-ticket`,
             all: 'allTicket',
             view: (id) => `ticket/${id}`
+        },
+
+        payments: {
+            requestPayment: 'payment/initiate',
+            status: (id) => `payment/status/${id}`
         }
     }
 }

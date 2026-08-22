@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import api from '../../../config/api'
 import apiList from '../../../config/apiList'
 import { useToast } from '../../../context/ToastContext'

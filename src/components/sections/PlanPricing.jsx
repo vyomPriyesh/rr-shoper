@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react'
 import SectionsUI from '../layouts/SectionsUI'
 import { userState } from '../../context/UserContext'
 import apiList from '../../config/apiList';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import api from '../../config/api';
 import { useParams } from 'react-router-dom';
+import { useToast } from '../../context/ToastContext';
+import Loader from '../ui/Loader';
 
 const PlanPricing = () => {
 
     const { user } = userState();
-    const { packages, images } = apiList();
+    const { packages, images, payments } = apiList();
+    const { showToast } = useToast();
 
     const { platformName } = useParams();
 
@@ -33,6 +36,7 @@ const PlanPricing = () => {
                     }
 
                     acc[item.platform.name].push({
+                        package_id: item._id,
                         name: item.name,
                         price: item.price,
                         services: item.services,
@@ -52,6 +56,30 @@ const PlanPricing = () => {
             setSelectedPlatform(platformName)
         }
     }, [platformName, pricingData])
+
+    console.log(pricingData)
+
+    const { mutate: requestPaymentHandle, isFetching: requestPaymentFetching } = useMutation({
+        mutationFn: (payload) => api.post(payments.requestPayment, payload),
+        onSuccess: ({ data }) => {
+
+            const redirectUrl = data?.data?.result?.redirectUrl;
+
+            if (redirectUrl) {
+                // window.open(redirectUrl, "_blank");
+                window.location.href = redirectUrl;
+            } else {
+                showToast(
+                    "Unable to start payment",
+                    "error"
+                );
+            }
+        },
+        onError: ({ response }) => {
+            const message = response.data.error.error_message
+            showToast(message, "error");
+        }
+    })
 
     const Content = () => {
         return (
@@ -229,6 +257,7 @@ const PlanPricing = () => {
                             <div className="mt-auto">
 
                                 <button
+                                    onClick={() => requestPaymentHandle({ amount: plan.price, package_id: plan.package_id })}
                                     className={`
                                         w-full py-3.5 rounded-2xl
                                         text-sm sm:text-base font-semibold
@@ -259,13 +288,16 @@ const PlanPricing = () => {
     }
 
     return (
-       <SectionsUI
-            topic="Plans & Pricing"
-            heading="Choose Your Marketplace Plan"
-            text="Pricing changes based on marketplace platforms. Select your platform to explore custom plans."
-            content={<Content />}
-            id="platforms"
-        />
+        <>
+            {requestPaymentFetching && <Loader />}
+            <SectionsUI
+                topic="Plans & Pricing"
+                heading="Choose Your Marketplace Plan"
+                text="Pricing changes based on marketplace platforms. Select your platform to explore custom plans."
+                content={<Content />}
+                id="platforms"
+            />
+        </>
     )
 }
 

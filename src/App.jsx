@@ -15,6 +15,7 @@ import RefundCancellationPolicies from "./pages/RefundCancellationPolicies"
 import TermsConditions from "./pages/TermsConditions"
 import DashboardData from "./pages/DashboardData"
 import ProtectedRoute from "./protecttedRoute/ProtectedRoute"
+import PaymentStatus from "./pages/PaymentStatus"
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicies />} />
             <Route path="/refund-cancellation-policy" element={<RefundCancellationPolicies />} />
             <Route path="/terms-and-conditions" element={<TermsConditions />} />
+            <Route path="/payment/status/:id" element={<PaymentStatus />} />
           </Routes>
         </div>
         <Footer />
