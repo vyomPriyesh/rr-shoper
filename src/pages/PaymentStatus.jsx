@@ -20,12 +20,12 @@ const PaymentStatus = () => {
 
     const queryClient = useQueryClient();
 
-    useEffect(() => {
-        if (isFetching) return
-        queryClient.invalidateQueries({
-            queryKey: ["profile", user?.token],
-        });
-    }, [isFetching, isFetching])
+    // useEffect(() => {
+    //     if (isFetching) return
+    //     queryClient.invalidateQueries({
+    //         queryKey: ["profile", user?.token],
+    //     });
+    // }, [isFetching, isFetching])
 
     return (
         <div>
