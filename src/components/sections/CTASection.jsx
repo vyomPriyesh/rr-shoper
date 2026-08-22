@@ -30,10 +30,7 @@ const CTASection = () => {
                     </p>
 
                     {/* Buttons */}
-                    <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-
-                        {/* Primary Button */}
-                        {/* Primary Button */}
+                    {/* <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                         <button
                             className="
         h-[58px]
@@ -58,8 +55,6 @@ const CTASection = () => {
                             <HiOutlineCalendarDays className="text-xl" />
                            Get Seller Consultation
                         </button>
-
-                        {/* Secondary Button */}
                         <button
                             className="
         h-[58px]
@@ -90,7 +85,7 @@ const CTASection = () => {
                             <FaWhatsapp className="text-xl" />
                            Contact Support
                         </button>
-                    </div>
+                    </div>*/}
                 </div>
             </div>
         </section>
