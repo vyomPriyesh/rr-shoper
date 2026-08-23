@@ -24,7 +24,7 @@ function App() {
       <BrowserRouter>
         <MobileLogin />
         <Header />
-        <div className="full-mountain-image bg-gradient-to-br from-[#fceef6] via-[#faf0f6] to-[#fcedf5] pt-20">
+        <div className="full-mountain-image bg-gradient-to-br from-[#fceef6] via-[#faf0f6] to-[#fcedf5]">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route

@@ -14,10 +14,10 @@ import ViewTicket from './dashboard/tickets/ViewTicket'
 const DashboardData = () => {
 
     const links = [
-        {
-            name: "Dashboard", to: "dashboard",
-            icon: MdOutlineDashboard
-        },
+        // {
+        //     name: "Dashboard", to: "dashboard",
+        //     icon: MdOutlineDashboard
+        // },
         {
             name: "My Profile", to: "dashboard/my-profile",
             icon: FaUser

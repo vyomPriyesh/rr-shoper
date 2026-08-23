@@ -1,31 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import Logo from "../sections/Logo";
-
 import {
-  HiMenu,
-  HiX,
-} from "react-icons/hi";
-
-import {
-  Link,
-  NavLink,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
-import { MdOutlineDashboard } from "react-icons/md";
-import {
+  FaBars,
+  FaTimes,
   FaChevronDown,
-  FaRegUser,
+  FaUser,
+  FaSignOutAlt,
 } from "react-icons/fa";
-
-import CommonButton from "../ui/CommonButton";
-import LanguageSwitcher from "../ui/LanguageSwitcher";
+import Logo from "../sections/Logo";
+import { Link, NavLink } from "react-router-dom";
 import { userState } from "../../context/UserContext";
-import { useQuery } from "@tanstack/react-query";
 import apiList from "../../config/apiList";
-import api from "../../config/api";
 import { useToast } from "../../context/ToastContext";
-import Lenis from "lenis";
+import { useQuery } from "@tanstack/react-query";
+import api from "../../config/api";
 
 const Header = () => {
 
@@ -33,20 +20,10 @@ const Header = () => {
   const { auth } = apiList();
   const { showToast } = useToast();
 
-  const navigate = useNavigate();
-  const lenisRef = useRef(null);
-
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const [profileOpen, setProfileOpen] =
-    useState(false);
-
-  const [isScrolled, setIsScrolled] =
-    useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const profileRef = useRef(null);
-
-  const { pathname } = useLocation();
 
   const NAV_LINKS = [
     {
@@ -70,13 +47,6 @@ const Header = () => {
       to: "/contact",
     },
   ];
-
-  const btnProps = {
-    bgColor: "#A36081",
-    color: "#fff",
-    borderRadius: "999px",
-    variant: "contained",
-  };
 
   const { data: profileData, error: profileErrorData, isError: profileError } = useQuery({
     queryKey: ["profile", user?.token],
@@ -111,491 +81,163 @@ const Header = () => {
     }
   }, [profileData, profileError])
 
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    lenisRef.current = lenis;
-
-    const raf = (time) => {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    };
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
-  const handleMenuClick = () => {
-    lenisRef.current?.scrollTo(0, {
-      duration: 1.2,
-    });
-  };
-
-  // useEffect(() => {
-
-  //   const handleScroll = () => {
-  //     setIsScrolled(window.scrollY > 50);
-  //   };
-
-  //   window.addEventListener(
-  //     "scroll",
-  //     handleScroll
-  //   );
-
-  //   return () => {
-
-  //     window.removeEventListener(
-  //       "scroll",
-  //       handleScroll
-  //     );
-
-  //   };
-
-  // }, []);
-
-  useEffect(() => {
-
-    const handleClickOutside = (
-      event
-    ) => {
-
-      if (
-        profileRef.current &&
-        !profileRef.current.contains(
-          event.target
-        )
-      ) {
-        setProfileOpen(false);
-      }
-    };
-
-    document.addEventListener(
-      "click",
-      handleClickOutside
-    );
-
-    return () => {
-
-      document.removeEventListener(
-        "click",
-        handleClickOutside
-      );
-
-    };
-
-  }, []);
-
-  const handleProfileToggle = (
-    e
-  ) => {
-
-    e.stopPropagation();
-
-    setProfileOpen((prev) => !prev);
-
-  };
-
-  const handleCloseDropdown = () => {
-    setProfileOpen(false);
-  };
+  // Close profile dropdown when clicking outside
 
   const linksClass = `
     relative text-[#000000]
     font-medium transition-all duration-300
     cursor-pointer hover:text-[#A36081]
-
     after:absolute after:bottom-0 after:left-0
     after:h-0.5 after:bg-[#A36081]
     after:w-0 after:transition-all
-    after:duration-300 after:ease-in-out
+    after:duration-300 after:ease-in-out hover:after:w-full`;
 
-    hover:after:w-full
-  `;
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(event.target)
+      ) {
+        setProfileOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+    setProfileOpen(false);
+  };
 
   return (
-    <header
-      className={`
-        ${menuOpen
-          ? isScrolled
-            ? "fixed"
-            : ""
-          : "fixed"
-        }
-        left-0 right-0 z-50
-        bg-[#FFFFFF]/95 backdrop-blur-md header_animation
-      `}
-    >
-
-      <div className="container mx-auto md:px-5 px-2">
-
-        <nav className="flex items-center justify-between md:h-20 h-14">
-
-          {/* Logo */}
-          <div>
-            <Logo />
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-8">
-
-            {/* Nav Links */}
-            <div className="flex items-center gap-8 text-nowrap">
-
-              {NAV_LINKS.map(
-                ({ label, to }) => (
-                  <NavLink
-                    key={to}
-                    to={to}
-                    onClick={handleMenuClick}
-                    className={({
-                      isActive,
-                    }) =>
-                      `
-                        ${linksClass}
-
-                        ${isActive
-                        ? "text-primary after:w-full"
-                        : ""
-                      }
-                      `
-                    }
-                  >
-                    {label}
-                  </NavLink>
-                )
-              )}
-            </div>
-
-            {/* <LanguageSwitcher /> */}
-
-            {/* Desktop Profile */}
-            {user &&
-              <div
-                ref={profileRef}
-                className="relative"
-              >
-
-                <button
-                  onClick={
-                    handleProfileToggle
+    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white">
+      <div className="mx-auto container flex md:h-20 h-14 items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-8">
+          <Logo />
+        </div>
+        <div className="flex items-center md:gap-10">
+          <nav className="hidden items-center gap-10 lg:flex">
+            {NAV_LINKS.map(
+              ({ label, to }) => (
+                <NavLink key={to} to={to}
+                  // onClick={handleMenuClick}
+                  className={({
+                    isActive,
+                  }) =>
+                    `${linksClass} ${isActive ? "text-primary after:w-full" : ""}`
                   }
-                  className="
-                  flex items-center gap-3
-                  transition-all duration-300
-                "
                 >
-
-                  {/* Avatar */}
-                  <img
-                    className="
-                    w-10 h-10 rounded-full
-                    flex items-center
-                    justify-center
-                    text-sm font-semibold
-                  "
-                    src={user?.image || `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${user?.name}`}
-                  />
-
-                  {/* Name */}
-                  <div className="text-left">
-
-                    <p
-                      className="
-                      text-sm font-semibold capitalize
-                      text-heading leading-none
-                    "
-                    >
-                      {user?.name || user?.email || user?.mobile}
-                    </p>
-
-                  </div>
-
-                  {/* Arrow */}
-                  <FaChevronDown
-                    className={`
-                    text-sm
-                    transition-all duration-300
-
-                    ${profileOpen
-                        ? "rotate-180"
-                        : ""
-                      }
-                  `}
-                  />
-                </button>
-
-                {/* Dropdown */}
-                <div
-                  className={`
-                  absolute right-0 top-[120%]
-                  w-[220px]
-
-                  rounded-2xl overflow-hidden
-
-                  bg-white
-                  border border-[#E8DDE3]
-
-                  shadow-[0_10px_40px_rgba(0,0,0,0.08)]
-
-                  transition-all duration-300
-                  origin-top-right
-
-                  ${profileOpen
-                      ? `
-                          opacity-100 visible
-                          scale-100 translate-y-0
-                        `
-                      : `
-                          opacity-0 invisible
-                          scale-95 -translate-y-2
-                          pointer-events-none
-                        `
-                    }
-                `}
-                >
-
-                  <div className="p-2">
-                    <Link
-                      to="/dashboard"
-                      onClick={handleCloseDropdown}
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-heading hover:bg-[#F8F1F5] hover:text-primary transition-all duration-300"
-                    >
-                      <MdOutlineDashboard className="text-lg" />
-                      Dashboard
-                    </Link>
-                    <button
-                      onClick={() => {
-                        logout();
-                        handleCloseDropdown();
-
-                        // logout logic
-
-                      }}
-                      className="
-                      w-full text-left
-
-                      flex items-center gap-3
-
-                      px-4 py-3 rounded-xl
-
-                      text-sm font-medium
-                      text-red-500
-
-                      hover:bg-red-50
-
-                      transition-all duration-300
-                    "
-                    >
-                      <HiX className="text-lg" />
-
-                      Logout
-                    </button>
-
-                  </div>
-                </div>
-              </div>
-            }
-          </div>
-
-          {/* Mobile Right */}
-          <div className="flex items-center gap-2 lg:hidden">
-
-            {/* Mobile Profile */}
-            {user && <div
-              ref={profileRef}
-              className="relative"
-            >
-
+                  {label}
+                </NavLink>
+              )
+            )}
+          </nav>
+          {user &&
+            <div ref={profileRef} className="relative">
               <button
-                onClick={
-                  handleProfileToggle
-                }
-                className="
-                  w-10 h-10 rounded-full
-                  bg-primary text-white
-
-                  flex items-center
-                  justify-center
-                "
+                type="button"
+                onClick={() => setProfileOpen((prev) => !prev)}
+                className="flex items-center gap-3 rounded-lg p-1.5 transition hover:bg-gray-100"
               >
-                <FaRegUser />
+                <img src={user?.image || `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${user?.name}`}
+                  alt="Profile"
+                  className="h-9 w-9 rounded-full object-cover"
+                />
+
+                <div className="hidden text-left sm:block">
+                  <p className="text-sm font-semibold text-gray-900">
+                    {user?.name}
+                  </p>
+                </div>
+
+                <FaChevronDown
+                  className={`hidden text-sm text-gray-500 transition-transform duration-300 sm:block ${profileOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                />
               </button>
 
-              {/* Mobile Dropdown */}
+              {/* PROFILE DROPDOWN */}
               <div
-                className={`
-                  absolute right-0 top-[120%]
-                  w-[220px]
-
-                  rounded-2xl overflow-hidden
-
-                  bg-white
-                  border border-[#E8DDE3]
-
-                  shadow-[0_10px_40px_rgba(0,0,0,0.08)]
-
-                  transition-all duration-300
-                  origin-top-right
-
-                  ${profileOpen
-                    ? `
-                          opacity-100 visible
-                          scale-100 translate-y-0
-                        `
-                    : `
-                          opacity-0 invisible
-                          scale-95 -translate-y-2
-                          pointer-events-none
-                        `
-                  }
-                `}
+                className={`absolute right-0 z-10 top-full mt-2 w-56 origin-top-right overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl transition-all duration-200 ease-out ${profileOpen
+                  ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
+                  : "pointer-events-none -translate-y-2 scale-95 opacity-0"
+                  }`}
               >
-
-                {/* User Info */}
-                {/* <div
-                  className="
-                    px-4 py-4
-                    border-b border-[#F1E5EB]
-                  "
-                >
-
-                  <p
-                    className="
-                      text-sm font-semibold
-                      text-heading capitalize
-                    "
-                  >
-                     {user?.name || user?.mobile}
+                <div className="border-b border-gray-100 px-4 py-3 sm:hidden">
+                  <p className="font-semibold text-gray-900">
+                    {user?.name}
                   </p>
-
-                  <p
-                    className="
-                      text-xs text-paragraph capitalize
-                      mt-1
-                    "
-                  >
-                     {user?.name || user?.email}
-                  </p>
-
-                </div> */}
-
-                <div className="p-2">
-
+                </div>
+                <div className="py-2">
                   <Link
-                    to="/dashboard"
-                    onClick={handleCloseDropdown}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-heading hover:bg-[#F8F1F5] hover:text-primary transition-all duration-300"
+                    to="/dashboard/my-profile"
+                    className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm text-gray-700 transition hover:bg-gray-100"
                   >
-                    <MdOutlineDashboard className="text-lg" />
-                    Dashboard
+                    <FaUser className="text-gray-500" />
+                    My Profile
                   </Link>
+                  <div className="my-2 border-t border-gray-100" />
                   <button
-                    onClick={() => {
-                      logout();
-                      handleCloseDropdown();
-
-                      // logout logic
-
-                    }}
-                    className="
-                      w-full text-left
-
-                      flex items-center gap-3
-
-                      px-4 py-3 rounded-xl
-
-                      text-sm font-medium
-                      text-red-500
-
-                      hover:bg-red-50
-
-                      transition-all duration-300
-                    "
+                    type="button"
+                    onClick={handleLogout}
+                    className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-red-600 transition hover:bg-red-50"
                   >
-                    <HiX className="text-lg" />
-
+                    <FaSignOutAlt />
                     Logout
                   </button>
-
                 </div>
               </div>
             </div>
-            }
+          }
 
-            {/* Mobile Toggle */}
-            <button
-              className="p-2 pe-0"
-              onClick={() =>
-                setMenuOpen(!menuOpen)
-              }
+          {/* MOBILE MENU BUTTON */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-600 transition hover:bg-gray-100 lg:hidden"
+          >
+            <div
+              className={`transition-transform duration-300 ${mobileMenuOpen ? "rotate-180" : "rotate-0"
+                }`}
             >
-              {
-                menuOpen
-                  ? <HiX size={28} />
-                  : <HiMenu size={28} />
-              }
-            </button>
-          </div>
-        </nav>
+              {mobileMenuOpen ? (
+                <FaTimes size={22} />
+              ) : (
+                <FaBars size={22} />
+              )}
+            </div>
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* MOBILE MENU WITH OPEN / CLOSE ANIMATION */}
       <div
-        className={`
-          lg:hidden bg-[#FFFFFF]
-
-          shadow-xl overflow-hidden
-
-          transition-all duration-300
-
-          ${menuOpen
-            ? `
-                  max-h-[500px]
-                  border-b border-[#EDEDED]
-                `
-            : "max-h-0"
-          }
-        `}
+        className={`overflow-hidden bg-white transition-[max-height,opacity,transform] duration-300 ease-in-out lg:hidden ${mobileMenuOpen
+          ? "max-h-96 translate-y-0 border-t border-gray-200 opacity-100"
+          : "max-h-0 -translate-y-2 border-t border-transparent opacity-0"
+          }`}
       >
-
-        <div className="flex flex-col gap-4 px-5 py-6">
-
+        <nav className="space-y-1 px-4 py-4 flex flex-col gap-3">
           {NAV_LINKS.map(
             ({ label, to }) => (
-
-              <Link
-                key={to}
-                to={to}
-                onClick={() =>
-                  setMenuOpen(false)
+              <NavLink key={to} to={to}
+                // onClick={handleMenuClick}
+                className={({
+                  isActive,
+                }) =>
+                  `${linksClass} ${isActive ? "text-primary after:w-full" : ""} w-fit`
                 }
-                className={linksClass}
               >
                 {label}
-              </Link>
-
+              </NavLink>
             )
           )}
-
-          <CommonButton bgColor="#A36081"
-            color="white"
-            className="w-full sm:w-auto justify-center shadow-xl hover:scale-105 transition-all duration-300"
-            text="Book Consultation"
-            {...btnProps}
-          />
-
-          {/* <LanguageSwitcher /> */}
-        </div>
+        </nav>
       </div>
     </header>
   );
