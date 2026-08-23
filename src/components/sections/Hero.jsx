@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Badge from '../ui/Badge'
 import {
     FaArrowRight,
@@ -10,18 +10,13 @@ import {
 import CommonButton from '../ui/CommonButton'
 import dummyImg from '../../assets/images/dummyImg.jpg'
 import apiList from '../../config/apiList'
-import { useQuery } from '@tanstack/react-query'
-import api from '../../config/api'
-import { userState } from '../../context/UserContext'
 import { StateStore } from '../../context/StateStoreContext'
 import { BounceAnimation, SlideAnimation, SlideLeftByChar, WaveTextAnimation } from 'priyesh-bhanderi-react-packages'
 import { useNavigate } from 'react-router-dom'
-import Lenis from "lenis";
 
 const Hero = () => {
 
-    const { platforms, images } = apiList();
-    const { user } = userState();
+    const { images } = apiList();
     const { platFormData, platFormLDataoading: isLoading } = StateStore();
 
     const navigate = useNavigate();
@@ -62,45 +57,14 @@ const Hero = () => {
 
     const animations = {
         hidden: {
-            x: 100,
+            y: 100,
             opacity: 0,
         },
         visible: {
-            x: 0,
+            y: 0,
             opacity: 1,
         },
     }
-
-    const lenisRef = useRef(null);
-
-    useEffect(() => {
-        const lenis = new Lenis({
-            duration: 1.2,
-            smoothWheel: true,
-            wheelMultiplier: 1,
-            touchMultiplier: 2,
-            infinite: false,
-        });
-
-        lenisRef.current = lenis;
-
-        const raf = (time) => {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        };
-
-        requestAnimationFrame(raf);
-
-        return () => {
-            lenis.destroy();
-        };
-    }, []);
-
-    const handleMenuClick = () => {
-        lenisRef.current?.scrollTo(0, {
-            duration: 1.2,
-        });
-    };
 
     return (
         <section className="relative flex items-center pt-5 md:pb-0 pb-10">
@@ -142,7 +106,7 @@ const Hero = () => {
                                 {...btnProps}
                                 bgColor="#A36081"
                                 color="white"
-                                onClick={() => { handleMenuClick(), navigate('/contact') }}
+                                onClick={() => navigate('/contact')}
                                 className="w-full sm:w-auto justify-center shadow-xl hover:scale-105 transition-all duration-300"
                             >
                                 <FaPeopleCarry size={18} />
@@ -152,7 +116,7 @@ const Hero = () => {
                                 {...btnProps}
                                 bgColor="white"
                                 color="#1A1A1A"
-                                onClick={() => { handleMenuClick(), navigate('/services') }}
+                                onClick={() => navigate('/services')}
                                 className="w-full sm:w-auto justify-center border-2 border-primary/30 shadow-xl hover:bg-primary/5 transition-all duration-300"
                             >
                                 <FaArrowRight size={14} className="text-primary" />
@@ -188,7 +152,7 @@ const Hero = () => {
                                 {(platFormData?.length == 0 || isLoading) ?
                                     <div role="status" className="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
                                         <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-5">
-                                            {Array.from({ length: 2 }).map((_, index) => (
+                                            {Array.from({ length: 8 }).map((_, index) => (
                                                 <div key={index} className="bg-gray-300 rounded-2xl sm:rounded-3xl aspect-square w-full h-[140px] mb-4 flex flex-col items-center justify-center ">
                                                     <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center overflow-hidden justify-center bg-gray-100">
                                                         <img src={dummyImg} alt="" />

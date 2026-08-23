@@ -4,10 +4,6 @@ import {
     FaEnvelope,
     FaWhatsapp,
     FaMapMarkerAlt,
-    FaFacebookF,
-    FaInstagram,
-    FaLinkedinIn,
-    FaYoutube,
     FaPaperPlane,
     FaRegClock,
 } from 'react-icons/fa'
@@ -134,7 +130,7 @@ const ContactSection = () => {
                             </div>
                         </div>
 
-                        <div className="flex items-start gap-5">
+                        {/* <div className="flex items-start gap-5">
                             <div className="md:w-14 md:h-14 w-12 h-12 aspect-square text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
                                 <FaMapMarkerAlt />
                             </div>
@@ -150,7 +146,7 @@ const ContactSection = () => {
                                     Surat, Gujarat, 395010
                                 </p>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 

@@ -115,7 +115,7 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white">
+    <header className="fixed top-0 z-50 w-full border-b border-gray-200 bg-white">
       <div className="mx-auto container flex md:h-20 h-14 items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-8">
           <Logo />
@@ -217,21 +217,28 @@ const Header = () => {
 
       {/* MOBILE MENU WITH OPEN / CLOSE ANIMATION */}
       <div
-        className={`overflow-hidden bg-white transition-[max-height,opacity,transform] duration-300 ease-in-out lg:hidden ${mobileMenuOpen
-          ? "max-h-96 translate-y-0 border-t border-gray-200 opacity-100"
-          : "max-h-0 -translate-y-2 border-t border-transparent opacity-0"
+        className={`fixed left-0 right-0 top-14 z-40 overflow-hidden bg-white transition-all duration-300 ease-in-out md:top-20 lg:hidden ${mobileMenuOpen
+          ? "max-h-[calc(100vh-3.5rem)] translate-y-0 opacity-100"
+          : "pointer-events-none max-h-0 -translate-y-3 opacity-0"
           }`}
       >
         <nav className="space-y-1 px-4 py-4 flex flex-col gap-3">
           {NAV_LINKS.map(
-            ({ label, to }) => (
+            ({ label, to }, index) => (
               <NavLink key={to} to={to}
                 // onClick={handleMenuClick}
-                className={({
-                  isActive,
-                }) =>
-                  `${linksClass} ${isActive ? "text-primary after:w-full" : ""} w-fit`
+                className={({ isActive }) =>
+                  `${linksClass} ${isActive ? "text-primary after:w-full" : ""
+                  } w-fit transition-all duration-300 ${mobileMenuOpen
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-6 opacity-0"
+                  }`
                 }
+                style={{
+                  transitionDelay: mobileMenuOpen
+                    ? `${index * 70}ms`
+                    : "0ms",
+                }}
               >
                 {label}
               </NavLink>

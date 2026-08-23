@@ -1,47 +1,13 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../sections/Logo'
-
-import { BiSupport } from 'react-icons/bi'
 import SocialMedia from '../ui/SocialMedia'
 import { LuBadgeInfo } from 'react-icons/lu'
 import { StateStore } from '../../context/StateStoreContext'
-import Lenis from "lenis";
 
 const Footer = () => {
 
     const { platFormData } = StateStore();
-    const lenisRef = useRef(null);
-
-    useEffect(() => {
-        const lenis = new Lenis({
-            duration: 1.2,
-            smoothWheel: true,
-            wheelMultiplier: 1,
-            touchMultiplier: 2,
-            infinite: false,
-        });
-
-        lenisRef.current = lenis;
-
-        const raf = (time) => {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        };
-
-        requestAnimationFrame(raf);
-
-        return () => {
-            lenis.destroy();
-        };
-    }, []);
-
-    const handleMenuClick = () => {
-        lenisRef.current?.scrollTo(0, {
-            duration: 1.2,
-        });
-    };
-
 
     const footerData = useMemo(() => {
         return [
@@ -141,7 +107,6 @@ const Footer = () => {
                                         <li key={i}>
                                             <Link
                                                 to={link.path}
-                                                onClick={handleMenuClick}
                                                 className={linkClass}
                                             >
                                                 {link.label}
@@ -178,7 +143,6 @@ const Footer = () => {
                         <Link
                             to="/privacy-policy"
                             className={linkClass}
-                            onClick={handleMenuClick}
                         >
                             Privacy Policy
                         </Link>
@@ -186,7 +150,6 @@ const Footer = () => {
                         <Link
                             to="/terms-and-conditions"
                             className={linkClass}
-                            onClick={handleMenuClick}
                         >
                             Terms & Conditions
                         </Link>
@@ -194,7 +157,6 @@ const Footer = () => {
                         <Link
                             to="/refund-cancellation-policy"
                             className={linkClass}
-                            onClick={handleMenuClick}
                         >
                             Refund & Cancellation Policy
                         </Link>

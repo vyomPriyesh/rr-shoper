@@ -146,7 +146,7 @@ const PlanPricing = () => {
                                 className={`
                                     relative z-10
                                     flex items-center justify-center
-                                    w-9 h-9 sm:w-10 sm:h-10
+                                    w-9 h-9 sm:w-10 sm:h-10 overflow-hidden
                                     rounded-xl transition-all duration-500
 
                                     ${selectedPlatform === platform.name
@@ -158,7 +158,7 @@ const PlanPricing = () => {
                                 <img
                                     src={images.imgUrl + platform.image.image}
                                     alt={platform.name}
-                                    className="w-5 h-5 sm:w-6 sm:h-6 object-contain"
+                                    className="w-7 h-7 object-contain"
                                 />
                             </div>
 
@@ -220,7 +220,7 @@ const PlanPricing = () => {
                                     {plan.name}
                                 </h3>
                                 {purchaseData(plan.package_id)?.expire_time &&
-                                    <span className={`text-sm font-medium  ${plan?.popular ? 'bg-white text-primary' : ' text-white bg-primary'}  px-2 py-1 rounded-xl`}>{purchaseData(plan.package_id)?.expire_time}</span>
+                                    <span className={`md:text-sm text-xs font-medium  ${plan?.popular ? 'bg-white text-primary' : ' text-white bg-primary'}  px-2 py-1 rounded-xl`}>{purchaseData(plan.package_id)?.expire_time}</span>
                                 }
                             </div>
 

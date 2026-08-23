@@ -40,5 +40,5 @@ export const displayDateTime = (date) => {
 }
 
 export const unixDisplayDate = (date) => {
-    return dayjs.unix(date).format("DD MMM YYYY hh:mm A")
+    return dayjs.unix(date).format("DD MMM YYYY")
 }

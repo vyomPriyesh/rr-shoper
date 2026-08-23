@@ -10,7 +10,7 @@ const SectionsUI = ({
     return (
         <div id={id} className='pt-0 pb-10 md:py-7'>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="max-w-3xl mx-auto text-center mb-12">
+                <div className="max-w-3xl mx-auto text-center mb-8">
                     <h2 className="text-sm sm:text-base font-semibold uppercase tracking-[4px] text-primary mb-4">
                         {topic}
                     </h2>
