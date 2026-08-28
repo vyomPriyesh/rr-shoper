@@ -24,6 +24,10 @@ const apiList = () => {
             get: 'all-options',
         },
 
+        contactUs: {
+            raiseInquiry: 'raise-inquiry'
+        },
+
         tickets: {
             getTicketForm: (id) => `ticket-form/by-ticket-title/${id}`,
             add: `ticket/add-ticket`,
