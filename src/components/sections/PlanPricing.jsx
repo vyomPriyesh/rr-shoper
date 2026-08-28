@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useToast } from '../../context/ToastContext';
 import Loader from '../ui/Loader';
 import { unixDisplayDate } from '../ui/DateDisplay';
+import { FaCheck } from 'react-icons/fa';
 
 const PlanPricing = () => {
 
@@ -216,22 +217,22 @@ const PlanPricing = () => {
 
                             {/* Title */}
                             <div className={`flex justify-between flex-row mb-5 place-items-center ${plan?.popular ? 'mt-7' : ''}`}>
-                                <h3 className="text-2xl font-bold capitalize">
+                                <h3 className="2xl:text-2xl lg:text-lg text-base font-bold capitalize">
                                     {plan.name}
                                 </h3>
                                 {purchaseData(plan.package_id)?.expire_time &&
-                                    <span className={`md:text-sm text-xs font-medium  ${plan?.popular ? 'bg-white text-primary' : ' text-white bg-primary'}  px-2 py-1 rounded-xl`}>{purchaseData(plan.package_id)?.expire_time}</span>
+                                    <span className={`md:text-sm xl:text-xs text-xs font-medium  ${plan?.popular ? 'bg-white text-primary' : ' text-white bg-primary'}  px-2 py-1 rounded-xl`}>{purchaseData(plan.package_id)?.expire_time}</span>
                                 }
                             </div>
 
                             {/* Price */}
                             <div className="flex items-end gap-1 mb-7">
 
-                                <span className="text-4xl font-bold">
+                                <span className="2xl:text-4xl lg:text-xl text-xl font-bold">
                                     {plan.price}
                                 </span>
 
-                                <span className="text-sm opacity-70 mb-1">
+                                <span className="2xl:text-sm text-xs opacity-70 mb-1">
                                     /month
                                 </span>
                             </div>
@@ -247,21 +248,17 @@ const PlanPricing = () => {
                                     >
 
                                         <div
-                                            className={`
-                                                min-w-[20px] h-5 rounded-full
-                                                flex items-center justify-center
-                                                text-[11px] mt-0.5
-
+                                            className={`w-5 h-5 2xl:h-6 2xl:w-6 aspect-square rounded-full flex items-center justify-center 2xl:text-xs md:text-xs text-xs
                                                 ${plan?.popular
                                                     ? 'bg-white text-primary'
                                                     : 'bg-[#F8EEF3] text-primary'
                                                 }
                                             `}
                                         >
-                                            ✓
+                                           <FaCheck />
                                         </div>
 
-                                        <span className="text-sm sm:text-[15px] leading-relaxed capitalize">
+                                        <span className="2xl:text-base xl:text-xs text-sm leading-relaxed capitalize">
                                             {feature}
                                         </span>
                                     </div>

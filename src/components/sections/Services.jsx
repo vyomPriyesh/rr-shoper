@@ -70,15 +70,15 @@ const Services = () => {
                                 />
                             </div>
                             <div className="flex flex-1 flex-col px-4 pb-6 pt-8 sm:pt-7 sm:px-5 sm:pb-6 relative">
-                                <span className='h-14 w-14 aspect-square bg-white rounded-full absolute top-0 -translate-y-1/2 p-1'>
-                                    <span className='bg-primary text-white h-full w-full flex justify-center items-center rounded-full shadow-lg text-2xl'>
+                                <span className='2xl:h-14 2xl:w-14 md:h-11 md:w-11 h-12 w-12 aspect-square bg-white rounded-full absolute top-0 -translate-y-1/2 p-1'>
+                                    <span className='bg-primary text-white h-full w-full flex justify-center items-center rounded-full shadow-lg 2xl:text-2xl md:text-base text-lg'>
                                         <Icon />
                                     </span>
                                 </span>
-                                <h3 className="text-lg font-bold leading-tight text-gray-900 sm:text-xl">
+                                <h3 className="2xl:text-lg xl:text-base font-bold leading-tight text-gray-900">
                                     {service.title}
                                 </h3>
-                                <p className="mt-3 text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">
+                                <p className="mt-3 xl:text-xs 2xl:text-base text-sm leading-6 text-gray-600 sm:leading-7">
                                     {service.description}
                                 </p>
                                 <span className="mt-auto pt-5">

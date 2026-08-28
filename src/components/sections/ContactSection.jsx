@@ -23,149 +23,75 @@ const ContactSection = () => {
         message: '',
     })
 
+
+    const contactInfo = [
+        { title: "Phone", value: contactDetails?.mobile, icon: <FaPhoneAlt />, },
+        { title: "Email", value: contactDetails?.email, icon: <FaEnvelope />, },
+        { title: "WhatsApp", value: contactDetails?.mobile, icon: <FaWhatsapp />, },
+        { title: "Business Hours", value: "Mon – Sat: 9:00 AM – 6:00 PM", icon: <FaRegClock />, },
+        { title: "Office Address", value: (<> Amiras hotel pase, Time Shoppers, 216, Varachha Main Rd, Bhagavan Nagar, Sarthana Jakat Naka, Sarthi Society, <br /> Nana Varachha, Surat, Gujarat 395006 </>), icon: <FaMapMarkerAlt />, }
+    ]
+
+    
+
     return (
-        <div className="pb-10 pt-6 px-4 lg:px-8">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="px-4 pt-6 pb-10 sm:px-6 lg:px-8">
+            <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
 
                 {/* Left Content */}
                 <div className="lg:pr-10">
 
-                    <span className="text-primary font-semibold uppercase tracking-[4px] text-sm">
+                    {/* Section Label */}
+                    <span className="text-xs font-semibold uppercase tracking-[2px] text-primary sm:text-sm sm:tracking-[4px]">
                         Contact Us
                     </span>
 
-                    <h2 className="mt-4 text-2xl lg:text-4xl font-bold leading-tight text-heading">
+                    {/* Main Heading */}
+                    <h2 className="mt-2 text-2xl font-bold leading-tight text-heading sm:text-3xl lg:text-4xl">
                         Get Marketplace Assistance
                     </h2>
 
-                    <p className="mt-4 text-paragraph text-lg leading-8 max-w-xl">
-                        Contact us for seller account setup, marketplace onboarding, product listing, and support services. Our team will respond within 24 hours.
+                    {/* Description */}
+                    <p className="mt-3 max-w-xl text-sm leading-6 text-paragraph sm:text-base sm:leading-7 lg:text-lg lg:leading-8">
+                        Contact us for seller account setup, marketplace onboarding,
+                        product listing, and support services. Our team will respond
+                        within 24 hours.
                     </p>
 
                     {/* Contact Info */}
-                    <div className="mt-8 space-y-8">
-
-                        {/* Phone */}
-                        <div className="flex items-start gap-5">
-                            <div className="md:w-14 md:h-14 w-12 h-12 text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
-                                <FaPhoneAlt />
+                    <div className="mt-8 space-y-7 sm:space-y-8">
+                        {contactInfo.map((item, index) => (
+                            <div key={index} className="flex items-start gap-4 sm:gap-5" >
+                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-xl text-primary shadow-md sm:h-12 sm:w-12 sm:text-2xl lg:h-14 lg:w-14">
+                                    {item.icon}
+                                </div>
+                                <div className="min-w-0">
+                                    <h4 className="text-base font-semibold text-heading sm:text-lg lg:text-xl">
+                                        {item.title}
+                                    </h4>
+                                    <p className="mt-1 break-words text-sm leading-6 text-paragraph sm:text-base sm:leading-7"> {item.value} </p>
+                                </div>
                             </div>
+                        ))}
 
-                            <div>
-                                <h4 className="text-base md:text-lg font-semibold text-heading">
-                                    Phone
-                                </h4>
-
-                                <p className=" text-paragraph text-sm md:text-base">
-                                    {contactDetails?.mobile}
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Email */}
-                        <div className="flex items-start gap-5">
-                            <div className="md:w-14 md:h-14 w-12 h-12 text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
-                                <FaEnvelope />
-                            </div>
-
-                            <div>
-                                <h4 className="text-base md:text-lg font-semibold text-heading">
-                                    Email
-                                </h4>
-
-                                <p className=" text-paragraph text-sm md:text-base">
-                                    {contactDetails?.email}
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* WhatsApp */}
-                        <div className="flex items-start gap-5">
-                            <div className="md:w-14 md:h-14 w-12 h-12 text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
-                                <FaWhatsapp />
-                            </div>
-
-                            <div>
-                                <h4 className="text-base md:text-lg font-semibold text-heading">
-                                    WhatsApp
-                                </h4>
-
-                                <p className=" text-paragraph text-sm md:text-base">
-                                    {contactDetails?.mobile}
-                                </p>
-                            </div>
-                        </div>
-                        {/* Business Hours */}
-                        <div className="flex items-start gap-5">
-                            <div className="md:w-14 md:h-14 w-12 h-12 text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
-                                <FaRegClock />
-                            </div>
-
-                            <div>
-                                <h4 className="text-base md:text-lg font-semibold text-heading">
-                                    Business Hours
-                                </h4>
-
-                                <p className=" text-paragraph text-sm md:text-base leading-7">
-                                    Mon – Sat: 9:00 AM – 6:00 PM
-                                </p>
-                            </div>
-                        </div>
-                        {/* Address */}
-                        <div className="flex items-start gap-5">
-                            <div className="md:w-14 md:h-14 w-12 h-12 aspect-square text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
-                                <FaMapMarkerAlt />
-                            </div>
-
-                            <div>
-                                <h4 className="text-base md:text-lg font-semibold text-heading">
-                                    Office Address
-                                </h4>
-
-                                <p className=" text-paragraph text-sm md:text-base leading-7">
-                                    Amiras hotel pase, Time Shoppers, 216, Varachha Main Rd, Bhagavan Nagar, Sarthana Jakat Naka, Sarthi Society,
-                                    <br />
-                                    Nana Varachha, Surat, Gujarat 395006
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* <div className="flex items-start gap-5">
-                            <div className="md:w-14 md:h-14 w-12 h-12 aspect-square text-2xl rounded-xl bg-white flex items-center justify-center text-primary shadow-md">
-                                <FaMapMarkerAlt />
-                            </div>
-
-                            <div>
-                                <h4 className="text-base md:text-lg font-semibold text-heading">
-                                    GST Address
-                                </h4>
-
-                                <p className=" text-paragraph text-sm md:text-base leading-7">
-                                    3RD FLOOR,SHOP NO.334, TIMES TRADE CENTER, 
-                                    <br />
-                                    Surat, Gujarat, 395010
-                                </p>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
 
                 {/* Right Form */}
-                <section className="bg-white rounded-[32px] p-6 lg:p-6 shadow-[0_10px_40px_rgba(176,106,141,0.08)] border border-borderColor">
+                <section className="rounded-[24px] border border-borderColor bg-white p-5 shadow-[0_10px_40px_rgba(176,106,141,0.08)] sm:rounded-[32px] sm:p-6 lg:p-8">
 
-                    <h3 className="text-3xl font-bold text-heading">
+                    {/* Form Heading */}
+                    <h3 className="text-2xl font-bold leading-tight text-heading sm:text-3xl lg:text-4xl">
                         Send Us a Message
                     </h3>
 
-                    <p className="mt-3 text-paragraph leading-7">
+                    {/* Form Description */}
+                    <p className="mt-3 text-sm leading-6 text-paragraph sm:text-base sm:leading-7 lg:text-lg">
                         Fill out the form below and we'll get back to you shortly.
                     </p>
 
-                    <form className="mt-8 space-y-4">
-
-                        {/* Name + Phone */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-
+                    <form className="mt-6 space-y-4 sm:mt-8">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
                             <InputField
                                 label="Full Name"
                                 type="text"
@@ -285,17 +211,18 @@ const ContactSection = () => {
                         <button
                             type="submit"
                             className="
-            w-full h-14 rounded-2xl
-            bg-gradient-to-r from-primaryDark to-primary
-            text-white font-semibold text-lg
-            flex items-center justify-center gap-3
-            transition-all duration-300
-            hover:scale-[1.01]
-            hover:shadow-xl
-            shadow-[0_10px_30px_rgba(176,106,141,0.25)]
-        "
+                                flex h-12 w-full items-center justify-center gap-3
+                                rounded-2xl
+                                bg-gradient-to-r from-primaryDark to-primary
+                                text-base font-semibold text-white
+                                shadow-[0_10px_30px_rgba(176,106,141,0.25)]
+                                transition-all duration-300
+                                hover:scale-[1.01]
+                                hover:shadow-xl
+                                sm:h-14 sm:text-lg
+                            "
                         >
-                            <FaPaperPlane />
+                            <FaPaperPlane className="text-sm sm:text-base" />
                             Contact Support
                         </button>
                     </form>

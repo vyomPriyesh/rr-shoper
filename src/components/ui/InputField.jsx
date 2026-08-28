@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { IoChevronDown } from 'react-icons/io5'
-import api from '../../config/api'
 import apiList from '../../config/apiList'
 import ImagesUploadUi from './ImagesUploadUi'
 import { RxCross2 } from "react-icons/rx";

@@ -88,7 +88,7 @@ const Header = () => {
     font-medium transition-all duration-300
     cursor-pointer hover:text-[#A36081]
     after:absolute after:bottom-0 after:left-0
-    after:h-0.5 after:bg-[#A36081]
+    after:h-0.5 after:bg-[#A36081] 2xl:text-base md:text-xs lg:text-sm text-sm
     after:w-0 after:transition-all
     after:duration-300 after:ease-in-out hover:after:w-full`;
 
@@ -116,7 +116,7 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 z-50 w-full border-b border-gray-200 bg-white">
-      <div className="mx-auto container flex md:h-20 h-14 items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto container flex  2xl:h-20 xl:h-14 lg:h-20 md:h-14 h-14 items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-8">
           <Logo />
         </div>
@@ -146,17 +146,17 @@ const Header = () => {
               >
                 <img src={user?.image || `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${user?.name}`}
                   alt="Profile"
-                  className="h-9 w-9 rounded-full object-cover"
+                  className="2xl:h-9 2xl:w-9 md:h-8 md:w-8 rounded-full object-cover"
                 />
 
                 <div className="hidden text-left sm:block">
-                  <p className="text-sm font-semibold text-gray-900">
+                  <p className="2xl:text-sm md:text-sm text-xs font-semibold text-gray-900">
                     {user?.name}
                   </p>
                 </div>
 
                 <FaChevronDown
-                  className={`hidden text-sm text-gray-500 transition-transform duration-300 sm:block ${profileOpen ? "rotate-180" : "rotate-0"
+                  className={`hidden 2xl:text-sm md:text-[10px] text-[10px] text-gray-500 transition-transform duration-300 sm:block ${profileOpen ? "rotate-180" : "rotate-0"
                     }`}
                 />
               </button>
