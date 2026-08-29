@@ -4,7 +4,7 @@ import ButtonUi from './ButtonUi'
 const PageTitleAddbtn = ({ title, add, addClick, addText, className, otherButtons = [], displayStatus, ...rest }) => {
     return (
         <div className="flex justify-between gap-5">
-            <h2 className='text-xl font-semibold'>{title}</h2>
+            <h2 className='2xl:text-xl md:text-sm text-base font-semibold'>{title}</h2>
             <div className="flex justify-between gap-5">
                 {otherButtons?.length > 0 &&
                     otherButtons?.map((list, i) => (

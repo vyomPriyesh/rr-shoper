@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { IoChevronDown } from 'react-icons/io5'
-import apiList from '../../config/apiList'
 import ImagesUploadUi from './ImagesUploadUi'
 import { RxCross2 } from "react-icons/rx";
 
@@ -24,8 +23,6 @@ const InputField = ({
     imageLimit,
     ...rest
 }) => {
-
-    const { images } = apiList();
 
     const [open, setOpen] = useState(false)
     const dropdownRef = useRef(null)

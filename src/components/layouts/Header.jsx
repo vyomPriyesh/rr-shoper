@@ -17,7 +17,7 @@ import api from "../../config/api";
 const Header = () => {
 
   const { user, logout, setUser } = userState();
-  const { auth } = apiList();
+  const { auth, images } = apiList();
   const { showToast } = useToast();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -144,7 +144,7 @@ const Header = () => {
                 onClick={() => setProfileOpen((prev) => !prev)}
                 className="flex items-center gap-3 rounded-lg p-1.5 transition hover:bg-gray-100"
               >
-                <img src={user?.image || `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${user?.name}`}
+                <img src={images?.imgUrl + user?.image?.image || `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${user?.name}`}
                   alt="Profile"
                   className="2xl:h-9 2xl:w-9 md:h-8 md:w-8 w-8 h-8 rounded-full object-cover"
                 />
