@@ -176,6 +176,7 @@ const Header = () => {
                 <div className="py-2">
                   <Link
                     to="/dashboard/my-profile"
+                    onClick={()=>setProfileOpen(false)}
                     className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm text-gray-700 transition hover:bg-gray-100"
                   >
                     <FaUser className="text-gray-500" />
