@@ -242,40 +242,39 @@ html {
     animation: floatThree 8s ease-in-out infinite;
 }
 
-.imgBlendColor{
+.imgBlendColor {
     mix-blend-mode: darken;
 }
 
 .header_animation {
     animation: header 0.5s ease-out forwards;
-    
+
 }
 
 @keyframes header {
-  0% {
-    opacity: 0;
-    transform: translateY(-40px);
-    filter: blur(8px);
-  }
+    0% {
+        opacity: 0;
+        transform: translateY(-40px);
+        filter: blur(8px);
+    }
 
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
-    filter: blur(0px);
-  }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+        filter: blur(0px);
+    }
 }
 
 .text-wave {
     margin-right: 5px;
 }
 
-.hero-text-revel{
+.hero-text-revel {
     margin-right: 5px;
 }
 
 html,
 body,
-#root,
-#root * {
-  font-family: sans-serif !important;
+#root {
+    font-family: sans-serif;
 }

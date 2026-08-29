@@ -144,7 +144,7 @@ const Header = () => {
                 onClick={() => setProfileOpen((prev) => !prev)}
                 className="flex items-center gap-3 rounded-lg p-1.5 transition hover:bg-gray-100"
               >
-                <img src={images?.imgUrl + user?.image?.image || `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${user?.name}`}
+                <img src={user?.image?.image ? images?.imgUrl + user?.image?.image : `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${user?.name || 'PP'}`}
                   alt="Profile"
                   className="2xl:h-9 2xl:w-9 md:h-8 md:w-8 w-8 h-8 rounded-full object-cover"
                 />

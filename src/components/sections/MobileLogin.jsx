@@ -103,12 +103,12 @@ const MobileLogin = ({ onClose }) => {
             setOtp("");
             setEmail("");
             setOtpSent(false);
-            setRefresh((prev) => prev + 1);
             setOpen(false)
             localStorage.setItem("user", JSON.stringify({
-                ...data.result.user,
+                // ...data.result.user,
                 token: data.result.token
             }));
+            setRefresh((prev) => prev + 1);
         },
         onError: ({ response }) => {
             const message = response.data.error.error_message
