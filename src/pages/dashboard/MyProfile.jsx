@@ -242,7 +242,7 @@ const MyProfile = () => {
                                 />
                             ) : (
                                 <div className="w-full min-h-[44px] flex items-center px-4 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 text-sm sm:text-base">
-                                    {user?.name || '-'}
+                                    {formData?.name || '-'}
                                 </div>
                             )}
 
@@ -271,7 +271,7 @@ const MyProfile = () => {
                                 />
                             ) : (
                                 <div className="w-full min-h-[44px] flex items-center px-4 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 text-sm sm:text-base break-all">
-                                    {user?.email || '-'}
+                                    {formData?.email || '-'}
                                 </div>
                             )}
 
@@ -300,7 +300,7 @@ const MyProfile = () => {
                                 />
                             ) : (
                                 <div className="w-full min-h-[44px] flex items-center px-4 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 text-sm sm:text-base">
-                                    {user?.mobile || user?.phoneNumber || '-'}
+                                    {formData?.mobile || formData?.phoneNumber || '-'}
                                 </div>
                             )}
 
