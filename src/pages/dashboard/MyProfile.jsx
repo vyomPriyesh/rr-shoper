@@ -33,7 +33,7 @@ const MyProfile = () => {
                 email: user?.email || '',
                 mobile: user?.mobile || user?.phoneNumber || '',
             })
-            setProfileImage(user?.image?.image ? images?.imgUrl + user?.image?.image : '')
+            setProfileImage(user?.image?.image ? images?.imgUrl + user?.image?.image : null)
         }
     }, [user])
 
@@ -165,7 +165,7 @@ const MyProfile = () => {
                         <span className="relative w-fit">
 
                             <img
-                                src={profileImage || `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${encodeURIComponent(user?.name || 'PP')}`
+                                src={profileImage || `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${encodeURIComponent(user?.name || 'RR')}`
                                 }
                                 alt="Profile"
                                 className="2xl:h-24 2xl:w-24 md:h-20 md:w-20 h-24 w-24 rounded-full object-cover border-2 border-gray-100"
