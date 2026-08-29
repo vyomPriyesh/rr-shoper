@@ -146,7 +146,7 @@ const Header = () => {
               >
                 <img src={user?.image || `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${user?.name}`}
                   alt="Profile"
-                  className="2xl:h-9 2xl:w-9 md:h-8 md:w-8 rounded-full object-cover"
+                  className="2xl:h-9 2xl:w-9 md:h-8 md:w-8 w-8 h-8 rounded-full object-cover"
                 />
 
                 <div className="hidden text-left sm:block">
