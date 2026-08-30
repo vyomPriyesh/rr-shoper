@@ -334,10 +334,14 @@ const MyService = () => {
                 <div className="flex items-start justify-between gap-3">
 
                   <div>
-                    <h3 className="font-bold text-gray-900">
-                      {getPackageName(service?.package_id?.name)}
-                    </h3>
-
+                    <div className="flex flex-row gap-2 justify-center">
+                      <h3 className="font-bold text-gray-900">
+                        {getPackageName(service?.package_id?.name)}
+                      </h3>
+                      <span className="rounded-full bg-[#b5688d] px-3 py-1 text-[11px] font-semibold text-white capitalize">
+                        {service?.package_id?.platform?.name}
+                      </span>
+                    </div>
                     <p className="mt-1 text-sm text-gray-500">
                       ₹ {service?.package_id?.price?.toLocaleString("en-IN")} /month
                     </p>
