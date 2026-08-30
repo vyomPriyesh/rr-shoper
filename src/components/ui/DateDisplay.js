@@ -32,13 +32,48 @@ export const timeAgo = (date) => {
 };
 
 export const displayDate = (date) => {
-    return dayjs(date).format('DD-MM-YYYY')
+    return dayjs(date).format('DD MMM YYYY')
 }
 
 export const displayDateTime = (date) => {
-    return dayjs(date).format('DD-MM-YYYY hh:mm A')
+    return dayjs(date).format('DD MMM YYYY hh:mm A')
 }
 
 export const unixDisplayDate = (date) => {
-    return dayjs.unix(date).format("DD MMM YYYY")
+    return dayjs.unix(date).format("DD MMM YYYY hh:mm A")
 }
+
+export const remainingDaysUnix = (date1, date2) => {
+    const parseDate = (date) => {
+        if (!date) return null;
+
+        // Unix timestamp in seconds
+        if (typeof date === "number") {
+            return dayjs.unix(date);
+        }
+
+        // Numeric string Unix timestamp
+        if (
+            typeof date === "string" &&
+            /^\d+$/.test(date)
+        ) {
+            return dayjs.unix(Number(date));
+        }
+
+        // Normal date formats
+        return dayjs(date);
+    };
+
+    const startDate = parseDate(date1);
+    const endDate = parseDate(date2);
+
+    if (
+        !startDate?.isValid() ||
+        !endDate?.isValid()
+    ) {
+        return 0;
+    }
+
+    return Math.max(0, endDate.startOf("day").diff(startDate.startOf("day"), "day")
+    );
+};
