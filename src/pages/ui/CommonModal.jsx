@@ -2,7 +2,7 @@ import { Modal } from 'antd'
 import React from 'react'
 import ButtonUi from './ButtonUi'
 
-const CommanModal = ({ open, onClose, onDone, title, children, ...rest }) => {
+const CommonModal = ({ open, onClose, onDone, title, children, ...rest }) => {
     return (
         <Modal
             open={open}
@@ -25,4 +25,4 @@ const CommanModal = ({ open, onClose, onDone, title, children, ...rest }) => {
     )
 }
 
-export default CommanModal
+export default CommonModal

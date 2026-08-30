@@ -33,10 +33,19 @@ const PlanPricingContent = ({
     setGstNumber,
     handleGstSubmit,
     closeGstModal,
-    policyAccepted,
-    setPolicyAccepted,
+    downgradeModal,
+    downgradePlan,
+    currentPackageName,
+    handleDowngradeSubmit,
+    closeDowngradeModal,
+    downgradeRequest,
+    currentPackage,
 }) => {
     const selectedPlans = pricingData[selectedPlatform] || [];
+
+    const isCurrentPackageActive = Boolean(
+        currentPackage && !currentPackage.package_expire_status
+    );
 
     return (
         <>
@@ -122,8 +131,13 @@ const PlanPricingContent = ({
                     const buttonText = getPlanButtonText(plan);
                     const purchase = getPurchaseData(plan.package_id);
 
-                    const isCurrent = planState === "CURRENT";
-                    const isDowngrade = planState === "DOWNGRADE";
+                    const isPendingDowngrade =
+                        isCurrentPackageActive &&
+                        downgradeRequest?.requested_package_id ===
+                        plan.package_id;
+
+                    const isCurrent =
+                        planState === "CURRENT";
 
                     return (
                         <div
@@ -222,10 +236,11 @@ const PlanPricingContent = ({
                                 ))}
                             </div>
 
-                            {!isCurrent && !isDowngrade && (
+                            {!isCurrent && (
                                 <div className="mt-auto">
                                     <button
                                         type="button"
+                                        disabled={isPendingDowngrade}
                                         onClick={() =>
                                             handlePurchase(plan)
                                         }
@@ -233,19 +248,23 @@ const PlanPricingContent = ({
                                             w-full py-3.5 rounded-2xl
                                             text-sm sm:text-base font-semibold
                                             transition-all duration-300
-                                            ${plan.popular
-                                                ? `
-                                                        bg-white text-primary
-                                                        hover:bg-[#F8EEF3]
-                                                    `
-                                                : `
-                                                        bg-primary text-white
-                                                        hover:bg-primaryDark
-                                                    `
+                                            ${isPendingDowngrade
+                                                ? "bg-primary/40 text-white cursor-not-allowed"
+                                                : plan.popular
+                                                    ? `
+                                                            bg-white text-primary
+                                                            hover:bg-[#F8EEF3]
+                                                        `
+                                                    : `
+                                                            bg-primary text-white
+                                                            hover:bg-primaryDark
+                                                        `
                                             }
                                         `}
                                     >
-                                        {buttonText}
+                                        {isPendingDowngrade
+                                            ? "Request Pending"
+                                            : buttonText}
                                     </button>
                                 </div>
                             )}
@@ -277,62 +296,34 @@ const PlanPricingContent = ({
                         }
                         maxLength={15}
                     />
-                    <label className="flex items-start gap-3 cursor-pointer text-sm text-gray-600 leading-6">
-                        <input
-                            type="checkbox"
-                            checked={policyAccepted}
-                            onChange={(e) =>
-                                setPolicyAccepted(e.target.checked)
-                            }
-                            className="mt-1 w-4 h-4 accent-primary cursor-pointer"
-                        />
+                </div>
+            </CommonModal>
 
-                        <span>
-                            I have read and agree to the{" "}
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    window.open(
-                                        "/privacy-policy",
-                                        "_blank",
-                                        "noopener,noreferrer"
-                                    )
-                                }
-                                className="text-primary font-semibold hover:underline"
-                            >
-                                Privacy Policy
-                            </button>
-                            ,{" "}
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    window.open(
-                                        "/terms-and-conditions",
-                                        "_blank",
-                                        "noopener,noreferrer"
-                                    )
-                                }
-                                className="text-primary font-semibold hover:underline"
-                            >
-                                Terms & Conditions
-                            </button>{" "}
-                            and{" "}
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    window.open(
-                                        "/refund-cancellation-policy",
-                                        "_blank",
-                                        "noopener,noreferrer"
-                                    )
-                                }
-                                className="text-primary font-semibold hover:underline"
-                            >
-                                Refund & Cancellation Policy
-                            </button>
-                            .
+            <CommonModal
+                open={downgradeModal}
+                onDone={handleDowngradeSubmit}
+                onClose={closeDowngradeModal}
+                title="Request Downgrade"
+            >
+                <div className="space-y-5">
+                    <p className="text-sm text-gray-600 leading-6">
+                        You are requesting to downgrade from{" "}
+                        <span className="font-semibold text-heading">
+                            {findPackageName(currentPackageName)}
+                        </span>{" "}
+                        to{" "}
+                        <span className="font-semibold text-heading">
+                            {findPackageName(
+                                downgradePlan?.name
+                            )}
                         </span>
-                    </label>
+                        .
+                    </p>
+
+                    <p className="text-sm text-gray-500 leading-6">
+                        Your downgrade request will be reviewed before
+                        the plan is changed.
+                    </p>
                 </div>
             </CommonModal>
         </>
@@ -351,7 +342,11 @@ const PlanPricing = () => {
     const [gstModal, setGstModal] = useState(false);
     const [gstPlan, setGstPlan] = useState(null);
     const [gstNumber, setGstNumber] = useState("");
-    const [policyAccepted, setPolicyAccepted] = useState(false);
+
+    const [downgradeModal, setDowngradeModal] =
+        useState(false);
+    const [downgradePlan, setDowngradePlan] =
+        useState(null);
 
     const {
         data: { platforms = [], pricingData = {} } = {},
@@ -422,6 +417,15 @@ const PlanPricing = () => {
         );
     }, [user?.package, selectedPlatform]);
 
+    const expiredPackage = useMemo(() => {
+        return user?.package?.find(
+            (item) =>
+                item.package_id?.platform?.name ===
+                selectedPlatform &&
+                item.package_expire_status
+        );
+    }, [user?.package, selectedPlatform]);
+
     const currentPackageName =
         currentPackage?.package_id?.name || null;
 
@@ -448,6 +452,17 @@ const PlanPricing = () => {
         },
         [packageOrder]
     );
+
+    const downgradeRequest = useMemo(() => {
+        if (!user?.downgradeRequests?.length) {
+            return null;
+        }
+
+        return [...user.downgradeRequests]
+            .reverse()
+            .find((request) => request?.requested_package_id);
+    }, [user?.downgradeRequests]);
+
 
     const getPurchaseData = useCallback(
         (packageId) => {
@@ -532,6 +547,10 @@ const PlanPricing = () => {
                 return "Upgrade";
             }
 
+            if (state === "DOWNGRADE") {
+                return "Downgrade";
+            }
+
             if (state === "NEW") {
                 return "Get Started";
             }
@@ -545,8 +564,13 @@ const PlanPricing = () => {
         setGstModal(false);
         setGstPlan(null);
         setGstNumber("");
-        setPolicyAccepted(false);
     }, []);
+
+    const closeDowngradeModal =
+        useCallback(() => {
+            setDowngradeModal(false);
+            setDowngradePlan(null);
+        }, []);
 
     const {
         mutate: requestPaymentHandle,
@@ -564,10 +588,8 @@ const PlanPricing = () => {
 
             if (redirectUrl) {
                 closeGstModal();
-
                 window.location.href =
                     redirectUrl;
-
                 return;
             }
 
@@ -587,6 +609,36 @@ const PlanPricing = () => {
         },
     });
 
+    const {
+        mutate: requestDowngradeHandle,
+        isPending: requestDowngradePending,
+    } = useMutation({
+        mutationFn: (payload) =>
+            api.post(
+                payments.requestDowngrade,
+                payload
+            ),
+
+        onSuccess: ({ data }) => {
+            showToast(
+                data?.message ||
+                "Downgrade request submitted successfully",
+                "success"
+            );
+
+            closeDowngradeModal();
+        },
+
+        onError: ({ response }) => {
+            showToast(
+                response?.data?.error
+                    ?.error_message ||
+                "Unable to submit downgrade request",
+                "error"
+            );
+        },
+    });
+
     const handlePurchase = useCallback(
         (plan) => {
             const state = getPlanState(plan);
@@ -595,39 +647,29 @@ const PlanPricing = () => {
                 return;
             }
 
+            if (state === "DOWNGRADE") {
+                setDowngradePlan(plan);
+                setDowngradeModal(true);
+                return;
+            }
+
             setGstPlan(plan);
             setGstNumber("");
             setGstModal(true);
-            setPolicyAccepted(false);
         },
         [getPlanState]
     );
 
     const handleGstSubmit = useCallback(() => {
-        const gst =
-            gstNumber.trim().toUpperCase();
+        const gst = gstNumber.trim().toUpperCase();
 
         if (!gst) {
-            showToast(
-                "Please enter GST number",
-                "error"
-            );
+            showToast("Please enter GST number", "error");
             return;
         }
 
         if (gst.length !== 15) {
-            showToast(
-                "Please enter a valid GST number",
-                "error"
-            );
-            return;
-        }
-
-        if (!policyAccepted) {
-            showToast(
-                "Please accept the Privacy Policy, Terms & Conditions and Refund & Cancellation Policy",
-                "error"
-            );
+            showToast("Please enter a valid GST number", "error");
             return;
         }
 
@@ -635,19 +677,46 @@ const PlanPricing = () => {
             return;
         }
 
-        requestPaymentHandle({
+        const payload = {
             amount: gstPlan.price,
             package_id: gstPlan.package_id,
             gst_number: gst,
-            all_policies_checked: policyAccepted
-        });
+        };
+
+        if (downgradeRequest?.requested_package_id) {
+            payload.request_package_id =
+                downgradeRequest.requested_package_id;
+        }
+
+        requestPaymentHandle(payload);
     }, [
         gstNumber,
         gstPlan,
+        downgradeRequest,
         requestPaymentHandle,
         showToast,
-        policyAccepted,
     ]);
+
+    const handleDowngradeSubmit =
+        useCallback(() => {
+            if (
+                !downgradePlan ||
+                !currentPackage
+            ) {
+                return;
+            }
+
+            requestDowngradeHandle({
+                current_package_id:
+                    currentPackage.package_id?._id,
+                requested_package_id:
+                    downgradePlan.package_id,
+            });
+        }, [
+            currentPackage,
+            downgradePlan,
+            requestDowngradeHandle,
+        ]);
 
     const content = useMemo(
         () => (
@@ -678,11 +747,25 @@ const PlanPricing = () => {
                 handleGstSubmit={
                     handleGstSubmit
                 }
-                closeGstModal={
-                    closeGstModal
+                closeGstModal={closeGstModal}
+                downgradeModal={
+                    downgradeModal
                 }
-                policyAccepted={policyAccepted}
-                setPolicyAccepted={setPolicyAccepted}
+                downgradePlan={downgradePlan}
+                currentPackageName={
+                    currentPackageName
+                }
+                handleDowngradeSubmit={
+                    handleDowngradeSubmit
+                }
+                closeDowngradeModal={
+                    closeDowngradeModal
+                }
+                downgradeRequest={
+                    downgradeRequest
+                }
+                currentPackage={currentPackage}
+                expiredPackage={expiredPackage}
             />
         ),
         [
@@ -699,14 +782,23 @@ const PlanPricing = () => {
             gstNumber,
             handleGstSubmit,
             closeGstModal,
+            downgradeModal,
+            downgradePlan,
+            currentPackageName,
+            handleDowngradeSubmit,
+            closeDowngradeModal,
+            downgradeRequest,
+            currentPackage,
+            expiredPackage,
         ]
     );
 
     return (
         <>
-            {requestPaymentPending && (
-                <Loader />
-            )}
+            {(
+                requestPaymentPending ||
+                requestDowngradePending
+            ) && <Loader />}
 
             <SectionsUI
                 topic="Plans & Pricing"

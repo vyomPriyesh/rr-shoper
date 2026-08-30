@@ -12,6 +12,9 @@ input[type='number'] {
 html {
     scroll-behavior: smooth;
 }
+::-webkit-scrollbar {
+    display: none;
+}
 
 .logo-Font {
     font-family: "Cormorant Garamond", serif;

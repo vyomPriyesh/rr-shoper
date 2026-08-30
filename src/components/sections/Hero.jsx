@@ -180,7 +180,7 @@ const Hero = () => {
                                                 }}
                                             >
                                                 <div className="2xl:w-14 2xl:h-14 xl:w-11 xl:h-11 md:h-12 md:w-12 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center overflow-hidden justify-center bg-gradient-to-r from-primary/10 to-[#A17BA4]/10">
-                                                    <img src={images.imgUrl + image.image || dummyImg} className='imgBlendColor' loading='lazy' />
+                                                    <img src={images.imgUrl + image?.image || dummyImg} className='imgBlendColor' loading='lazy' />
                                                 </div>
 
                                                 <span className="xl:text-xs 2xl:text-base text-base font-bold text-[#1A1A1A] capitalize">

@@ -50,6 +50,10 @@ const PrivacyPolicies = () => {
                 ]
             },
             {
+                title: 'Downgrade Policy',
+                subtitle: 'Downgrades are available after your current package expires. You can purchase the new plan once your existing package has expired.',
+            },
+            {
                 title: 'Payment Security',
                 subtitle: 'All payment-related information is processed securely through authorized payment service providers.',
                 points: [

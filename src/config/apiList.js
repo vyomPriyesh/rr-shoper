@@ -4,7 +4,7 @@ const apiList = () => {
             sendOtp: "send-otp",
             verifyOtp: "verify-otp",
             profile: "profile",
-            updateProfile:'profile/update',
+            updateProfile: 'profile/update',
             findCustomer: (email) => `findCustomer/${email}`,
         },
 
@@ -38,8 +38,12 @@ const apiList = () => {
 
         payments: {
             requestPayment: 'payment/initiate',
-            status: (id) => `payment/status/${id}`
-        }
+            status: (id) => `payment/status/${id}`,
+        },
+
+        downGrade: {
+            request: 'requestDowngrade/add-request'
+        },
     }
 }
 
