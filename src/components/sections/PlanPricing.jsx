@@ -7,15 +7,15 @@ import React, {
 import SectionsUI from "../layouts/SectionsUI";
 import { userState } from "../../context/UserContext";
 import apiList from "../../config/apiList";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import api from "../../config/api";
 import { useParams } from "react-router-dom";
 import { useToast } from "../../context/ToastContext";
 import Loader from "../ui/Loader";
 import { unixDisplayDate } from "../ui/DateDisplay";
 import { FaCheck } from "react-icons/fa";
-import InputField from "../ui/InputField";
-import CommonModal from "../../pages/ui/CommonModal";
+import GSTModal from "../ui/GSTModal";
+import handlePayment from "../../hooks/handlePayment";
 
 const PlanPricingContent = ({
     platforms,
@@ -254,87 +254,7 @@ const PlanPricingContent = ({
                 })}
             </div>
 
-            <CommonModal
-                open={gstModal}
-                onDone={handleGstSubmit}
-                onClose={closeGstModal}
-                title="Enter GST Number"
-            >
-                <div className="space-y-5">
-                    <InputField
-                        type="text"
-                        placeholder="Enter GST number"
-                        value={gstNumber}
-                        onChange={(e) =>
-                            setGstNumber(
-                                e.target.value
-                                    .toUpperCase()
-                                    .replace(
-                                        /[^A-Z0-9]/g,
-                                        ""
-                                    )
-                            )
-                        }
-                        maxLength={15}
-                    />
-                    <label className="flex items-start gap-3 cursor-pointer text-sm text-gray-600 leading-6">
-                        <input
-                            type="checkbox"
-                            checked={policyAccepted}
-                            onChange={(e) =>
-                                setPolicyAccepted(e.target.checked)
-                            }
-                            className="mt-1 w-4 h-4 accent-primary cursor-pointer"
-                        />
-
-                        <span>
-                            I have read and agree to the{" "}
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    window.open(
-                                        "/privacy-policy",
-                                        "_blank",
-                                        "noopener,noreferrer"
-                                    )
-                                }
-                                className="text-primary font-semibold hover:underline"
-                            >
-                                Privacy Policy
-                            </button>
-                            ,{" "}
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    window.open(
-                                        "/terms-and-conditions",
-                                        "_blank",
-                                        "noopener,noreferrer"
-                                    )
-                                }
-                                className="text-primary font-semibold hover:underline"
-                            >
-                                Terms & Conditions
-                            </button>{" "}
-                            and{" "}
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    window.open(
-                                        "/refund-cancellation-policy",
-                                        "_blank",
-                                        "noopener,noreferrer"
-                                    )
-                                }
-                                className="text-primary font-semibold hover:underline"
-                            >
-                                Refund & Cancellation Policy
-                            </button>
-                            .
-                        </span>
-                    </label>
-                </div>
-            </CommonModal>
+            <GSTModal open={gstModal} onClose={closeGstModal} onClick={handleGstSubmit} onChange={(e) => { setGstNumber(e?.gst_number || gstNumber), setPolicyAccepted(e?.all_policies_checked || policyAccepted) }} value={{ all_policies_checked: policyAccepted, gst_number: gstNumber }} />
         </>
     );
 };
@@ -548,44 +468,7 @@ const PlanPricing = () => {
         setPolicyAccepted(false);
     }, []);
 
-    const {
-        mutate: requestPaymentHandle,
-        isPending: requestPaymentPending,
-    } = useMutation({
-        mutationFn: (payload) =>
-            api.post(
-                payments.requestPayment,
-                payload
-            ),
-
-        onSuccess: ({ data }) => {
-            const redirectUrl =
-                data?.data?.result?.redirectUrl;
-
-            if (redirectUrl) {
-                closeGstModal();
-
-                window.location.href =
-                    redirectUrl;
-
-                return;
-            }
-
-            showToast(
-                "Unable to start payment",
-                "error"
-            );
-        },
-
-        onError: ({ response }) => {
-            showToast(
-                response?.data?.error
-                    ?.error_message ||
-                "Unable to start payment",
-                "error"
-            );
-        },
-    });
+    const { handlePayment: requestPaymentHandle, paymentPending: requestPaymentPending } = handlePayment({ onSuccess: closeGstModal });
 
     const handlePurchase = useCallback(
         (plan) => {

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import {
   FaCheck,
   FaCalendarAlt,
@@ -6,18 +6,23 @@ import {
   FaCrown,
   FaShoppingBag,
   FaHistory,
-  FaArrowUp,
   FaRedo,
-  FaEye,
 } from "react-icons/fa";
 import PageTitleAddbtn from "../ui/PageTitleAddbtn";
 import { userState } from "../../context/UserContext";
 import { displayDateTime, remainingDaysUnix, unixDisplayDate } from "../../components/ui/DateDisplay";
 import { Link } from "react-router-dom";
+import GSTModal from "../../components/ui/GSTModal";
+import handlePayment from "../../hooks/handlePayment";
+import Loader from "../../components/ui/Loader";
 
 const MyService = () => {
 
   const { user, options } = userState();
+
+  const [gstModal, setGstModal] = useState(false);
+  const [gstData, setGstData] = useState({});
+  const [packageData, setPackageData] = useState({});
 
   const activeServices = useMemo(() => user?.package?.filter(list => !list.package_expire_status), [user?.package]);
   const oldServices = useMemo(() => user?.package?.filter(list => list.package_expire_status), [user?.package]);
@@ -30,9 +35,23 @@ const MyService = () => {
     return packageOrder.find((item) => item.value === packageName)?.label;
   }, [packageOrder]);
 
+  const closeGstModal = useCallback(() => {
+    setGstModal(false);
+    setGstData({})
+  }, []);
+
+  const handleGstModal = useCallback((data) => {
+    setGstModal(true)
+    setPackageData(data)
+  }, [])
+
+  const { handlePayment: requestPaymentHandle, paymentPending: requestPaymentPending } = handlePayment({ onSuccess: closeGstModal });
+
   return (
     <div className="w-full">
-
+      {requestPaymentPending && (
+        <Loader />
+      )}
       {/* HEADER */}
       <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
@@ -249,7 +268,7 @@ const MyService = () => {
 
 
                   {/* ACTIONS */}
-                  <div className="mt-6 flex flex-col gap-2 sm:flex-row">
+                  {/* <div className="mt-6 flex flex-col gap-2 sm:flex-row">
                     <button
                       type="button"
                       className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#b5688d] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#a4577d]"
@@ -258,7 +277,7 @@ const MyService = () => {
                       Upgrade
                     </button>
 
-                  </div>
+                  </div> */}
 
                 </div>
 
@@ -388,6 +407,7 @@ const MyService = () => {
 
                 <button
                   type="button"
+                  onClick={() => handleGstModal({ price: service?.package_id?.price, package_id: service?.package_id?._id })}
                   className="mt-5 flex w-full items-center justify-center gap-2 rounded-lg border border-[#b5688d] px-4 py-2.5 text-sm font-semibold text-[#b5688d] transition hover:bg-[#b5688d] hover:text-white"
                 >
                   <FaRedo />
@@ -428,7 +448,17 @@ const MyService = () => {
         </button>
 
       </div> */}
-
+      <GSTModal
+        open={gstModal}
+        onClose={closeGstModal}
+        onChange={(prev) => { setGstData({ ...gstData, ...prev }) }}
+        onClick={() => requestPaymentHandle({
+          amount: packageData?.price,
+          package_id: packageData?.package_id,
+          gst_number: gstData?.gst_number,
+          all_policies_checked: gstData?.all_policies_checked
+        })}
+      />
     </div>
   );
 };
