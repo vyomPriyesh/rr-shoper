@@ -451,6 +451,7 @@ const MyService = () => {
       <GSTModal
         open={gstModal}
         onClose={closeGstModal}
+        value={gstData}
         onChange={(prev) => { setGstData({ ...gstData, ...prev }) }}
         onClick={() => requestPaymentHandle({
           amount: packageData?.price,
