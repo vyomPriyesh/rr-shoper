@@ -448,18 +448,19 @@ const MyService = () => {
         </button>
 
       </div> */}
-      <GSTModal
-        open={gstModal}
-        onClose={closeGstModal}
-        value={gstData}
-        onChange={(prev) => { setGstData({ ...gstData, ...prev }) }}
-        onClick={() => requestPaymentHandle({
-          amount: packageData?.price,
-          package_id: packageData?.package_id,
-          gst_number: gstData?.gst_number,
-          all_policies_checked: gstData?.all_policies_checked
-        })}
-      />
+      {gstModal &&
+        <GSTModal
+          open={gstModal}
+          onClose={closeGstModal}
+          value={gstData}
+          onChange={(prev) => { setGstData({ ...gstData, ...prev }) }}
+          onClick={() => requestPaymentHandle({
+            package_id: packageData?.package_id,
+            gst_number: gstData?.gst_number,
+            all_policies_checked: gstData?.all_policies_checked
+          })}
+        />
+      }
     </div>
   );
 };

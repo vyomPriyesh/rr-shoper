@@ -3,7 +3,6 @@ import {
   FaBars,
   FaTimes,
   FaChevronDown,
-  FaUser,
   FaSignOutAlt,
 } from "react-icons/fa";
 import Logo from "../sections/Logo";
@@ -14,7 +13,7 @@ import { useToast } from "../../context/ToastContext";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../config/api";
 
-const Header = () => {
+const Header = ({ dashboardRoutes }) => {
 
   const { user, logout, setUser } = userState();
   const { auth, images } = apiList();
@@ -174,14 +173,16 @@ const Header = () => {
                   </p>
                 </div>
                 <div className="py-2">
-                  <Link
-                    to="/dashboard/my-profile"
-                    onClick={()=>setProfileOpen(false)}
-                    className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm text-gray-700 transition hover:bg-gray-100"
-                  >
-                    <FaUser className="text-gray-500" />
-                    My Profile
-                  </Link>
+                  {dashboardRoutes?.map((list, index) => (
+                    <Link
+                      to={`/${list.to}`}
+                      onClick={() => setProfileOpen(false)}
+                      className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm text-gray-700 transition hover:bg-gray-100"
+                    >
+                      {list.icon && <list.icon className="text-gray-500" />}
+                      {list.name}
+                    </Link>
+                  ))}
                   <div className="my-2 border-t border-gray-100" />
                   <button
                     type="button"

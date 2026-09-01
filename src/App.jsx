@@ -14,14 +14,40 @@ import TermsConditions from "./pages/TermsConditions"
 import DashboardData from "./pages/DashboardData"
 import ProtectedRoute from "./protecttedRoute/ProtectedRoute"
 import PaymentStatus from "./pages/PaymentStatus"
+import { FaUser } from "react-icons/fa"
+import { IoBagCheck, IoTicketSharp } from "react-icons/io5"
+import { TbShoppingCartCopy } from "react-icons/tb"
 
 function App() {
+
+  const dashboardRoutes = [
+    // {
+    //     name: "Dashboard", to: "dashboard",
+    //     icon: MdOutlineDashboard
+    // },
+    {
+      name: "My Profile", to: "dashboard/my-profile",
+      icon: FaUser
+    },
+    {
+      name: "My Service", to: "dashboard/my-service",
+      icon: IoBagCheck
+    },
+    {
+      name: "My Orders", to: "dashboard/my-orders",
+      icon: TbShoppingCartCopy
+    },
+    {
+      name: "Tickets", to: "dashboard/tickets",
+      icon: IoTicketSharp
+    },
+  ]
 
   return (
     <>
       <BrowserRouter>
         <MobileLogin />
-        <Header />
+        <Header dashboardRoutes={dashboardRoutes} />
         <div className="full-mountain-image bg-gradient-to-br from-[#fceef6] via-[#faf0f6] to-[#fcedf5] pt-20">
           <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -29,7 +55,7 @@ function App() {
               path="/dashboard/*"
               element={
                 <ProtectedRoute >
-                  <DashboardData />
+                  <DashboardData dashboardRoutes={dashboardRoutes} />
                 </ProtectedRoute>
               }
             />

@@ -7,6 +7,7 @@ import apiList from '../../config/apiList'
 import { useToast } from '../../context/ToastContext'
 import api from '../../config/api'
 import Loader from '../../components/ui/Loader'
+import InputField from '../../components/ui/InputField'
 
 const MyProfile = () => {
 
@@ -23,6 +24,7 @@ const MyProfile = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        gst_number: '',
         mobile: '',
     })
 
@@ -31,6 +33,7 @@ const MyProfile = () => {
             setFormData({
                 name: user?.name || '',
                 email: user?.email || '',
+                gst_number: user?.gst_number || '',
                 mobile: user?.mobile || user?.phoneNumber || '',
             })
             setProfileImage(user?.image?.image ? images?.imgUrl + user?.image?.image : null)
@@ -133,6 +136,7 @@ const MyProfile = () => {
         setFormData({
             name: user?.name || '',
             email: user?.email || '',
+            gst_number: user?.gst_number || '',
             mobile: user?.mobile || user?.phoneNumber || '',
         })
 
@@ -145,6 +149,7 @@ const MyProfile = () => {
         updateProfile({
             name: formData.name,
             email: formData.email,
+            gst_number: formData.gst_number,
             mobile: formData.mobile,
         })
     }
@@ -220,91 +225,52 @@ const MyProfile = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
 
                         {/* Name */}
-                        <div className="flex flex-col gap-2">
-
-                            <label
-                                htmlFor="name"
-                                className="text-sm font-medium text-gray-600"
-                            >
-                                Name
-                            </label>
-
-                            {isEditing ? (
-                                <input
-                                    id="name"
-                                    type="text"
-                                    name="name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    placeholder="Enter your name"
-                                    disabled={isProfileUpdating}
-                                    className="w-full h-11 px-4 rounded-lg border border-gray-300 bg-white text-gray-800 text-sm sm:text-base outline-none focus:border-primary focus:ring-1 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
-                                />
-                            ) : (
-                                <div className="w-full min-h-[44px] flex items-center px-4 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 text-sm sm:text-base">
-                                    {formData?.name || '-'}
-                                </div>
-                            )}
-
-                        </div>
+                        <InputField
+                            id="name"
+                            type="text"
+                            label="Name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Enter your name"
+                            disabled={!isEditing || isProfileUpdating}
+                        />
 
                         {/* Email */}
-                        <div className="flex flex-col gap-2">
-
-                            <label
-                                htmlFor="email"
-                                className="text-sm font-medium text-gray-600"
-                            >
-                                Email
-                            </label>
-
-                            {isEditing ? (
-                                <input
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    placeholder="Enter your email"
-                                    disabled={isProfileUpdating}
-                                    className="w-full h-11 px-4 rounded-lg border border-gray-300 bg-white text-gray-800 text-sm sm:text-base outline-none focus:border-primary focus:ring-1 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
-                                />
-                            ) : (
-                                <div className="w-full min-h-[44px] flex items-center px-4 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 text-sm sm:text-base break-all">
-                                    {formData?.email || '-'}
-                                </div>
-                            )}
-
-                        </div>
+                        <InputField
+                            id="email"
+                            label="Email"
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Enter your email"
+                            disabled={!isEditing || isProfileUpdating}
+                        />
 
                         {/* Mobile */}
-                        <div className="flex flex-col gap-2">
+                        <InputField
+                            id="mobile"
+                            type="tel"
+                            label="Mobile"
+                            name="mobile"
+                            value={formData.mobile}
+                            onChange={handleChange}
+                            placeholder="Enter your mobile number"
+                            disabled={!isEditing || isProfileUpdating}
+                        />
 
-                            <label
-                                htmlFor="mobile"
-                                className="text-sm font-medium text-gray-600"
-                            >
-                                Mobile
-                            </label>
-
-                            {isEditing ? (
-                                <input
-                                    id="mobile"
-                                    type="tel"
-                                    name="mobile"
-                                    value={formData.mobile}
-                                    onChange={handleChange}
-                                    placeholder="Enter your mobile number"
-                                    disabled={isProfileUpdating}
-                                    className="w-full h-11 px-4 rounded-lg border border-gray-300 bg-white text-gray-800 text-sm sm:text-base outline-none focus:border-primary focus:ring-1 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
-                                />
-                            ) : (
-                                <div className="w-full min-h-[44px] flex items-center px-4 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 text-sm sm:text-base">
-                                    {formData?.mobile || formData?.phoneNumber || '-'}
-                                </div>
-                            )}
-
-                        </div>
+                        {/* GST Number */}
+                        <InputField
+                            id="gst_number"
+                            type="text"
+                            label="GST Number"
+                            name="gst_number"
+                            value={formData.gst_number}
+                            onChange={handleChange}
+                            placeholder="Enter your GST number"
+                            disabled={!isEditing || isProfileUpdating}
+                        />
 
                     </div>
 

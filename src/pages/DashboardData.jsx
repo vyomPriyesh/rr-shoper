@@ -1,42 +1,21 @@
 import React from 'react'
-import { FaUser } from 'react-icons/fa'
-import { IoBagCheck, IoTicketSharp } from 'react-icons/io5'
-import { NavLink, Outlet, Route, Router, Routes } from 'react-router-dom'
+import { NavLink, Route, Routes } from 'react-router-dom'
 import MyProfile from './dashboard/MyProfile'
 import MyService from './dashboard/MyService'
-import { MdOutlineDashboard } from 'react-icons/md'
 import DashboardPage from './dashboard/DashboardPage'
 import Tickets from './dashboard/tickets/Tickets'
 import AddTickets from './dashboard/tickets/AddTickets'
 import ViewTicket from './dashboard/tickets/ViewTicket'
+import MyOrders from './dashboard/MyOrders'
 
 
-const DashboardData = () => {
-
-    const links = [
-        // {
-        //     name: "Dashboard", to: "dashboard",
-        //     icon: MdOutlineDashboard
-        // },
-        {
-            name: "My Profile", to: "dashboard/my-profile",
-            icon: FaUser
-        },
-        {
-            name: "My Service", to: "dashboard/my-service",
-            icon: IoBagCheck
-        },
-        {
-            name: "Tickets", to: "dashboard/tickets",
-            icon: IoTicketSharp
-        },
-    ]
+const DashboardData = ({ dashboardRoutes }) => {
 
     return (
         <div className='container mx-auto md:p-5 p-3'>
             <div className="flex md:flex-row flex-col gap-5">
                 <div className="md:w-1/4 w-full rounded-lg border dashboard-menu border-primary md:p-5 px-2 py-1 flex md:flex-col flex-row text-nowrap md:overflow-visible overflow-scroll gap-2">
-                    {links.map((list, index) => (
+                    {dashboardRoutes.map((list, index) => (
                         <NavLink
                             to={"/" + list.to}
                             key={index}
@@ -55,6 +34,7 @@ const DashboardData = () => {
                         <Route path="/" element={<DashboardPage />} />
                         <Route path="/my-profile" element={<MyProfile />} />
                         <Route path="/my-service" element={<MyService />} />
+                        <Route path="/my-orders" element={<MyOrders />} />
                         <Route path="/tickets" element={<Tickets />} />
                         <Route path="/tickets/add-ticket" element={<AddTickets />} />
                         <Route path="/tickets/:id" element={<ViewTicket />} />

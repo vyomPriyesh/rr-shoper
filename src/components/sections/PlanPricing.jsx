@@ -254,7 +254,15 @@ const PlanPricingContent = ({
                 })}
             </div>
 
-            <GSTModal open={gstModal} onClose={closeGstModal} onClick={handleGstSubmit} onChange={(e) => { setGstNumber(e?.gst_number || gstNumber), setPolicyAccepted(e?.all_policies_checked || policyAccepted) }} value={{ all_policies_checked: policyAccepted, gst_number: gstNumber }} />
+            {gstModal && (
+                <GSTModal
+                    open={gstModal}
+                    onClose={closeGstModal
+                    } onClick={handleGstSubmit}
+                    onChange={(e) => { setGstNumber(e?.gst_number || gstNumber), setPolicyAccepted((e?.all_policies_checked !== null || e?.all_policies_checked === undefined) ? e?.all_policies_checked : policyAccepted) }}
+                    value={{ all_policies_checked: policyAccepted, gst_number: gstNumber }}
+                />
+            )}
         </>
     );
 };
@@ -479,7 +487,6 @@ const PlanPricing = () => {
             }
 
             setGstPlan(plan);
-            setGstNumber("");
             setGstModal(true);
             setPolicyAccepted(false);
         },
@@ -519,7 +526,6 @@ const PlanPricing = () => {
         }
 
         requestPaymentHandle({
-            amount: gstPlan.price,
             package_id: gstPlan.package_id,
             gst_number: gst,
             all_policies_checked: policyAccepted
