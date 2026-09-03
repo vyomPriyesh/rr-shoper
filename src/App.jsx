@@ -17,6 +17,9 @@ import PaymentStatus from "./pages/PaymentStatus"
 import { FaUser } from "react-icons/fa"
 import { IoBagCheck, IoTicketSharp } from "react-icons/io5"
 import { TbShoppingCartCopy } from "react-icons/tb"
+import { ReactLenis } from "lenis/react"
+import "lenis/dist/lenis.css"
+import ScrollToTop from "./components/layouts/ScrollToTop"
 
 function App() {
 
@@ -46,6 +49,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel: true }}>
+        <ScrollToTop />
         <MobileLogin />
         <Header dashboardRoutes={dashboardRoutes} />
         <div className="full-mountain-image bg-gradient-to-br from-[#fceef6] via-[#faf0f6] to-[#fcedf5] pt-20">
@@ -70,6 +75,7 @@ function App() {
           </Routes>
         </div>
         <Footer />
+        </ReactLenis>
       </BrowserRouter>
     </>
   )
