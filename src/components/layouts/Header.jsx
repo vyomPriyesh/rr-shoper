@@ -140,7 +140,7 @@ const Header = ({ dashboardRoutes }) => {
             <div ref={profileRef} className="relative">
               <button
                 type="button"
-                onClick={() => { setProfileOpen((prev) => !prev), setMobileMenuOpen(false)} }}
+                onClick={() => { setProfileOpen((prev) => !prev), setMobileMenuOpen(false) }}
                 className="flex items-center gap-3 rounded-lg p-1.5 transition hover:bg-gray-100"
               >
                 <img src={user?.image?.image ? images?.imgUrl + user?.image?.image : `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${user?.name || 'RR'}`}
