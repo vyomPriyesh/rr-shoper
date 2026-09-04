@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import SectionsUI from '../layouts/SectionsUI';
 import { FaRegUser } from 'react-icons/fa';
 import { LuTag } from 'react-icons/lu';
@@ -6,7 +6,6 @@ import { RiShieldCheckLine } from 'react-icons/ri';
 import { TbRegistered } from 'react-icons/tb';
 import { BsCardList } from 'react-icons/bs';
 import { AiOutlineShop } from 'react-icons/ai';
-
 
 const Services = () => {
 
@@ -60,29 +59,35 @@ const Services = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-7 lg:gap-10">
                 {SERVICES.map((service, index) => {
                     const Icon = service?.icon;
+                    const animationDelay = `${0.1 + index * 0.12}s`;
+
                     return (
-                        <div key={index} className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white p-1 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                        <div 
+                            key={index} 
+                            style={{ animationDelay }}
+                            className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white p-1 shadow-sm border border-slate-100 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-xl hover:border-primary/20 animate-fade-in-up"
+                        >
                             <div className="relative overflow-hidden rounded-t-xl">
                                 <img
                                     src={service.img}
-                                    alt="Seller Account Setup"
-                                    className="aspect-[16/9] w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                                    alt={service.title}
+                                    className="aspect-[16/9] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
                                 />
                             </div>
                             <div className="flex flex-1 flex-col px-4 pb-6 pt-8 sm:pt-7 sm:px-5 sm:pb-6 relative">
-                                <span className='2xl:h-14 2xl:w-14 md:h-11 md:w-11 h-12 w-12 aspect-square bg-white rounded-full absolute top-0 -translate-y-1/2 p-1'>
-                                    <span className='bg-primary text-white h-full w-full flex justify-center items-center rounded-full shadow-lg 2xl:text-2xl md:text-base text-lg'>
+                                <span className='2xl:h-14 2xl:w-14 md:h-11 md:w-11 h-12 w-12 aspect-square bg-white rounded-full absolute top-0 -translate-y-1/2 p-1 transition-transform duration-300 ease-out group-hover:-translate-y-[60%] group-hover:scale-110'>
+                                    <span className='bg-primary text-white h-full w-full flex justify-center items-center rounded-full shadow-lg 2xl:text-2xl md:text-base text-lg transition-colors duration-300 group-hover:bg-secondary'>
                                         <Icon />
                                     </span>
                                 </span>
-                                <h3 className="2xl:text-lg xl:text-base font-bold leading-tight text-gray-900">
+                                <h3 className="2xl:text-lg xl:text-base font-bold leading-tight text-gray-900 transition-colors duration-300 group-hover:text-primary">
                                     {service.title}
                                 </h3>
                                 <p className="mt-3 xl:text-xs 2xl:text-base text-sm leading-6 text-gray-600 sm:leading-7">
                                     {service.description}
                                 </p>
                                 <span className="mt-auto pt-5">
-                                    <span className="block h-1 w-12 rounded-full bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-16" />
+                                    <span className="block h-1 w-12 rounded-full bg-gradient-to-r from-primary to-secondary transition-all duration-500 ease-in-out group-hover:w-24" />
                                 </span>
                             </div>
                         </div>
@@ -103,4 +108,4 @@ const Services = () => {
     )
 }
 
-export default Services
+export default Services;
