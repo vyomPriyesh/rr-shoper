@@ -55,46 +55,44 @@ const Services = () => {
         },
     ];
 
-    // Variants for each individual card container
     const cardVariants = {
         hidden: { 
             opacity: 0, 
-            scaleY: 0, 
-            transformOrigin: "center" 
+            y: 40 
         },
-        visible: { 
-            opacity: 1, 
-            scaleY: 1, 
-            transition: { 
-                duration: 0.8, 
-                ease: [0.16, 1, 0.3, 1] 
-            } 
-        },
-    };
-
-    // Variants for image drop-in animation
-    const imgVariants = {
-        hidden: { opacity: 0, y: 30 },
         visible: { 
             opacity: 1, 
             y: 0, 
             transition: { 
                 duration: 0.6, 
-                ease: "easeOut",
-                delay: 0.2
+                ease: [0.16, 1, 0.3, 1] 
             } 
         },
     };
-    // Variants for content float-up animation
+
+    // Clean fade + subtle scale animation for images without layout shifting
+    const imgVariants = {
+        hidden: { opacity: 0, scale: 0.95 },
+        visible: { 
+            opacity: 1, 
+            scale: 1, 
+            transition: { 
+                duration: 0.5, 
+                ease: "easeOut",
+                delay: 0.15
+            } 
+        },
+    };
+
     const contentVariants = {
-        hidden: { opacity: 0, y: 15 },
+        hidden: { opacity: 0, y: 10 },
         visible: { 
             opacity: 1, 
             y: 0, 
             transition: { 
-                duration: 0.7, 
+                duration: 0.5, 
                 ease: "easeOut",
-                delay: 0.3
+                delay: 0.25
             } 
         },
     };
@@ -114,7 +112,7 @@ const Services = () => {
                             viewport={{ once: true, amount: 0.2 }}
                             className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white p-1 shadow-sm transition-all duration-400 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:border-blue-500/40"
                         >
-                            <div className="relative overflow-hidden rounded-t-xl">
+                            <div className="relative overflow-hidden rounded-t-xl bg-gray-50">
                                 <motion.img
                                     variants={imgVariants}
                                     src={service.img}
