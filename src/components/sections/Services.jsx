@@ -55,7 +55,7 @@ const Services = () => {
     ];
 
     const Content = () => {
-        return 
+        return (
         <>
        <style>{`
                     .service-card-animated {
