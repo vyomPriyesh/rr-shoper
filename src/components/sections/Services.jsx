@@ -74,18 +74,17 @@ const Services = () => {
 
     // Variants for image drop-in animation
     const imgVariants = {
-        hidden: { opacity: 0, y: -30 },
+        hidden: { opacity: 0, y: 30 },
         visible: { 
             opacity: 1, 
             y: 0, 
             transition: { 
-                duration: 0.7, 
-                ease: [0.34, 1.56, 0.64, 1],
+                duration: 0.6, 
+                ease: "easeOut",
                 delay: 0.2
             } 
         },
     };
-
     // Variants for content float-up animation
     const contentVariants = {
         hidden: { opacity: 0, y: 15 },
@@ -112,7 +111,7 @@ const Services = () => {
                             variants={cardVariants}
                             initial="hidden"
                             whileInView="visible"
-                            viewport={{ once: false, amount: 0.2 }}
+                            viewport={{ once: true, amount: 0.2 }}
                             className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white p-1 shadow-sm transition-all duration-400 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:border-blue-500/40"
                         >
                             <div className="relative overflow-hidden rounded-t-xl">
