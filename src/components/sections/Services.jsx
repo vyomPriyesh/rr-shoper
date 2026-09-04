@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion'; // 🌟 ADDED: Framer Motion import
+import { motion } from 'framer-motion';
 import SectionsUI from '../layouts/SectionsUI';
 import { FaRegUser } from 'react-icons/fa';
 import { LuTag } from 'react-icons/lu';
@@ -55,17 +55,7 @@ const Services = () => {
         },
     ];
 
-    // 🌟 ADDED: Animation Variants for Staggered & Entrance Effects
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.12, // Stagger cards sequentially
-            },
-        },
-    };
-
+    // Variants for each individual card container
     const cardVariants = {
         hidden: { 
             opacity: 0, 
@@ -82,26 +72,28 @@ const Services = () => {
         },
     };
 
+    // Variants for image drop-in animation
     const imgVariants = {
         hidden: { opacity: 0, y: -30 },
         visible: { 
             opacity: 1, 
             y: 0, 
             transition: { 
-                duration: 0.6, 
+                duration: 0.7, 
                 ease: [0.34, 1.56, 0.64, 1],
                 delay: 0.2
             } 
         },
     };
 
+    // Variants for content float-up animation
     const contentVariants = {
         hidden: { opacity: 0, y: 15 },
         visible: { 
             opacity: 1, 
             y: 0, 
             transition: { 
-                duration: 0.6, 
+                duration: 0.7, 
                 ease: "easeOut",
                 delay: 0.3
             } 
@@ -110,33 +102,29 @@ const Services = () => {
 
     const Content = () => {
         return (
-            // 🌟 UPDATED: Wrapper container triggers child animations upon scroll into view
-            <motion.div 
-                className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-7 lg:gap-10"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-7 lg:gap-10">
                 {SERVICES.map((service, index) => {
                     const Icon = service?.icon;
 
                     return (
                         <motion.div 
                             key={index} 
-                            variants={cardVariants} // 🌟 UPDATED: Curtain Reveal Motion
+                            variants={cardVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: false, amount: 0.2 }}
                             className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white p-1 shadow-sm transition-all duration-400 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:border-blue-500/40"
                         >
                             <div className="relative overflow-hidden rounded-t-xl">
                                 <motion.img
-                                    variants={imgVariants} // 🌟 UPDATED: Image Drop-In Motion
+                                    variants={imgVariants}
                                     src={service.img}
                                     alt={service.title}
                                     className="aspect-[16/9] w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                                 />
                             </div>
                             <motion.div 
-                                variants={contentVariants} // 🌟 UPDATED: Content Float-Up Motion
+                                variants={contentVariants}
                                 className="flex flex-1 flex-col px-4 pb-6 pt-8 sm:pt-7 sm:px-5 sm:pb-6 relative"
                             >
                                 <span className='2xl:h-14 2xl:w-14 md:h-11 md:w-11 h-12 w-12 aspect-square bg-white rounded-full absolute top-0 -translate-y-1/2 p-1 transition-transform duration-300 ease-out group-hover:-translate-y-[60%] group-hover:scale-110'>
@@ -157,7 +145,7 @@ const Services = () => {
                         </motion.div>
                     );
                 })}
-            </motion.div>
+            </div>
         )
     }
 
