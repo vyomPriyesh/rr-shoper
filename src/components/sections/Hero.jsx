@@ -57,11 +57,11 @@ const Hero = () => {
 
     const animations = {
         hidden: {
-            y: 100,
+            x: 100,
             opacity: 0,
         },
         visible: {
-            y: 0,
+            x: 0,
             opacity: 1,
         },
     }
