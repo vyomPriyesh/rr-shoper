@@ -290,13 +290,18 @@ const PlanPricing = () => {
             const response = data?.data?.data || [];
 
             const platforms = [
-                ...new Map(
-                    response.map((item) => [
-                        item.platform?._id,
-                        item.platform,
-                    ])
-                ).values(),
-            ];
+  ...new Map(
+    response.map((item) => [
+      item.platform?._id,
+      item.platform,
+    ])
+  ).values(),
+].sort((a, b) => {
+  if (a?.index == null) return 1;
+  if (b?.index == null) return -1;
+
+  return Number(a.index) - Number(b.index);
+});
 
             const pricingData = [...response]
                 .sort((a, b) =>
