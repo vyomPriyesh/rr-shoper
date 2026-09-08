@@ -332,56 +332,6 @@ const ViewTicket = () => {
 
                 </div>
 
-
-                {/* ==================================================================
-                    Ticket Attachments
-                    ================================================================== */}
-
-                {ticketData?.images?.length > 0 && (
-
-                    <div className="mt-6">
-
-                        <p className="mb-3 text-xs font-medium text-gray-500 md:text-sm">
-                            Attachments
-                        </p>
-
-
-                        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-
-                            {ticketData.images.map((image, index) => {
-
-                                const imageUrl =
-                                    image?.url ||
-                                    image?.image ||
-                                    image
-
-                                return (
-                                    <a
-                                        key={index}
-                                        href={imageUrl}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="group relative aspect-square overflow-hidden rounded-xl border border-gray-200 bg-gray-100"
-                                    >
-
-                                        <img
-                                            src={imageUrl}
-                                            alt={`Ticket attachment ${index + 1}`}
-                                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                        />
-
-                                    </a>
-                                )
-
-                            })}
-
-                        </div>
-
-                    </div>
-
-                )}
-
-
                 {/* ==================================================================
                     Additional Information
                     ================================================================== */}

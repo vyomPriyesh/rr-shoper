@@ -43,7 +43,7 @@ const Tickets = () => {
 
     const description = (data) => {
         const textareaKey = Object.keys(data).find(list => list.includes('textarea'))
-        return data[textareaKey]?.map(list => list.value).join(', ') || ''
+        return Array.isArray(data?.[textareaKey]) ? data?.[textareaKey]?.map(list => list.value).join(', ') : data?.[textareaKey]
     }
 
     const handlePagination = (data) => {
