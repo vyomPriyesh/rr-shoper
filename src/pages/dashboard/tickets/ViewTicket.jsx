@@ -310,7 +310,10 @@ const ViewTicket = () => {
                             value={item?.value || '-'}
                         />
                     ))}
-
+<h2 className="text-base font-semibold text-gray-900 md:text-lg">
+                        Additional Information
+                    </h2>
+                    
 
                     {/* Dynamic Upload Fields */}
 
@@ -332,52 +335,7 @@ const ViewTicket = () => {
 
                 </div>
 
-                {/* ==================================================================
-                    Additional Information
-                    ================================================================== */}
-
-                <div className="mt-6 border-t border-gray-100 pt-6">
-
-                    <h2 className="text-base font-semibold text-gray-900 md:text-lg">
-                        Additional Information
-                    </h2>
-
-
-                    <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 md:gap-4">
-
-                        <DetailItem
-                            label="Created At"
-                            value={displayDateTime(ticketData?.createdAt)}
-                        />
-
-                        <DetailItem
-                            label="Updated At"
-                            value={displayDateTime(ticketData?.updatedAt)}
-                        />
-
-
-                        {ticketData?.upload?.map((item, index) => (
-                            <div className="col-span-1 flex flex-col gap-2 sm:col-span-2" key={index}>
-
-                                <p className="mb-1.5 text-xs font-medium capitalize text-gray-500 md:text-sm">
-                                    {item?.name}
-                                </p>
-
-                                <ImagesUploadUi
-                                    value={item?.value}
-                                    multiple={Array.isArray(item?.value)}
-                                    readOnly
-                                />
-
-                            </div>
-                        ))}
-
-                    </div>
-
-                </div>
-
-
-                {/* ==================================================================
+                 {/* ==================================================================
                     Comments
                     ================================================================== */}
 
