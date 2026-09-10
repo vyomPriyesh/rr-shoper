@@ -310,9 +310,12 @@ const ViewTicket = () => {
                             value={item?.value || '-'}
                         />
                     ))}
-<h2 className="text-base font-semibold text-gray-900 md:text-lg">
-                        Additional Information
-                    </h2>
+<DetailItem
+                            label="Created At"
+                            value={displayDateTime(ticketData?.createdAt)}
+                        />
+
+
                     
 
                     {/* Dynamic Upload Fields */}
