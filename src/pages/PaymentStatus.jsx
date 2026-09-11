@@ -15,7 +15,8 @@ const PaymentStatus = () => {
     const { data, isFetching } = useQuery({
         queryKey: ['payment-status', id],
         queryFn: () => api.get(payments.status(id)),
-        enabled: !!user && !!id
+        enabled: !!user && !!id,
+        select : ({data}) => data
     })
 
     const queryClient = useQueryClient();
