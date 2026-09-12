@@ -39,13 +39,7 @@ const apiList = () => {
             view: (id) => `ticket/${id}`,
 
             // Comments
-            comments: (ticketId) => `ticket/${ticketId}/comments`,
-
-            // Add main comment
-            addComment: (ticketId) => `ticket/${ticketId}/comment`,
-
-            // Add reply / nested reply
-            addReply: (ticketId) => `ticket/${ticketId}/comment/reply`,
+            comments: (ticketId) => `ticket/comments/${ticketId}`,
 
             // Comment reactions
             likeComment: (commentId) => `ticket/comment/${commentId}/like`,

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Header from "./components/layouts/Header"
 import "./App.css"
@@ -20,8 +20,32 @@ import { TbShoppingCartCopy } from "react-icons/tb"
 import { ReactLenis } from "lenis/react"
 import "lenis/dist/lenis.css"
 import ScrollToTop from "./components/layouts/ScrollToTop"
+import { userState } from "./context/UserContext"
+import { socket } from "./config/socket"
 
 function App() {
+
+  const { user } = userState();
+
+  useEffect(() => {
+    if (!user?.token) {
+      socket.disconnect();
+      return;
+    }
+
+    socket.auth = {
+      auth_id: user?._id,
+      role: user?.role,
+    };
+
+    if (!socket.connected) {
+      socket.connect();
+    }
+
+    return () => {
+      // socket.disconnect();
+    };
+  }, [user?._id]);
 
   const dashboardRoutes = [
     // {
@@ -50,31 +74,31 @@ function App() {
     <>
       <BrowserRouter>
         <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel: true }}>
-        <ScrollToTop />
-        <MobileLogin />
-        <Header dashboardRoutes={dashboardRoutes} />
-        <div className="full-mountain-image bg-gradient-to-br from-[#fceef6] via-[#faf0f6] to-[#fcedf5] pt-20">
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route
-              path="/dashboard/*"
-              element={
-                <ProtectedRoute >
-                  <DashboardData dashboardRoutes={dashboardRoutes} />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/contact" element={<ContactSection />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/platforms" element={<PlanPricing />} />
-            <Route path="/platforms/:platformName" element={<PlanPricing />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicies />} />
-            <Route path="/refund-cancellation-policy" element={<RefundCancellationPolicies />} />
-            <Route path="/terms-and-conditions" element={<TermsConditions />} />
-            <Route path="/payment/status/:id" element={<PaymentStatus />} />
-          </Routes>
-        </div>
-        <Footer />
+          <ScrollToTop />
+          <MobileLogin />
+          <Header dashboardRoutes={dashboardRoutes} />
+          <div className="full-mountain-image bg-gradient-to-br from-[#fceef6] via-[#faf0f6] to-[#fcedf5] pt-20">
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route
+                path="/dashboard/*"
+                element={
+                  <ProtectedRoute >
+                    <DashboardData dashboardRoutes={dashboardRoutes} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/contact" element={<ContactSection />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/platforms" element={<PlanPricing />} />
+              <Route path="/platforms/:platformName" element={<PlanPricing />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicies />} />
+              <Route path="/refund-cancellation-policy" element={<RefundCancellationPolicies />} />
+              <Route path="/terms-and-conditions" element={<TermsConditions />} />
+              <Route path="/payment/status/:id" element={<PaymentStatus />} />
+            </Routes>
+          </div>
+          <Footer />
         </ReactLenis>
       </BrowserRouter>
     </>
