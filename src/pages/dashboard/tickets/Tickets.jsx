@@ -10,6 +10,7 @@ import ButtonUi from '../../ui/ButtonUi'
 import { timeAgo } from '../../../components/ui/DateDisplay'
 import PaginationData from '../../ui/PaginationData'
 import { Empty } from 'antd'
+import UserAvatar from '../../ui/UserAvatar'
 
 
 const Tickets = () => {
@@ -112,14 +113,7 @@ const Tickets = () => {
                             {allTickets?.map((list, i) => (
                                 <Link to={list?._id} className="flex flex-col sm:flex-row py-3 px-2 sm:items-center hover:bg-secondary/20 rounded hover:shadow-lg transition-all duration-300 ease-out cursor-pointer bg-secondary/10" key={i}>
                                     <div className="sm:w-1/2 flex flex-row items-center gap-3">
-                                        <img
-                                            className="w-10 h-10 rounded-full"
-                                            src={
-                                                list?.user?.image ||
-                                                `https://ui-avatars.com/api/?background=B06A8D&color=fff&name=${list?.user?.name}`
-                                            }
-                                            alt=""
-                                        />
+                                        <UserAvatar image={list?.customer?.image?.image} name={list?.customer?.name} />
 
                                         <div className="flex flex-col">
                                             <h6 className="font-semibold">{list?.title?.title}</h6>

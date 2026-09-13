@@ -17,6 +17,7 @@ import {
     FiThumbsUp
 } from 'react-icons/fi'
 import { socket } from '../../../config/socket'
+import UserAvatar from '../../ui/UserAvatar'
 
 const ViewTicket = () => {
 
@@ -295,13 +296,13 @@ const ViewTicket = () => {
                             value={item?.value || '-'}
                         />
                     ))}
-<DetailItem
-                            label="Created At"
-                            value={displayDateTime(ticketData?.createdAt)}
-                        />
+                    <DetailItem
+                        label="Created At"
+                        value={displayDateTime(ticketData?.createdAt)}
+                    />
 
 
-                    
+
 
                     {/* Dynamic Upload Fields */}
 
@@ -323,7 +324,7 @@ const ViewTicket = () => {
 
                 </div>
 
-                 {/* ==================================================================
+                {/* ==================================================================
                     Comments
                     ================================================================== */}
 
@@ -354,10 +355,7 @@ const ViewTicket = () => {
                         ================================================================== */}
 
                     <div className="mt-5 flex gap-3">
-
-                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#f4e4ec] text-xs font-semibold text-[#a6587e] sm:h-10 sm:w-10">
-                            PB
-                        </div>
+                        <UserAvatar image={user?.image?.image} name={user?.name} />
 
 
                         <div className="min-w-0 flex-1">
@@ -590,15 +588,7 @@ const YoutubeComment = ({
                 <div className="flex gap-2.5 sm:gap-3">
 
                     {/* Avatar */}
-
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#f4e4ec] text-xs font-semibold text-[#a6587e] sm:h-9 sm:w-9 sm:text-sm">
-
-                        {comment?.user?.initials ||
-                            comment?.user?.name?.charAt(0)?.toUpperCase() ||
-                            'U'}
-
-                    </div>
-
+                    <UserAvatar image={comment?.reply_by_customer?.image || comment?.reply_by_user?.image} name={comment?.reply_by_customer?.name || comment?.reply_by_user?.name} />
 
                     <div className="min-w-0 flex-1">
 
@@ -607,7 +597,7 @@ const YoutubeComment = ({
                         <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-0.5">
 
                             <span className="max-w-[70%] truncate text-xs font-semibold text-gray-900 sm:max-w-none sm:text-sm">
-                                {comment?.reply_by_customer?.name || 'Unknown User'}
+                                {comment?.reply_by_customer?.name || comment?.reply_by_user?.name || 'Unknown User'}
                             </span>
 
                             <span className="text-[10px] text-gray-400 sm:text-xs">

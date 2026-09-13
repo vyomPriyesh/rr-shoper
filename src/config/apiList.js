@@ -34,7 +34,7 @@ const apiList = () => {
 
             add: `ticket/add-ticket`,
 
-            all: 'allTicket',
+            all: 'allTickets',
 
             view: (id) => `ticket/${id}`,
 
