@@ -466,6 +466,7 @@ const ViewTicket = () => {
                                         // handleDislike={handleDislike}
                                         // isLikePending={isLiking}
                                         // isDislikePending={isDisliking}
+                                        user={user}
                                         isReplyPending={isAddingReply}
                                     />
 
@@ -540,6 +541,7 @@ const YoutubeComment = ({
     isDislikePending,
     isReplyPending,
     isReply,
+    user,
     level = 0
 }) => {
 
@@ -714,11 +716,7 @@ const YoutubeComment = ({
                             <div className="mt-3 rounded-xl border border-[#ead2df] bg-[#fdf8fa] p-2.5 sm:mt-4 sm:p-3">
 
                                 <div className="flex gap-2">
-
-                                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#f4e4ec] text-[10px] font-semibold text-[#a6587e] sm:h-8 sm:w-8 sm:text-xs">
-                                        PB
-                                    </div>
-
+                                    <UserAvatar image={user?.image?.image} name={user?.name} />
 
                                     <div className="min-w-0 flex-1">
 
@@ -837,6 +835,7 @@ const YoutubeComment = ({
                                     isLikePending={isLikePending}
                                     isDislikePending={isDislikePending}
                                     isReplyPending={isReplyPending}
+                                    user={user }
                                 />
 
                             </div>
