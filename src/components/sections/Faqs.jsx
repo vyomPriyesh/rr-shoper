@@ -73,31 +73,44 @@ const FAQItem = ({ id, question, answer }) => {
 
 const Faqs = () => {
     const faqs = [
-        {
-            id: 1,
-            question: 'What services do you provide?',
-            answer:
-                'We provide web development, mobile app development, UI/UX design, and cloud deployment services.',
-        },
-        {
-            id: 2,
-            question: 'How long does a project take?',
-            answer:
-                'Project timelines depend on complexity, but most projects are completed within 2–8 weeks.',
-        },
-        {
-            id: 3,
-            question: 'Do you provide support after delivery?',
-            answer:
-                'Yes, we provide post-launch support and maintenance packages for all projects.',
-        },
-        {
-            id: 4,
-            question: 'Can I request custom features?',
-            answer:
-                'Absolutely. We build fully customized solutions based on your requirements.',
-        },
-    ]
+    {
+        id: 1,
+        question: 'What marketplace management services do you provide?',
+        answer:
+            'We provide end-to-end seller operations, including marketplace account setup, brand registry assistance, catalog creation, keyword-optimized listings, policy compliance, and daily account maintenance.',
+    },
+    {
+        id: 2,
+        question: 'Which e-commerce platforms do you support?',
+        answer:
+            'We support all major Indian marketplaces: Amazon, Flipkart, Meesho, Myntra, Ajio, Snapdeal, and JioMart.',
+    },
+    {
+        id: 3,
+        question: 'How long does the onboarding and account setup take?',
+        answer:
+            'Initial seller account setup and onboarding usually take 3 to 7 business days, depending on document verification and your total catalog size.',
+    },
+    {
+        id: 4,
+        question: 'What is included in your Starter and Hot pricing plans?',
+        answer:
+            'Our Starter Plan (₹1,999/mo) includes new account creation, keyword optimization, brand registration assistance, and setup for up to 50 SKUs. Our Hot Plan (₹6,999/mo) includes listing management for up to 100 products, order keyword optimization, and dedicated seller support.',
+    },
+    {
+        id: 5,
+        question: 'Do you provide ongoing support after account setup?',
+        answer:
+            'Yes, we provide 24/7 seller support, ongoing catalog management, account health monitoring, and resolution of marketplace compliance issues.',
+    },
+    {
+        id: 6,
+        question: 'Can I request custom plans for multiple marketplaces?',
+        answer:
+            'Absolutely. We can create customized packages based on your total inventory count, number of marketplace accounts, and specific business goals.',
+    },
+];
+
 
     const Content = () => {
         return (
