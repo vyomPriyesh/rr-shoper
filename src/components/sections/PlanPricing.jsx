@@ -268,7 +268,7 @@ const PlanPricingContent = ({
 };
 
 const PlanPricing = () => {
-    const { user, options } = userState();
+    const { user, options, setOpen  } = userState();
     const { packages, images, payments } = apiList();
     const { showToast } = useToast();
     const { platformName } = useParams();
@@ -485,6 +485,10 @@ const PlanPricing = () => {
 
     const handlePurchase = useCallback(
         (plan) => {
+            if(!user?.token) {
+                setOpen(true)
+                return
+            }
             const state = getPlanState(plan);
 
             if (state === "CURRENT") {
