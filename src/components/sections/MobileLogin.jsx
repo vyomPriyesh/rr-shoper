@@ -9,7 +9,7 @@ import { userState } from "../../context/UserContext";
 const MobileLogin = ({ onClose }) => {
 
     const { auth } = apiList();
-    const { setRefresh, options, user } = userState();
+    const { setRefresh, options, user, open, setOpen} = userState();
     const { showToast } = useToast();
 
     const testData = {
@@ -23,8 +23,7 @@ const MobileLogin = ({ onClose }) => {
     const [otp, setOtp] = useState(null);
     const [otpSent, setOtpSent] = useState(false);
     const [seconds, setSeconds] = useState(30);
-    const [open, setOpen] = useState(null);
-
+    
     const timeoutRef = useRef(null);
 
     useEffect(() => {
