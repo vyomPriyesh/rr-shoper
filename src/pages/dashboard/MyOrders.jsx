@@ -9,7 +9,7 @@ import {
     FaShoppingBag,
     FaTimesCircle,
 } from "react-icons/fa";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import PageTitleAddbtn from "../ui/PageTitleAddbtn";
 import apiList from "../../config/apiList";
 import api from "../../config/api";
@@ -163,17 +163,24 @@ const MyOrders = () => {
         setPagination(data);
     };
 
+    const { mutate: handleInvoiceDownload } = useMutation({
+        mutationFn: (invoice) => api.get(payments.invoice(invoice), {
+            responseType: "blob",
+        }),
+        onSuccess: (response) => {
+            const url = window.URL.createObjectURL(response.data);
+            const link = document.createElement("a");
 
-    const handleDownloadReceipt = (order) => {
-        console.log("Download receipt:", order);
+            link.href = url;
+            link.download = "tax-invoice.pdf";
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
 
-        // Add your PDF receipt API here
-    };
-
-    // if (isLoading) {
-    //     return <MyOrdersSkeleton />;
-    // }
-
+            window.URL.revokeObjectURL(url);
+        },
+    });
+    
     return (
         <div className="w-full">
 
@@ -383,7 +390,7 @@ const MyOrders = () => {
 
                                             {/* Bottom Details */}
 
-                                            <div className="grid grid-cols-1 gap-4 rounded-xl bg-background/60 p-4 sm:grid-cols-2 lg:grid-cols-4">
+                                            <div className="grid grid-cols-1 gap-4 rounded-xl bg-secondary/25 p-4 sm:grid-cols-1 lg:grid-cols-3">
 
 
                                                 {/* Order Date */}
@@ -419,39 +426,27 @@ const MyOrders = () => {
 
                                                 </div>
 
-
-                                                {/* View Details */}
-
-                                                {/* <button className="flex items-center justify-center gap-2 rounded-lg border border-primary bg-white px-4 py-3 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white">
-
-                                                <FaEye />
-
-                                                View Details
-
-                                            </button> */}
-
-
                                                 {/* Receipt */}
 
-                                                {/* <button
-                                                onClick={() =>
-                                                    handleDownloadReceipt(order)
-                                                }
-                                                disabled={
-                                                    order?.payment_status?.toUpperCase() !==
-                                                    "COMPLETED"
-                                                }
-                                                className={`flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-white transition ${order?.payment_status?.toUpperCase() ===
-                                                    "COMPLETED"
-                                                    ? "bg-primary hover:bg-primaryDark"
-                                                    : "cursor-not-allowed bg-gray-300"
-                                                    }`}
-                                            >
-                                                <FaDownload />
+                                                <button
+                                                    onClick={() =>
+                                                        handleInvoiceDownload(order?._id)
+                                                    }
+                                                    disabled={
+                                                        order?.payment_status?.toUpperCase() !==
+                                                        "COMPLETED"
+                                                    }
+                                                    className={`flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-white transition ${order?.payment_status?.toUpperCase() ===
+                                                        "COMPLETED"
+                                                        ? "bg-primary hover:bg-primaryDark"
+                                                        : "cursor-not-allowed bg-gray-300"
+                                                        }`}
+                                                >
+                                                    <FaDownload />
 
-                                                Download Receipt
+                                                    Download Receipt
 
-                                            </button> */}
+                                                </button>
 
                                             </div>
 

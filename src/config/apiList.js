@@ -52,6 +52,7 @@ const apiList = () => {
             status: (id) => `payment/status/${id}`,
             customerOrders: '/payment/customer-orders',
             customerOrdersCounts: '/payment/customer-order-counts',
+            invoice: (invoice) => `/payment/invoice/${invoice}`
         },
 
         downGrade: {

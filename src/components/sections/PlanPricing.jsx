@@ -167,7 +167,7 @@ const PlanPricingContent = ({
                                     {findPackageName(plan.name)}
                                 </h3>
 
-                                {purchase.expireTime && (
+                                {plan.validityValue !== 'lifeTime' && purchase.expireTime && (
                                     <span
                                         className={`
                                             md:text-sm xl:text-xs text-xs
@@ -189,7 +189,7 @@ const PlanPricingContent = ({
                                 </span>
 
                                 <span className="2xl:text-sm text-xs opacity-70 mb-1">
-                                    /month
+                                    {plan.validity && `/${plan.validity}`}
                                 </span>
                             </div>
 
@@ -268,8 +268,8 @@ const PlanPricingContent = ({
 };
 
 const PlanPricing = () => {
-    const { user, options, setOpen  } = userState();
-    const { packages, images, payments } = apiList();
+    const { user, options, setOpen } = userState();
+    const { packages, images } = apiList();
     const { showToast } = useToast();
     const { platformName } = useParams();
 
@@ -290,18 +290,18 @@ const PlanPricing = () => {
             const response = data?.data?.data || [];
 
             const platforms = [
-  ...new Map(
-    response.map((item) => [
-      item.platform?._id,
-      item.platform,
-    ])
-  ).values(),
-].sort((a, b) => {
-  if (a?.index == null) return 1;
-  if (b?.index == null) return -1;
+                ...new Map(
+                    response.map((item) => [
+                        item.platform?._id,
+                        item.platform,
+                    ])
+                ).values(),
+            ].sort((a, b) => {
+                if (a?.index == null) return 1;
+                if (b?.index == null) return -1;
 
-  return Number(a.index) - Number(b.index);
-});
+                return Number(a.index) - Number(b.index);
+            });
 
             const pricingData = [...response]
                 .sort((a, b) =>
@@ -325,6 +325,8 @@ const PlanPricing = () => {
                         price: item.price,
                         services: item.services,
                         popular: item.popular,
+                        validity: options?.validityOptions?.find(list => list.value == item.validity)?.label,
+                        validityValue: item.validity
                     });
 
                     return acc;
@@ -485,7 +487,7 @@ const PlanPricing = () => {
 
     const handlePurchase = useCallback(
         (plan) => {
-            if(!user?.token) {
+            if (!user?.token) {
                 setOpen(true)
                 return
             }
