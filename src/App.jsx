@@ -77,7 +77,7 @@ function App() {
           <ScrollToTop />
           <MobileLogin />
           <Header dashboardRoutes={dashboardRoutes} />
-          <div className="full-mountain-image bg-gradient-to-br from-[#fceef6] via-[#faf0f6] to-[#fcedf5] pt-20">
+          <div className="full-mountain-image bg-gradient-to-br from-[#fceef6] via-[#faf0f6] to-[#fcedf5] md:pt-14 lg:pt-20 xl:pt-14 pt-10">
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route
