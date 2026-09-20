@@ -6,6 +6,7 @@ const apiList = () => {
             profile: "profile",
             updateProfile: 'profile/update',
             findCustomer: (email) => `findCustomer/${email}`,
+            updatePassword: (password) => `/profile/update-password/${password}`
         },
 
         images: {

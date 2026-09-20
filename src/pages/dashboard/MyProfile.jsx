@@ -8,6 +8,8 @@ import { useToast } from '../../context/ToastContext'
 import api from '../../config/api'
 import Loader from '../../components/ui/Loader'
 import InputField from '../../components/ui/InputField'
+import { Form } from 'antd'
+import CommonModal from '../ui/CommonModal'
 
 const MyProfile = () => {
 
@@ -20,6 +22,8 @@ const MyProfile = () => {
 
     const [isEditing, setIsEditing] = useState(false)
     const [profileImage, setProfileImage] = useState('')
+    const [form] = Form.useForm();
+    const [isPassModalOpen, setIsPassModal] = useState(false)
 
     const [formData, setFormData] = useState({
         name: '',
@@ -72,6 +76,39 @@ const MyProfile = () => {
             )
         },
     })
+
+    const {
+        mutate: updatePassword,
+        isPending: isPasswordUpdating,
+    } = useMutation({
+        mutationFn: (password) => api.get(auth.updatePassword(password)),
+
+        onSuccess: ({ data }) => {
+            showToast(data?.message, 'success')
+            setIsPassModal(false)
+            form.resetFields()
+            queryClient.invalidateQueries({
+                queryKey: ["profile", user?.token],
+            });
+        },
+
+        onError: (error) => {
+            showToast(
+                error?.response?.data?.message,
+                'error'
+            )
+        },
+    })
+
+    const handleUpdatePassword = async () => {
+        try {
+            const values = await form.validateFields()
+            updatePassword(values.password)
+        } catch (error) {
+            console.log(error)
+            // Ant Design already displays validation errors from validateFields()
+        }
+    }
 
     const {
         mutate: uploadImage,
@@ -154,10 +191,15 @@ const MyProfile = () => {
         })
     }
 
+    const onCloseModal = () => {
+        setIsPassModal(false)
+        form.resetFields()
+    }
+
     return (
         <div className="w-full">
-            {(isImageUploading || isProfileUpdating) && <Loader />}
-            <PageTitleAddbtn title="My Profile" />
+            {(isImageUploading || isProfileUpdating || isPasswordUpdating) && <Loader />}
+            <PageTitleAddbtn title="My Profile" add={user?.password_update == 1} addText='Update Password' addClick={() => setIsPassModal(true)} />
 
             <div className="mt-5 bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
 
@@ -314,7 +356,36 @@ const MyProfile = () => {
                 </form>
 
             </div>
+            <CommonModal title='Update Password' open={isPassModalOpen} onDone={handleUpdatePassword} onClose={onCloseModal}>
+                <Form form={form} className='flex flex-col gap-3'>
+                    <Form.Item name='password' rules={[
+                        { required: true, message: 'Password is required' },
+                    ]}>
+                        <InputField type='text' placeholder='Enter Password' />
+                    </Form.Item>
+                    <Form.Item name='cpassword' dependencies={["password"]}
+                        rules={[
+                            {
+                                required: true,
+                                message: "Confirm password is required",
+                            },
+                            ({ getFieldValue }) => ({
+                                validator(_, value) {
+                                    if (!value || getFieldValue("password") === value) {
+                                        return Promise.resolve();
+                                    }
 
+                                    return Promise.reject(
+                                        new Error("Passwords do not match")
+                                    );
+                                },
+                            }),
+                        ]}
+                    >
+                        <InputField type='text' placeholder='Confirm Password' />
+                    </Form.Item>
+                </Form>
+            </CommonModal>
         </div>
     )
 }

@@ -9,7 +9,7 @@ import { userState } from "../../context/UserContext";
 const MobileLogin = ({ onClose }) => {
 
     const { auth } = apiList();
-    const { setRefresh, options, user, open, setOpen} = userState();
+    const { setRefresh, options, user, open, setOpen } = userState();
     const { showToast } = useToast();
 
     const testData = {
@@ -23,7 +23,9 @@ const MobileLogin = ({ onClose }) => {
     const [otp, setOtp] = useState(null);
     const [otpSent, setOtpSent] = useState(false);
     const [seconds, setSeconds] = useState(30);
-    
+    const [userOtpVerified, setUserOtpVerified] = useState(false)
+    const [password, setPassword] = useState(null)
+
     const timeoutRef = useRef(null);
 
     useEffect(() => {
@@ -53,6 +55,7 @@ const MobileLogin = ({ onClose }) => {
         mutationFn: async () => await api.get(auth.findCustomer(email)),
         onSuccess: ({ data }) => {
             setMobile(data?.data?.mobile)
+            setUserOtpVerified(data?.data?.otp_status == 'verified');
         },
         onError: () => {
             setMobile(null)
@@ -93,7 +96,7 @@ const MobileLogin = ({ onClose }) => {
 
     const { mutate: handleVerify } = useMutation({
         mutationFn: async () => {
-            const response = await api.post(auth.verifyOtp, { mobile, otp });
+            const response = await api.post(auth.verifyOtp, { mobile, otp, password });
             return response.data;
         },
         onSuccess: ({ message, data }) => {
@@ -134,7 +137,7 @@ const MobileLogin = ({ onClose }) => {
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        if (!otpSent) {
+        if (!userOtpVerified && !otpSent) {
             handleSendOtp();
         } else {
             handleVerify();
@@ -231,7 +234,6 @@ const MobileLogin = ({ onClose }) => {
                                 </div>
 
                                 <form onSubmit={handleFormSubmit} className="space-y-3">
-                                    {/* Phone Input */}
                                     <div className="animate-slideUp space-y-5">
                                         <InputField
                                             type="text"
@@ -255,7 +257,9 @@ const MobileLogin = ({ onClose }) => {
                                             }
                                         />
                                     </div>
-
+                                    {userOtpVerified && (
+                                        <InputField type='text' value={password} placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} />
+                                    )}
                                     {!otpSent ? (
                                         <button
                                             type="submit"
@@ -273,7 +277,7 @@ const MobileLogin = ({ onClose }) => {
                         disabled:shadow-none
                       "
                                         >
-                                            Send OTP
+                                            {userOtpVerified ? 'Login' : 'Send OTP'}
                                         </button>
                                     ) : (
                                         <>
