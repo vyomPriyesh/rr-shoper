@@ -5,20 +5,23 @@ import SocialMedia from '../ui/SocialMedia'
 import { LuBadgeInfo } from 'react-icons/lu'
 import { StateStore } from '../../context/StateStoreContext'
 
-const Footer = () => {
+const Footer = ({ dashboardRoutes }) => {
 
     const { platFormData } = StateStore();
 
+
+    console.log(dashboardRoutes[0])
     const footerData = useMemo(() => {
         return [
             {
                 title: 'Quick Links',
                 links: [
-                    { label: "Home", path: "/" },
-                    { label: "Services", path: "services" },
-                    { label: "Platforms", path: "platforms" },
-                    // { label: "About", path: "about" },
-                    { label: "Contact", path: "contact" },
+                    { name: "Home", to: "/" },
+                    { name: "Services", to: "services" },
+                    { name: "Platforms", to: "platforms" },
+                    // { name: "About", to: "about" },
+                    { name: "Contact", to: "contact" },
+                    dashboardRoutes[0]
                 ]
             },
             // {
@@ -49,12 +52,12 @@ const Footer = () => {
             {
                 title: 'Platforms',
                 links: platFormData.map((item, i) => ({
-                    label: item.name,
-                    path: `/platforms/${item.name}`
+                    name: item.name,
+                    to: `/platforms/${item.name}`
                 }))
             },
         ]
-    }, [platFormData])
+    }, [platFormData, dashboardRoutes])
 
     const linkClass = `
         relative inline-block
@@ -106,10 +109,10 @@ const Footer = () => {
                                     {section.links.map((link, i) => (
                                         <li key={i}>
                                             <Link
-                                                to={link.path}
+                                                to={link.to}
                                                 className={linkClass}
                                             >
-                                                {link.label}
+                                                {link.name}
                                             </Link>
                                         </li>
                                     ))}

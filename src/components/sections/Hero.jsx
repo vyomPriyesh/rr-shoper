@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Badge from '../ui/Badge'
 import {
     FaArrowRight,
@@ -29,14 +29,14 @@ const Hero = () => {
     }
 
     // MAX 6 STATS
-    const HERO_STATS = [
+    const HERO_STATS = useMemo(() => [
         { number: 500, suffix: "+", label: "Businesses Supported" },
         { number: 500, suffix: "+", label: "Products Listed" },
-        { number: 6, suffix: "+", label: "Platforms Covered" },
+        { number: platFormData?.length, suffix: "+", label: "Platforms Covered" },
         { number: 120, suffix: "+", label: "Seller Accounts Managed" },
         { number: 98, suffix: "%", label: "Client Satisfaction" },
         { number: 24, suffix: "/7", label: "Support Available" },
-    ]
+    ], [platFormData])
 
     function Counter({ end }) {
         const [count, setCount] = useState(0)
