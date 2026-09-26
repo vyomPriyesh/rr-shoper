@@ -185,58 +185,60 @@ const MyService = () => {
                     </div>
 
 
-                    <div className="flex items-center gap-3">
+                    {service.package_expire &&
+                      <div className="flex items-center gap-3">
 
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#fdf1f7] text-[#b5688d]">
-                        <FaCalendarAlt />
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#fdf1f7] text-[#b5688d]">
+                          <FaCalendarAlt />
+                        </div>
+
+                        <div>
+                          <p className="text-xs text-gray-500">
+                            Valid Till
+                          </p>
+
+                          <p className="text-sm font-semibold text-gray-900">
+                            {unixDisplayDate(service.package_expire)}
+                          </p>
+                        </div>
+
                       </div>
-
-                      <div>
-                        <p className="text-xs text-gray-500">
-                          Valid Till
-                        </p>
-
-                        <p className="text-sm font-semibold text-gray-900">
-                          {unixDisplayDate(service.package_expire)}
-                        </p>
-                      </div>
-
-                    </div>
-
+                    }
                   </div>
 
 
                   {/* REMAINING DAYS */}
-                  <div className="mb-5 rounded-lg bg-[#fdf8fb] p-3">
+                  {service.package_expire &&
+                    <div className="mb-5 rounded-lg bg-[#fdf8fb] p-3">
 
-                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center justify-between gap-3">
 
-                      <div className="flex items-center gap-2">
-                        <FaClock className="text-[#b5688d]" />
+                        <div className="flex items-center gap-2">
+                          <FaClock className="text-[#b5688d]" />
 
-                        <span className="text-sm text-gray-600">
-                          Service Validity
+                          <span className="text-sm text-gray-600">
+                            Service Validity
+                          </span>
+                        </div>
+
+                        <span className="text-sm font-bold text-[#b5688d]">
+                          {remainingDaysUnix(service.createdAt, service.package_expire)} days remaining
                         </span>
+
                       </div>
 
-                      <span className="text-sm font-bold text-[#b5688d]">
-                        {remainingDaysUnix(service.createdAt, service.package_expire)} days remaining
-                      </span>
+                      {/* Progress */}
+                      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-gray-200">
+
+                        <div
+                          className="h-full rounded-full bg-[#b5688d]"
+                          style={{ width: `${Math.min((remainingDaysUnix(service.createdAt, service.package_expire) / 30) * 100, 100)}%`, }}
+                        />
+
+                      </div>
 
                     </div>
-
-                    {/* Progress */}
-                    <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-gray-200">
-
-                      <div
-                        className="h-full rounded-full bg-[#b5688d]"
-                        style={{ width: `${Math.min((remainingDaysUnix(service.createdAt, service.package_expire) / 30) * 100, 100)}%`, }}
-                      />
-
-                    </div>
-
-                  </div>
-
+                  }
 
                   {/* FEATURES */}
                   <div>

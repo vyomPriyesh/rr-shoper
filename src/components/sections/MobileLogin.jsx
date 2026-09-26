@@ -214,12 +214,12 @@ const MobileLogin = ({ onClose }) => {
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <h3 className="text-4xl font-black text-[#A36081] mb-4">
-                                                Verify Mobile
+                                                {userOtpVerified ? 'Enter Password' : 'Verify Mobile'}
                                             </h3>
 
-                                            <p className="text-xl text-[#A36081]/70">
+                                            {!userOtpVerified && <p className="text-xl text-[#A36081]/70">
                                                 Enter your number to receive OTP
-                                            </p>
+                                            </p>}
                                         </div>
 
                                         {onClose && (

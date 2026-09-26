@@ -9,8 +9,6 @@ const Footer = ({ dashboardRoutes }) => {
 
     const { platFormData } = StateStore();
 
-
-    console.log(dashboardRoutes[0])
     const footerData = useMemo(() => {
         return [
             {
