@@ -16,6 +16,7 @@ import api from "../../config/api";
 import { userState } from "../../context/UserContext";
 import PaginationData from "../ui/PaginationData";
 import { displayDateTime } from "../../components/ui/DateDisplay";
+import Loader from "../../components/ui/Loader";
 
 
 const STATUS_CONFIG = {
@@ -163,7 +164,7 @@ const MyOrders = () => {
         setPagination(data);
     };
 
-    const { mutate: handleInvoiceDownload } = useMutation({
+    const { mutate: handleInvoiceDownload, isPending } = useMutation({
         mutationFn: (invoice) => api.get(payments.invoice(invoice), {
             responseType: "blob",
         }),
@@ -180,10 +181,10 @@ const MyOrders = () => {
             window.URL.revokeObjectURL(url);
         },
     });
-    
+
     return (
         <div className="w-full">
-
+            {isPending && <Loader />}
             {/* Header */}
             <div className="mb-7">
                 <PageTitleAddbtn title="My Orders" />
