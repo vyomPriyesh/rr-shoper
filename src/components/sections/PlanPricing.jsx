@@ -12,7 +12,7 @@ import { FaArrowRight, FaCheck } from 'react-icons/fa';
 import SectionsUI from '../layouts/SectionsUI';
 import GSTModal from '../ui/GSTModal';
 import handlePayment from '../../hooks/handlePayment';
-import { unixDisplayDate } from '../ui/DateDisplay';
+import { displayDateTime } from '../ui/DateDisplay';
 
 const PlanPricing = () => {
 
@@ -78,8 +78,8 @@ const Content = () => {
                         acc[platformName] = [];
                     }
 
-                    const havePurchased = user?.package?.find(list => list.package_id._id == item._id)
-                    const packageExpire = havePurchased?.package_expire_status
+                    const havePurchased = user?.subscriptions?.find(list => list.package_id._id == item._id)
+                    const packageExpire = havePurchased?.status == 'expired'
 
                     acc[platformName].push({
                         package_id: item._id,
@@ -91,8 +91,8 @@ const Content = () => {
                             onetime_price: item.onetime_price,
                         },
                         purchasedPackage: !!havePurchased,
-                        validTill: unixDisplayDate(havePurchased?.package_expire),
-                        packageExpire: !!packageExpire,
+                        validTill: displayDateTime(havePurchased?.expires_at),
+                        packageExpire: packageExpire,
                         services: item.services,
                         popular: item.popular,
                     });
@@ -190,9 +190,9 @@ const Content = () => {
     }, [gstNumber, selectedPackage, requestPaymentHandle, showToast, policyAccepted, payloadValidity]);
 
     const currentPackageRank = useMemo(() => {
-        const currentPackage = user?.package?.find(pkg => !pkg.package_expire_status && pkg.package_id?.platform?.name === selectedPlatform);
+        const currentPackage = user?.subscriptions?.find(pkg => pkg.status == 'active' && pkg.package_id?.platform?.name === selectedPlatform);
         return currentPackage?.package_id?.name
-    }, [user?.package, selectedPlatform])
+    }, [user?.subscriptions, selectedPlatform])
 
     return (
         <div className='mx-auto flex w-full max-w-7xl flex-col items-center justify-center gap-6 px-2 sm:px-0'>
@@ -244,6 +244,7 @@ const Content = () => {
                         rank={list.name}
                         validTill={list.validTill}
                         currentPackageRank={currentPackageRank}
+                        packageOrder={packageOrder}
                     />
                 ))}
             </div>
@@ -260,12 +261,19 @@ const Content = () => {
     )
 }
 
-const PackageUi = ({ services, name, price, popular, image, validity, onClick, package_id, purchasedPackage, rank, currentPackageRank, packageExpire, validTill }) => {
+const PackageUi = ({ services, name, price, popular, image, validity, onClick, package_id, purchasedPackage, rank, currentPackageRank, packageExpire, validTill, packageOrder }) => {
 
+    const currentPackageIndex = packageOrder.findIndex(item => String(item.value) === String(currentPackageRank));
+    const packageIndex = packageOrder.findIndex(item => String(item.value) === String(rank));
     const isCurrentPackage = purchasedPackage && !packageExpire && rank === currentPackageRank;
-    const isUpgrade = !packageExpire && currentPackageRank && rank > currentPackageRank;
+    const isLowerPlan = currentPackageIndex >= 0 && packageIndex >= 0 && packageIndex < currentPackageIndex;
+    const isUpgrade = !packageExpire && currentPackageIndex >= 0 && packageIndex > currentPackageIndex;
 
-    const buttonConfig = packageExpire
+    const buttonConfig = isLowerPlan
+        ? {
+            hide: true,
+        }
+        : packageExpire
         ? {
             label: "Renew Plan",
             disabled: false,
@@ -349,25 +357,27 @@ const PackageUi = ({ services, name, price, popular, image, validity, onClick, p
                 </div>
 
                 <div className="mt-auto pt-8">
-                    <button
-                        type="button"
-                        disabled={buttonConfig.disabled}
-                        onClick={
-                            buttonConfig.disabled
-                                ? undefined
-                                : () => onClick(package_id, validity)
-                        }
-                        className={`flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all ${buttonConfig.disabled
-                                ? "cursor-not-allowed bg-gray-200 text-gray-500"
-                                : "bg-primary text-white hover:shadow-lg"
-                            }`}
-                    >
-                        <span>{buttonConfig.label}</span>
+                    {!buttonConfig.hide && (
+                        <button
+                            type="button"
+                            disabled={buttonConfig.disabled}
+                            onClick={
+                                buttonConfig.disabled
+                                    ? undefined
+                                    : () => onClick(package_id, validity)
+                            }
+                            className={`flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all ${buttonConfig.disabled
+                                    ? "cursor-not-allowed bg-gray-200 text-gray-500"
+                                    : "bg-primary text-white hover:shadow-lg"
+                                }`}
+                        >
+                            <span>{buttonConfig.label}</span>
 
-                        {!buttonConfig.disabled && (
-                            <FaArrowRight aria-hidden="true" />
-                        )}
-                    </button>
+                            {!buttonConfig.disabled && (
+                                <FaArrowRight aria-hidden="true" />
+                            )}
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

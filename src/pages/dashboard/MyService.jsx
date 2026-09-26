@@ -24,8 +24,8 @@ const MyService = () => {
   const [gstData, setGstData] = useState({});
   const [packageData, setPackageData] = useState({});
 
-  const activeServices = useMemo(() => user?.package?.filter(list => !list.package_expire_status), [user?.package]);
-  const oldServices = useMemo(() => user?.package?.filter(list => list.package_expire_status), [user?.package]);
+  const activeServices = useMemo(() => user?.subscriptions?.filter(list => list.status =='active'), [user?.subscriptions]);
+  const oldServices = useMemo(() => user?.subscriptions?.filter(list =>  list.status =='expired'), [user?.subscriptions]);
 
   const packageOrder = useMemo(() => {
     return options?.packageOrders || [];
@@ -46,6 +46,8 @@ const MyService = () => {
   }, [])
 
   const { handlePayment: requestPaymentHandle, paymentPending: requestPaymentPending } = handlePayment({ onSuccess: closeGstModal });
+
+  console.log(activeServices)
 
   return (
     <div className="w-full">
@@ -148,11 +150,11 @@ const MyService = () => {
                   <div className="mt-4">
 
                     <span className="text-2xl font-bold text-[#a34f78]">
-                      ₹ {service?.package_id?.price?.toLocaleString("en-IN")}
+                      ₹ {service?.payment_id?.amount?.toLocaleString("en-IN")}
                     </span>
 
-                    <span className="ml-1 text-sm text-gray-500">
-                      /month
+                    <span className="ml-1 text-sm text-gray-500 capitalize">
+                      /{service?.billing_period}
                     </span>
 
                   </div>
@@ -178,14 +180,14 @@ const MyService = () => {
                         </p>
 
                         <p className="text-sm font-semibold text-gray-900">
-                          {displayDateTime(service.createdAt)}
+                          {displayDateTime(service.starts_at)}
                         </p>
                       </div>
 
                     </div>
 
 
-                    {service.package_expire &&
+                    {(service.billing_period == 'month' || service.billing_period == 'year') &&
                       <div className="flex items-center gap-3">
 
                         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#fdf1f7] text-[#b5688d]">
@@ -198,7 +200,7 @@ const MyService = () => {
                           </p>
 
                           <p className="text-sm font-semibold text-gray-900">
-                            {unixDisplayDate(service.package_expire)}
+                            {displayDateTime(service.expires_at)}
                           </p>
                         </div>
 
@@ -208,7 +210,7 @@ const MyService = () => {
 
 
                   {/* REMAINING DAYS */}
-                  {service.package_expire &&
+                  {(service.billing_period == 'month' || service.billing_period == 'year') &&
                     <div className="mb-5 rounded-lg bg-[#fdf8fb] p-3">
 
                       <div className="flex items-center justify-between gap-3">
@@ -222,7 +224,7 @@ const MyService = () => {
                         </div>
 
                         <span className="text-sm font-bold text-[#b5688d]">
-                          {remainingDaysUnix(service.createdAt, service.package_expire)} days remaining
+                          {remainingDaysUnix(service.starts_at, service.expires_at)} days remaining
                         </span>
 
                       </div>
@@ -232,7 +234,7 @@ const MyService = () => {
 
                         <div
                           className="h-full rounded-full bg-[#b5688d]"
-                          style={{ width: `${Math.min((remainingDaysUnix(service.createdAt, service.package_expire) / 30) * 100, 100)}%`, }}
+                          style={{ width: `${Math.min((remainingDaysUnix(service.starts_at, service.expires_at) / 30) * 100, 100)}%`, }}
                         />
 
                       </div>

@@ -349,13 +349,13 @@ const PlanPricing3 = () => {
     }, [platformName, pricingData]);
 
     const currentPackage = useMemo(() => {
-        return user?.package?.find(
+        return user?.subscriptions?.find(
             (item) =>
                 item.package_id?.platform?.name ===
                 selectedPlatform &&
                 !item.package_expire_status
         );
-    }, [user?.package, selectedPlatform]);
+    }, [user?.subscriptions, selectedPlatform]);
 
     const currentPackageName =
         currentPackage?.package_id?.name || null;
@@ -387,7 +387,7 @@ const PlanPricing3 = () => {
     const getPurchaseData = useCallback(
         (packageId) => {
             const purchasedPackage =
-                user?.package?.find(
+                user?.subscriptions?.find(
                     (item) =>
                         item.package_id?._id ===
                         packageId
@@ -417,7 +417,7 @@ const PlanPricing3 = () => {
                         : null,
             };
         },
-        [user?.package]
+        [user?.subscriptions]
     );
 
     const getPlanState = useCallback(

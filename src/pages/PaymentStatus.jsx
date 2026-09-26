@@ -33,7 +33,7 @@ const PaymentStatus = () => {
     const packageData = useMemo(() => {
         if (!data) return {}
 
-        return user?.package?.find(
+        return user?.subscriptions?.find(
             list => list?.package_id?._id == data?.package_id
         )?.package_id
     }, [data, user])
