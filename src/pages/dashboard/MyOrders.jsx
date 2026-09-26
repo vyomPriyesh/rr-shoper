@@ -353,6 +353,15 @@ const MyOrders = () => {
 
                                                         <p className="mt-1 text-sm text-paragraph">
 
+                                                            Invoice Number:
+
+                                                            <span className="ml-1 font-medium text-heading">
+                                                                {order.invoice_number}
+                                                            </span>
+
+                                                        </p>
+                                                        <p className="mt-1 text-sm text-paragraph">
+
                                                             Order ID:
 
                                                             <span className="ml-1 font-medium text-heading">
@@ -415,7 +424,7 @@ const MyOrders = () => {
 
                                                 <div>
 
-                                                    <div className="flex items-center gap-2 text-xs text-paragraph">
+                                                    {/* <div className="flex items-center gap-2 text-xs text-paragraph">
                                                         <StatusIcon className="text-primary" />
 
                                                         Payment Status
@@ -423,7 +432,7 @@ const MyOrders = () => {
 
                                                     <p className="mt-2 text-sm font-semibold text-heading">
                                                         {status.label}
-                                                    </p>
+                                                    </p> */}
 
                                                 </div>
 
