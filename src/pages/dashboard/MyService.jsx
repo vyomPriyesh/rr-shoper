@@ -24,8 +24,8 @@ const MyService = () => {
   const [gstData, setGstData] = useState({});
   const [packageData, setPackageData] = useState({});
 
-  const activeServices = useMemo(() => user?.subscriptions?.filter(list => list.status =='active'), [user?.subscriptions]);
-  const oldServices = useMemo(() => user?.subscriptions?.filter(list =>  list.status =='expired'), [user?.subscriptions]);
+  const activeServices = useMemo(() => user?.subscriptions?.filter(list => list.status == 'active'), [user?.subscriptions]);
+  const oldServices = useMemo(() => user?.subscriptions?.filter(list => list.status == 'expired'), [user?.subscriptions]);
 
   const packageOrder = useMemo(() => {
     return options?.packageOrders || [];
@@ -46,8 +46,6 @@ const MyService = () => {
   }, [])
 
   const { handlePayment: requestPaymentHandle, paymentPending: requestPaymentPending } = handlePayment({ onSuccess: closeGstModal });
-
-  console.log(activeServices)
 
   return (
     <div className="w-full">
@@ -224,7 +222,7 @@ const MyService = () => {
                         </div>
 
                         <span className="text-sm font-bold text-[#b5688d]">
-                          {remainingDaysUnix(service.starts_at, service.expires_at)} days remaining
+                          {remainingDaysUnix(service.expires_at)} days remaining
                         </span>
 
                       </div>
@@ -234,7 +232,7 @@ const MyService = () => {
 
                         <div
                           className="h-full rounded-full bg-[#b5688d]"
-                          style={{ width: `${Math.min((remainingDaysUnix(service.starts_at, service.expires_at) / 30) * 100, 100)}%`, }}
+                          style={{ width: `${Math.min((remainingDaysUnix(service.expires_at) / 30) * 100, 100)}%`, }}
                         />
 
                       </div>

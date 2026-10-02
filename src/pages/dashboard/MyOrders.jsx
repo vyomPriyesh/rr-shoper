@@ -165,7 +165,7 @@ const MyOrders = () => {
     };
 
     const { mutate: handleInvoiceDownload, isPending } = useMutation({
-        mutationFn: (invoice) => api.get(payments.invoice(invoice), {
+        mutationFn: (invoice) => api.get(payments.invoice(invoice, user?._id), {
             responseType: "blob",
         }),
         onSuccess: (response) => {
