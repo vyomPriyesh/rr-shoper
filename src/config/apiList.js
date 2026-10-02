@@ -51,9 +51,9 @@ const apiList = () => {
         payments: {
             requestPayment: 'payment/initiate',
             status: (id) => `payment/status/${id}`,
-            customerOrders: '/payment/customer-orders',
-            customerOrdersCounts: '/payment/customer-order-counts',
-            invoice: (invoice) => `/payment/invoice/${invoice}`
+            customerOrders: 'payment/customer-orders',
+            customerOrdersCounts: 'payment/customer-order-counts',
+            invoice: (invoice, customerId) => `payment/invoice/${invoice}/${customerId}`
         },
 
         downGrade: {
