@@ -247,19 +247,21 @@ const MyService = () => {
                       Included Features
                     </h4>
 
-                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    <div className="flex flex-col gap-2">
 
-                      {service?.package_id?.services?.slice(0, 4).map((feature, index) => (
+                      {service?.serviceUpdates?.slice(0, 4).map((feature, index) => (
 
-                        <div
-                          key={index}
-                          className="flex items-start gap-2 text-xs text-gray-600"
-                        >
+                        <div key={index} className="flex items-center gap-2 text-xs text-gray-600" >
                           <FaCheck className="mt-0.5 shrink-0 text-[#b5688d]" />
 
-                          <span>
-                            {feature}
-                          </span>
+                          <div className="flex flex-row gap-3 items-center">
+                            <span className="text-sm">
+                              {feature?.name}
+                            </span>
+                            {feature?.update && <span className="rounded-full px-3 py-1 bg-secondary/20 text-primary font-semibold text-sm">
+                              {feature?.update}
+                            </span>}
+                          </div>
                         </div>
 
                       ))}
@@ -363,9 +365,14 @@ const MyService = () => {
                         {service?.package_id?.platform?.name}
                       </span>
                     </div>
-                    <p className="mt-1 text-sm text-gray-500">
-                      ₹ {service?.package_id?.price?.toLocaleString("en-IN")} /month
-                    </p>
+                    <div className="flex flex-row gap-1 items-center mt-1">
+                      <p className="text-sm text-gray-500">
+                        ₹ {service?.payment_id?.amount?.toLocaleString("en-IN")}
+                      </p>
+                      <span className="text-sm text-gray-500 capitalize">
+                        /{service?.billing_period}
+                      </span>
+                    </div>
                   </div>
 
                   <span className="rounded-full border border-red-200 bg-red-50 px-3 py-1 text-[11px] font-semibold text-red-600">
@@ -387,7 +394,7 @@ const MyService = () => {
                     </span>
 
                     <span className="text-xs font-semibold text-gray-800">
-                      {displayDateTime(service.createdAt)}
+                      {displayDateTime(service.starts_at)}
                     </span>
 
                   </div>
@@ -399,7 +406,7 @@ const MyService = () => {
                     </span>
 
                     <span className="text-xs font-semibold text-gray-800">
-                      {unixDisplayDate(service.package_expire)}
+                      {displayDateTime(service.expires_at)}
                     </span>
 
                   </div>
