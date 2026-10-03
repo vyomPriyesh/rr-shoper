@@ -249,7 +249,7 @@ const MyService = () => {
 
                     <div className="flex flex-col gap-2">
 
-                      {service?.serviceUpdates?.slice(0, 4).map((feature, index) => (
+                      {service?.serviceUpdates?.map((feature, index) => (
 
                         <div key={index} className="flex items-center gap-2 text-xs text-gray-600" >
                           <FaCheck className="mt-0.5 shrink-0 text-[#b5688d]" />
